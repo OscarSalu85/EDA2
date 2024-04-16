@@ -37,4 +37,5 @@ void printImage(char fileImage[]){
         if(!strcmp(line_break,"SL")) printf("\n");
         remaining -= number;
     }
+    fclose(f);
 }
