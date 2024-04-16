@@ -12,8 +12,9 @@ void printColor(char message[],char F_RBG[], char B_RBG[]){
 
 /*
 fileImage: "name.txt"
+file format:
 (int)height (int)width
-(char[])character (int)numberRepetions (char[])RGB_Background (char[]) line_break --> NSL/SL 
+(char[])character (int)numberRepetions (char[])RGB_Background (char[])line_break --> NSL/SL 
 ...
 */
 void printImage(char fileImage[]){
