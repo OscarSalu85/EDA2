@@ -1,0 +1,54 @@
+{
+    "skills":
+    [
+    {
+        "name":"skill_1",
+        "description":" ",
+        "duration": 1 ,
+        "modifiers": [2,0,-1], 
+        "damage": 0 
+    },
+    {
+        "name":"skill_2",
+        "description":" ",
+        "duration": 1 ,
+        "modifiers": [2,0,-1] 
+    },
+    {
+        "name":"skill_3",
+        "description":" ",
+        "duration": 1 ,
+        "modifiers": [2,0,-1] 
+    },
+    {
+        "name":"skill_4",
+        "description":" ",
+        "duration": 1 ,
+        "modifiers": [2,0,-1] 
+    }
+    ],
+
+    "Enemies":
+    [
+        {
+        "name":"cthulu",
+        "hp":100000,
+        "atk":50,
+        "def":100
+        },
+
+        {
+            "name":"cultist",
+            "hp":20,
+            "atk":10,
+            "def":10
+        },
+
+        {
+            "name":"cthulu's spawn",
+            "hp":50,
+            "atk":15,
+            "def":5
+        }
+    ]
+}
