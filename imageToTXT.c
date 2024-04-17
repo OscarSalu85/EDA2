@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "printPlus.h"
 /*
 First convert PNG to a RGB txt
 1.https://onlinepngtools.com/convert-png-to-rgb-values
@@ -62,4 +62,5 @@ void convert(char img[], char dest[],int height, int width){
 int main(){
     convert("Image.txt","Final.txt",12,16);
     convert("Image2.txt","Final2.txt",12,16);
+    printImage("Final.txt")
 }

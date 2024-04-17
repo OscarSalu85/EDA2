@@ -1,6 +1,6 @@
 #ifndef _STRUCTURES_H_
 #define _STRUCTURES_H_
-
+#endif
 #define MAX_CHAR 100
 #define MAX_ENEMIES 3
 #define MAX_OPTIONS 3
