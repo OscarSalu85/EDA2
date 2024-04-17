@@ -5,11 +5,11 @@
 #define MAX_ENEMIES 3
 #define MAX_OPTIONS 3
 #define MAX_DECISIONS 3
+#define MAX_SKILLS 4
 //Skills
 typedef struct Skills{
     char name[MAX_CHAR];
     char description[MAX_CHAR];
-    char skill[MAX_CHAR];
     int duration;
     char modifiers;
 }Skills;
@@ -53,3 +53,12 @@ typedef struct Scenario{
 }Scenario;
 
 
+//DATA
+typedef struct Data{
+    Character *character;
+    Skills *skills[MAX_SKILLS];
+    Enemy *enemies[MAX_ENEMIES];
+    Option *last_option;
+    Decision *last_decision;
+    Scenario *current_scenario;
+}Data;
