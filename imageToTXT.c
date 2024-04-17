@@ -61,6 +61,5 @@ void convert(char img[], char dest[],int height, int width){
 
 int main(){
     convert("Image.txt","Final.txt",12,16);
-    convert("Image2.txt","Final2.txt",12,16);
-    printImage("Final.txt")
+    printImage("Final.txt");
 }
