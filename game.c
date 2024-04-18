@@ -5,14 +5,12 @@
 #include "structures.h"
 
 //CREATES A NEW GAME
-void new_game(Data *data){
+new_game(Data *data){
     if(data != NULL){
         free(data); //Frees saved data
     }
-    
     data = malloc(sizeof(Data)); //Creates new data in memory
     configure(data); //Configures new character and skills
-    
 }
 
 void configure(Data *data){
@@ -25,4 +23,6 @@ void configure(Data *data){
     }
 };
 
-void continue_game();
+void continue_game(Data *data){
+
+};

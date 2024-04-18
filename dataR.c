@@ -59,7 +59,7 @@ int main() {
     }
     cJSON_ArrayForEach(skill,skills){
         cJSON *duration = cJSON_GetObjectItem(skill, "duration");
-            if (duration != NULL && cJSON_IsString(duration) ) {
+            if (duration != NULL && cJSON_IsString(duration)) {
                 printf("Found skill_1! Duration: %s\n", duration->valuestring);
                 break; // Stop searching once skill_1 is found
             }

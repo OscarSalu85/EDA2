@@ -1,6 +1,6 @@
 #ifndef _STRUCTURES_H_
 #define _STRUCTURES_H_
-#endif
+
 #define MAX_CHAR 100
 #define MAX_ENEMIES 3
 #define MAX_OPTIONS 3
@@ -55,10 +55,12 @@ typedef struct Scenario{
 
 //DATA
 typedef struct Data{
-    Character *character;
-    Skills *skills[MAX_SKILLS];
-    Enemy *enemies[MAX_ENEMIES];
-    Option *last_option;
-    Decision *last_decision;
-    Scenario *current_scenario;
+    struct Character *character;
+    struct Skills *skills[MAX_SKILLS];
+    struct Enemy *enemies[MAX_ENEMIES];
+    struct Option *last_option;
+    struct Decision *last_decision;
+    struct Scenario *current_scenario;
 }Data;
+
+#endif
