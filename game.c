@@ -1,11 +1,37 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "game.h"
 #include "structures.h"
 
+int main_menu(Data *data){
+    printf("1.Continue      2.Save Game     3.Configure \n");
+    while (1)
+    {
+        int choice = scanf("Select your option: ");
+        if(choice == 1){
+            if(data == NULL){
+                printf("\nNo saved data found\n");
+            }
+            else{
+                printf("Saved data found, continuing game...");
+                return 1;
+            }
+        }
+        else if(choice == 2){
+            return 2;
+        }
+        else if(choice == 3){
+            return 3;
+        }
+    }
+    
+    
+    
+}
 //CREATES A NEW GAME
-new_game(Data *data){
+void new_game(Data *data){
     if(data != NULL){
         free(data); //Frees saved data
     }

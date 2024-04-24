@@ -2,14 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "printPlus.h"
 #include "cJSON.c" // Include the cJSON library header
 
-int main() {
-    // File pointer for reading JSON file
-    FILE *file = fopen("generalData.json", "r");
+cJSON startup(char json[]){
+    FILE *file = fopen(json, "r");
     if (file == NULL) {
         printf("Error opening file.\n");
-        return 1;
     }
 
     // Get the file size
@@ -22,7 +21,6 @@ int main() {
     if (json_data == NULL) {
         printf("Memory allocation failed.\n");
         fclose(file);
-        return 1;
     }
 
     // Read JSON data from file
@@ -35,37 +33,29 @@ int main() {
     if (root == NULL) {
         printf("Error parsing JSON: %s\n", cJSON_GetErrorPtr());
         free(json_data);
-        return 1;
     }
-
-    // Get the "skills" array
-    cJSON *skills = cJSON_GetObjectItem(root, "skills");
-    if (skills == NULL || !cJSON_IsArray(skills)) {
-        printf("Error: 'skills' array not found or not an array.\n");
-        cJSON_Delete(root);
-        free(json_data);
-        return 1;
-    }
-
-    // Loop through the array to find "name" of "skill_1"
-    cJSON *skill;
-    cJSON_ArrayForEach(skill, skills) {
-        cJSON *name = cJSON_GetObjectItem(skill, "name");
-        if (name != NULL && cJSON_IsString(name) && strcmp(name->valuestring, "skill_1") == 0) {
-            printf("Found skill_1! Name: %s\n", name->valuestring);
-            //break; // Stop searching once skill_1 is found
-        }
-        
-    }
-    cJSON_ArrayForEach(skill,skills){
-        cJSON *duration = cJSON_GetObjectItem(skill, "duration");
-            if (duration != NULL && cJSON_IsString(duration)) {
-                printf("Found skill_1! Duration: %s\n", duration->valuestring);
-                break; // Stop searching once skill_1 is found
-            }
-    }
-    // Clean up
-    cJSON_Delete(root);
-    free(json_data);
-    return 0;
+    return *root;
 }
+void extractScenario(char scenario[]){
+    cJSON root  = startup("generalData.json");
+    cJSON *sections = cJSON_GetObjectItem(&root, "Scenarios");
+    cJSON *section;
+    cJSON_ArrayForEach(section,sections){
+        cJSON *name = cJSON_GetObjectItem(section, "name");
+        char *string1 = cJSON_Print(name);
+        string1++;
+        string1[strlen(string1)-1] = 0;
+        if(!strcmp(string1,scenario)){
+            cJSON *image = cJSON_GetObjectItem(section, "image");
+            char *string2 = cJSON_Print(image);
+            string2++;
+            string2[strlen(string2)-1] = 0;
+            printImage(string2);
+        }
+    }
+}
+
+int main() {
+   extractScenario("Deck");
+}
+

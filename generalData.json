@@ -50,5 +50,72 @@
             "atk":15,
             "def":5
         }
+    ],
+
+    "Scenarios":
+    [
+        {
+            "name":"Deck",
+            "image": "Deck.txt",
+            "options":
+                {
+                    "Option_A":"ABC",
+                    "Option_B":"ABC"
+                },
+            "next": "3rd class floor"
+        },
+        {
+            "name":"3rd class floor",
+            "options":
+                {
+                    "Option_A":"DEF",
+                    "Option_B":"FED"
+                },
+            "next": "Kitchen"
+        },
+        {
+            "name":"Kitchen",
+            "options":
+                {
+                    "Option_A":"DEF",
+                    "Option_B":"FED"
+                },
+            "next": "2nd class floor"
+        },
+        {
+            "name":"2nd class floor",
+            "options":
+                {
+                    "Option_A":"DEF",
+                    "Option_B":"FED"
+                },
+            "next": "hall"
+        },
+        {
+            "name":"hall",
+            "options":
+                {
+                    "Option_A":"DEF",
+                    "Option_B":"FED"
+                },
+            "next": "1st class floor"
+        },
+        {
+            "name":"1st class floor",
+            "options":
+                {
+                    "Option_A":"DEF",
+                    "Option_B":"FED"
+                },
+            "next": "hold"
+        },
+        {
+            "name":"hold",
+            "options":
+                {
+                    "Option_A":"DEF",
+                    "Option_B":"FED"
+                }
+        }
     ]
 }

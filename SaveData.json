@@ -1,0 +1,12 @@
+{
+    "Character":{
+        "name":"",
+        "skills":{
+            "Comment":"GETS SKILL INFO FROM GENERAL DATA BASED ON THE NAME",
+            "skill_1_name":"",
+            "skill_2_name":"",
+            "skill_3_name":"",
+            "skill_4_name":""
+        }
+    }
+}
