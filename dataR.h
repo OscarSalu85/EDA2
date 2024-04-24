@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "printPlus.h"
 #include "cJSON.c" // Include the cJSON library header
 
 cJSON startup(char json[]){
@@ -36,26 +35,31 @@ cJSON startup(char json[]){
     }
     return *root;
 }
-void extractScenario(char scenario[]){
+Scenario extractScenario(char scenario[]){
+    Scenario scene;
     cJSON root  = startup("generalData.json");
     cJSON *sections = cJSON_GetObjectItem(&root, "Scenarios");
     cJSON *section;
     cJSON_ArrayForEach(section,sections){
         cJSON *name = cJSON_GetObjectItem(section, "name");
-        char *string1 = cJSON_Print(name);
-        string1++;
-        string1[strlen(string1)-1] = 0;
-        if(!strcmp(string1,scenario)){
+        char *name_str = cJSON_Print(name);
+        name_str++;
+        name_str[strlen(name_str)-1] = 0;
+        if(!strcmp(name_str,scenario)){
+            strcpy(scene.name,name_str);
             cJSON *image = cJSON_GetObjectItem(section, "image");
-            char *string2 = cJSON_Print(image);
-            string2++;
-            string2[strlen(string2)-1] = 0;
-            printImage(string2);
+            char *image_file = cJSON_Print(image);
+            image_file++;
+            image_file[strlen(image_file)-1] = 0;
+            strcpy(scene.image,image_file);
+            cJSON *description = cJSON_GetObjectItem(section, "description");
+            char *description_str = cJSON_Print(description);
+            description_str++;
+            description_str[strlen(description_str)-1] = 0;
+            strcpy(scene.description,description_str);
+            return scene;
         }
     }
 }
 
-int main() {
-   extractScenario("Deck");
-}
 

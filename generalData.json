@@ -57,6 +57,7 @@
         {
             "name":"Deck",
             "image": "Deck.txt",
+            "description": "Prueba 1 2 3 4 5...",
             "options":
                 {
                     "Option_A":"ABC",

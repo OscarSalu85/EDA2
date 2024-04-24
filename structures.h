@@ -49,6 +49,7 @@ typedef struct Decision{
 typedef struct Scenario{
     char name[MAX_CHAR];
     char description[MAX_CHAR];
+    char image[MAX_CHAR];
     Decision decision[];
 }Scenario;
 

@@ -27,9 +27,21 @@ int main_menu(Data *data){
         }
     }
     
-    
-    
 }
+
+void configure(Data *data){
+    printf("\nSelect your new name: ");
+    char name[MAX_CHAR];
+    scanf("%s",name);
+    //char name[MAX_CHAR] = scanf("\nSelect your new name: ");
+    strcpy(data->character->name, name);
+
+    for(int i=0; i<MAX_SKILLS;i++){
+        int selected_skill = scanf("\nSelect your skill nº%d", i+1);
+        data->skills[i]; // = skill_list[selected_skill];
+    }
+};
+
 //CREATES A NEW GAME
 void new_game(Data *data){
     if(data != NULL){
@@ -39,16 +51,5 @@ void new_game(Data *data){
     configure(data); //Configures new character and skills
 }
 
-void configure(Data *data){
-    char name[MAX_CHAR] = scanf("\nSelect your new name: ");
-    strcpy(data->character->name, name);
-
-    for(int i=0; i<MAX_SKILLS;i++){
-        int selected_skill = scanf("\nSelect your skill nº%d", i+1);
-        data->skills[i]; // = skill_list[selected_skill];
-    }
-};
-
 void continue_game(Data *data){
-
 };
