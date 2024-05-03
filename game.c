@@ -53,3 +53,24 @@ void new_game(Data *data){
 
 void continue_game(Data *data){
 };
+
+void playerTurn(){
+
+}
+
+void enemyTurn(){
+    
+}
+
+
+int combat(Character *character, Enemy *enemies){
+    int active = 1;
+    while(active){
+        //Turn Player
+        playerTurn();
+        //Turn Enemy
+        enemyTurn();
+        if(character->hp <= 0) return 0;
+    }
+    return 1;
+}
