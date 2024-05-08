@@ -41,16 +41,19 @@ typedef struct Option{
 //Decision
 typedef struct Decision{
     char question[MAX_CHAR];
-    Option options[MAX_OPTIONS];
     int n_options;
-}Decision;
+    Option options[n_options];
+    
+}Decisions;
 
 //Scenario
 typedef struct Scenario{
     char name[MAX_CHAR];
     char description[MAX_CHAR];
     char image[MAX_CHAR];
-    Decision decision[];
+    int n_decision;
+    Decisions decision[n_decision];
+    
 }Scenario;
 
 
@@ -58,9 +61,8 @@ typedef struct Scenario{
 typedef struct Data{
     Character *character;
     Skills *skills[MAX_SKILLS];
-    Enemy *enemies[MAX_ENEMIES];
     Option *last_option;
-    Decision *last_decision;
+    Decisions *last_decision;
     Scenario *current_scenario;
 }Data;
 

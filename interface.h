@@ -6,9 +6,19 @@ void displaySkills_New(Skills skill_list){
     
 }
 
+void printScenario(Scenario *Scene){
+    printf("%s\n",Scene->name);
+    printImage(Scene->image);
+    printf("%s",Scene->description);
+}
+
+/*
+
 int main(){
     Scenario Scene = extractScenario("Deck");
-    printf("%s\n",Scene.name);
-    printImage(Scene.image);
-    printf("%s",Scene.description);
+    printScenario(&Scene);
 }
+
+*/
+
+

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "structures.h"
 #include "game.c"
+
 int main(){
     Data* data;
     while(1){

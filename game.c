@@ -4,6 +4,8 @@
 #include <string.h>
 #include "game.h"
 #include "structures.h"
+#include "interface.h"
+#include "queque.h"
 
 int main_menu(Data *data){
     printf("1.Continue      2.Save Game     3.Configure \n");
@@ -11,8 +13,9 @@ int main_menu(Data *data){
     {
         int choice = scanf("Select your option: ");
         if(choice == 1){
+            get_save_data(data);
             if(data == NULL){
-                printf("\nNo saved data found\n");
+                printf("\nNo saved data found, please start a new game\n");
             }
             else{
                 printf("Saved data found, continuing game...");
@@ -31,8 +34,7 @@ int main_menu(Data *data){
 
 void configure(Data *data){
     printf("\nSelect your new name: ");
-    char name[MAX_CHAR];
-    scanf("%s",name);
+    char name[MAX_CHAR] = scanf("%s");
     //char name[MAX_CHAR] = scanf("\nSelect your new name: ");
     strcpy(data->character->name, name);
 
@@ -52,10 +54,11 @@ void new_game(Data *data){
 }
 
 void continue_game(Data *data){
+    mainLoop(data);
 };
 
 void playerTurn(){
-
+    
 }
 
 void enemyTurn(){
@@ -65,12 +68,38 @@ void enemyTurn(){
 
 int combat(Character *character, Enemy *enemies){
     int active = 1;
+    Queue queue = createQueue(character,enemies);
     while(active){
         //Turn Player
         playerTurn();
         //Turn Enemy
         enemyTurn();
-        if(character->hp <= 0) return 0;
+        if(character->hp <= 0 || queue.last == NULL) return 0;
     }
     return 1;
 }
+
+int Decision(Data *data, Scenario scene){
+    for(int desc = 0; desc < 3;desc++){
+        Decisions currentDesc = scene.decision[desc];
+        int option = -1;
+        while(option < 0 ||option > currentDesc.n_options){
+            printf("%s",currentDesc.question);
+            scanf("%d",option);
+        }
+        Option currentOpt = currentDesc.options[option];
+        printf("%s",currentOpt.r_text);
+        int win = combat(data->character, currentOpt.enemies);
+        if(win != 0){
+            printf("%s",currentOpt.n_text);
+        }
+        else return 0;
+    }
+}
+
+void mainLoop(Data *data){
+    Scenario currentScene = extractScenario(data->current_scenario);
+    printScenario(currentScene.name);
+
+}
+
