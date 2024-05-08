@@ -42,7 +42,7 @@ typedef struct Option{
 typedef struct Decision{
     char question[MAX_CHAR];
     int n_options;
-    Option options[n_options];
+    Option options[];
     
 }Decisions;
 
@@ -51,8 +51,7 @@ typedef struct Scenario{
     char name[MAX_CHAR];
     char description[MAX_CHAR];
     char image[MAX_CHAR];
-    int n_decision;
-    Decisions decision[n_decision];
+    Decisions decision;
     
 }Scenario;
 
