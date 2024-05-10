@@ -33,15 +33,17 @@ cJSON startup_read(char json[]){
 }
 
 
-void save_character_data(Data *data){
+void save_data(Data *data){
     //Calls the open file on read function
     cJSON root = startup_read("SaveData.json");
+
     //Gets the necessary items in the json hierarchy
     cJSON *character = cJSON_GetObjectItem(&root, "Character");
     cJSON *stats = cJSON_GetObjectItem(character, "stats");
     cJSON *skills = cJSON_GetObjectItem(character, "skills");
     cJSON *scenario = cJSON_GetObjectItem(&root, "Current_Scenario");
     cJson *scenario_name = cJSON_GetObjectItem(scenario, "name");
+
     //Replace stats,name and scenario in file with current game's data
     cJSON_ReplaceItemInObject(character, "name", cJSON_CreateString(data->character->name));
     cJSON_ReplaceItemInObject(stats, "HP", cJSON_CreateNumber(data->character->hp));
@@ -65,33 +67,38 @@ void save_character_data(Data *data){
         free(json_string);
     }
 }
-/*
-Scenario extractScenario(char scenario[]){
-    Scenario scene;
-    cJSON root  = startup("generalData.json");
-    cJSON *sections = cJSON_GetObjectItem(&root, "Scenarios");
-    cJSON *section;
-    cJSON_ArrayForEach(section,sections){
-        cJSON *name = cJSON_GetObjectItem(section, "name");
-        char *name_str = cJSON_Print(name);
-        name_str++;
-        name_str[strlen(name_str)-1] = 0;
-        if(!strcmp(name_str,scenario)){
-            strcpy(scene.name,name_str);
-            cJSON *image = cJSON_GetObjectItem(section, "image");
-            char *image_file = cJSON_Print(image);
-            image_file++;
-            image_file[strlen(image_file)-1] = 0;
-            strcpy(scene.image,image_file);
-            cJSON *description = cJSON_GetObjectItem(section, "description");
-            char *description_str = cJSON_Print(description);
-            description_str++;
-            description_str[strlen(description_str)-1] = 0;
-            strcpy(scene.description,description_str);
-            return scene;
-        }
+
+void load_data(Data *data){
+    //Calls the open file on read function
+    cJSON root = startup_read("SaveData.json");
+
+    //Gets the necessary items in the json hierarchy
+    cJSON *character = cJSON_GetObjectItem(&root, "Character");
+    cJSON *stats = cJSON_GetObjectItem(character, "stats");
+    cJSON *skills = cJSON_GetObjectItem(character, "skills");
+    cJSON *scenario = cJSON_GetObjectItem(&root, "Current_Scenario");
+
+    //Obtains the json objects holding the data we want
+    cJSON *scenario_name = cJSON_GetObjectItem(scenario, "name");
+    cJSON *name = cJSON_GetObjectItem(character, "name");
+    cJSON *atk = cJSON_GetObjectItem(stats, "ATK");
+    cJSON *def = cJSON_GetObjectItem(stats, "DEF");
+    cJSON *hp = cJSON_GetObjectItem(stats, "HP");
+
+    //Obtains the character data and loads it into the main data structure
+    strcpy(data->character->name, cJSON_Print(name));
+    data->character->atk = cJSON_GetNumberValue(atk);
+    data->character->def = cJSON_GetNumberValue(def);
+    data->character->hp = cJSON_GetNumberValue(hp);
+    
+    //Obtains all saved skills and loads them into the main data structure
+    for (int i = 0; i < cJSON_GetArraySize(skills); i++) {
+        //Iterates through the skills array
+        cJSON *skill_index = cJSON_GetArrayItem(skills, i);
+        cJSON *skill_current = cJSON_GetObjectItem(skill_index, "skill_name");
+        strcpy(data->character->skill[i]->name, cJSON_Print(skill_current));
     }
+    
+    //Obtains the scenario in which the data was saved and loads it into the main data structure
+    strcpy(data->current_scenario->name, cJSON_Print(scenario_name));
 }
-
-
-*/
