@@ -41,7 +41,7 @@
         "description":"",
         "duration": 1,
         "modifiers": [2,0,-1],
-        "damage":
+        "damage": 2
     }
     ],
 

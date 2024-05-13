@@ -20,7 +20,7 @@ typedef struct Character{
     int hp;
     int atk;
     int def;
-    Skills skill[4];
+    Skills skill[MAX_SKILLS];
 }Character;
 
 //Enemy
@@ -29,6 +29,7 @@ typedef struct Enemy{
     int hp;
     int atk;
     int def;
+    Skills skill[2];
 }Enemy;
 
 //Option
@@ -42,7 +43,7 @@ typedef struct Option{
 typedef struct Decision{
     char question[MAX_CHAR];
     int n_options;
-    Option options[];
+    Option options[MAX_OPTIONS];
     
 }Decisions;
 
