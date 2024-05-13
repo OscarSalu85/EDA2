@@ -103,3 +103,39 @@ void mainLoop(Data *data){
 
 }
 
+//FUNCTIONS TO ALLOCATE MEMORY DATA FOR THE 
+Data* create_data(){
+    //ALLOCATES MEMORY FOR DATA
+    Data *data = malloc(sizeof(Data));
+    if(data == NULL){
+        return 0;
+    }
+
+    //ALLOCATES MEMORY FOR THE CHARACTER
+    data->character = malloc(sizeof(Character));
+    if(data->character == NULL){
+        free(data);
+        return 0;
+    }
+
+    //ALLOCATES MEMORY FOR CHARACTER SKILLS BY ITERATING THROUGH EACH ONE
+    for (int i = 0; i < 4; i++) {
+        data->character->skill[i] = malloc(sizeof(Skills));
+        if (data->character->skill[i] == NULL) {
+            // Handle memory allocation failure
+            // Free previously allocated memory
+            for (int j = 0; j < i; j++) {
+                free(data->character->skill[j]);
+            }
+        }
+    }
+
+    //ALLOCATES MEMORY FOR THE CURRENT SCENARIO IN THE DATA
+    data->current_scenario = malloc(sizeof(Scenario));
+    if(data->current_scenario == NULL){
+        free(data);
+        return 0;
+    }
+    return data;
+}
+
