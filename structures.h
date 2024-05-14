@@ -11,7 +11,7 @@ typedef struct Skills{
     char name[MAX_CHAR];
     char description[MAX_CHAR];
     int duration;
-    char modifiers;
+    char modifiers[MAX_CHAR];
 }Skills;
 
 //Character

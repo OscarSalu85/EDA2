@@ -57,8 +57,51 @@ void continue_game(Data *data){
     mainLoop(data);
 };
 
-void playerTurn(){
-    
+Enemy selectTarget(Enemy *enemies){
+    int num_alive = 0;
+    int num_enemies = sizeof(enemies)/sizeof(Enemy);
+    for(int i = 0; i < num_enemies; i++){
+        if(enemies[i].hp > 0){
+            num_alive++;
+            printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i].name,enemies[i].hp,enemies[i].atk,enemies[i].def);
+        }
+    }
+    if(num_alive == 0) return NULL;
+    printf("Chose option:")
+    int opt = 0;
+    while(opt < 1 || opt > num_enemies){
+        scanf("%d", opt);
+        if(0 < opt < num_enemies && enemies[opt -1].hp > 0) return enemies[opt - 1];
+        opt = 0;
+        printf("Chose valid option:")
+    }
+}
+
+Skills selectSkill(Character *character){
+    for(int i = 0; i < 4;i++){
+        printf("\n%d.%s\n:",i+1,character->skill[i].name);
+        printf("   -Desc:%s\n",character->skill[i].description)
+        printf("   -Dur:%d\n",character->skill[i].duration)
+        printf("   -Mod:%s\n\n",character->skill[i].modifiers)
+    }
+    printf("Chose option:")
+    int opt = -1;
+    while(opt < 1 || opt > 5){
+        scanf("%d", opt);
+        if(0 < opt < 5) return character->skill[opt - 1];
+        opt = 0;
+        printf("Chose valid option:")
+    }
+}
+
+int playerTurn(Turn *turn, Enemy *enemies, Character *character){
+   if(enemies != NULL){
+        Enemy target = selectTarget(enemies);
+        if(target == NULL) return 0;
+        Skills skill = selectSkill(character);
+        //Compute skil use
+   }
+   else return 0;
 }
 
 void enemyTurn(){
@@ -69,12 +112,13 @@ void enemyTurn(){
 int combat(Character *character, Enemy *enemies){
     int active = 1;
     Queue queue = createQueue(character,enemies);
-    while(active){
-        //Turn Player
-        playerTurn();
-        //Turn Enemy
-        enemyTurn();
-        if(character->hp <= 0 || queue.last == NULL) return 0;
+    while(active && queue.first != NULL){
+        //Character
+        if(queue.first->type == 0){
+            active = playerTurn(queue.first, enemies, character);
+        }
+        
+        if(character->hp <= 0 || queue.first == NULL) return 0;
     }
     return 1;
 }
