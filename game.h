@@ -6,6 +6,7 @@
 #include "interface.h"
 #include "queque.h"
 #include "dataR.h"
+
 int main_menu(Data *data){
     printf("1.Continue      2.New Game     3.Configure \n");
     while (1)
@@ -125,21 +126,20 @@ Skills selectSkill(Character *character){
 void playerTurn(Turn *turn, Enemy *enemies, Character *character){
    if(enemies != NULL){
         Enemy target = selectTarget(enemies);
-        if(target.name == NULL) return 0;
         Skills skill = selectSkill(character);
-        //Atack
+        //Attack
         int damage = 0;
         if(target.def > 0) damage = ((character->atk * skill.damage) / target.def);
         else damage = (character->atk * skill.damage);
         target.hp = target.hp - damage;
         //Modifiers
    }
-   else return 0;
 }
 
 Skills selectEnemySkill(Enemy *current_enemy){
-    
-    
+    Skills *skill;
+    //Select skill randomly
+    return *skill;
 }
 
 int enemyTurn(Turn *turn, Character *character){
