@@ -29,7 +29,6 @@ int main_menu(Data *data){
             return 3;
         }
     }
-    
 }
 
 void configure(Data *data){
@@ -61,6 +60,16 @@ void configure(Data *data){
         //data->character->skill[i] = skill_list[selected_skill];
     }
 };
+
+void mainLoop(Data *data){
+    Scenario *currentScene = data->current_scenario;
+    int active = 1;
+    while(active){
+        printScenario(currentScene->name);
+        int active = Decision(data,*currentScene);
+
+    }
+}
 
 //CREATES A NEW GAME
 void new_game(Data *data){
@@ -161,27 +170,22 @@ int combat(Character *character, Enemy *enemies){
 }
 
 int Decision(Data *data, Scenario scene){
-    for(int desc = 0; desc < 3;desc++){
-        Decisions currentDesc = scene.decision[desc];
-        int option = -1;
-        while(option < 0 ||option > currentDesc.n_options){
-            printf("%s",currentDesc.question);
-            scanf("%d",option);
-        }
-        Option currentOpt = currentDesc.options[option];
-        printf("%s",currentOpt.r_text);
-        int win = combat(data->character, currentOpt.enemies);
-        if(win != 0){
-            printf("%s",currentOpt.n_text);
-        }
-        else return 0;
+    
+    Decisions *currentDesc = scene.decision;
+    int option = -1;
+    while(option < 0 ||option > currentDesc->n_options){
+        printf("%s",currentDesc->question);
+        scanf("%d",option);
     }
-}
-
-void mainLoop(Data *data){
-    Scenario currentScene = extractScenario(data->current_scenario);
-    printScenario(currentScene.name);
-
+    Option *currentOpt = currentDesc->options[option];
+    printf("%s",currentOpt->r_text);
+    int win = combat(data->character, currentOpt->enemies);
+    if(win != 0){
+        printf("%s",currentOpt->n_text);
+        return 1;
+    }
+    else return 0;
+    
 }
 
 //FUNCTIONS TO ALLOCATE MEMORY DATA FOR THE 

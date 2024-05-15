@@ -154,7 +154,7 @@
         },
         {
             "name":"hall",
-            "description":"",
+            "description":"Now he finds the hall, maybe you think that it is strange to find the hall at this point but what is stranger is the objects movements and the special enemies that there arein the hall.",
             "options":
                 {
                     "Option_A":"DEF",
@@ -164,6 +164,7 @@
         },
         {
             "name":"1st class floor",
+            "description":"(name char) are sourround by the most sophisticated area of the ship as well as the most sophisticated enemies that there are in the floor.",
             "options":
                 {
                     "Option_A":"DEF",
@@ -173,6 +174,7 @@
         },
         {
             "name":"hold",
+            "description":"Finally he arrives to the hold the least floor of the ship. Now he has to fight against the last and most difficult enemy he has never seen",
             "options":
                 {
                     "Option_A":"DEF",
