@@ -124,7 +124,7 @@
         },
         {
             "name":"3rd class floor",
-            "descripion":"",
+            "descripion":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
             "options":
                 {
                     "Option_A":"DEF",
@@ -134,6 +134,7 @@
         },
         {
             "name":"Kitchen",
+            "description":"After the horrible conditions that he has seen before now he arrives to the kitchen but he was surprised (not for good),he found some strange food and people that he has to pass through to continue his path.",
             "options":
                 {
                     "Option_A":"DEF",
@@ -143,6 +144,7 @@
         },
         {
             "name":"2nd class floor",
+            "description":"Now he arrives to the 2nd class floor, the things have changed unfortunately not in a goodway for (name char), he arrives and see new staff and another type of enemies that he has to beat.¿It might be the end of(name)?",
             "options":
                 {
                     "Option_A":"DEF",
@@ -152,6 +154,7 @@
         },
         {
             "name":"hall",
+            "description":"",
             "options":
                 {
                     "Option_A":"DEF",

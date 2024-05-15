@@ -116,7 +116,7 @@ Skills selectSkill(Character *character){
 void playerTurn(Turn *turn, Enemy *enemies, Character *character){
    if(enemies != NULL){
         Enemy target = selectTarget(enemies);
-        if(target == NULL) return 0;
+        if(target.name == NULL) return 0;
         Skills skill = selectSkill(character);
         //Atack
         int damage = 0;
@@ -128,15 +128,20 @@ void playerTurn(Turn *turn, Enemy *enemies, Character *character){
    else return 0;
 }
 
+Skills selectEnemySkill(Enemy *current_enemy){
+    
+    
+}
+
 int enemyTurn(Turn *turn, Character *character){
-    Enemy *current_enemy = &turn.enemy;
-    Skills *skill = selectEnemySkill();
+    Enemy *current_enemy = turn->enemy;
+    Skills *skill = selectEnemySkill(current_enemy);
     //Atack
     int damage = 0;
-    if(character > 0) damage = ((current_enemy->atk * skill.damage) / character.def);
-    else damage = (current_enemy->atk * skill.damage);
-    character.hp = character.hp - damage;
-    if (character.hp <= 0) return 0;
+    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) / character->def);
+    else damage = (current_enemy->atk * skill->damage);
+    character->hp = character->hp - damage;
+    if (character->hp <= 0) return 0;
     return 1;
 }
 
@@ -148,7 +153,7 @@ int combat(Character *character, Enemy *enemies){
         if(queue.first->type == 0){
             playerTurn(queue.first, enemies, character);
         }
-        else active = enemyTurn();
+        else active = enemyTurn(queue.first, character);
         
         if(character->hp <= 0 || queue.first == NULL) return 0;
     }
@@ -184,14 +189,14 @@ Data* create_data(){
     //ALLOCATES MEMORY FOR DATA
     Data *data = malloc(sizeof(Data));
     if(data == NULL){
-        return 0;
+        return;
     }
 
     //ALLOCATES MEMORY FOR THE CHARACTER
     data->character = malloc(sizeof(Character));
     if(data->character == NULL){
         free(data);
-        return 0;
+        return;
     }
 
     //ALLOCATES MEMORY FOR CHARACTER SKILLS BY ITERATING THROUGH EACH ONE
@@ -210,7 +215,7 @@ Data* create_data(){
     data->current_scenario = malloc(sizeof(Scenario));
     if(data->current_scenario == NULL){
         free(data);
-        return 0;
+        return;
     }
     return data;
 }
