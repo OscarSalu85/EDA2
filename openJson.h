@@ -1,5 +1,6 @@
 #ifndef OPENJSON_H
 #define OPENJSON_H
+
 cJSON startup_read(char json[]){
     FILE *file = fopen(json, "r");
     if (file == NULL) {

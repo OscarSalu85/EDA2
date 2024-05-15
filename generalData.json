@@ -37,11 +37,39 @@
         "damage": 0
     },
     {
-        "name":"Carrot s",
-        "description":"",
+        "name":"Carrot's shurikens",
+        "description":"When (name char) is in the kitchen he found 3 carrots and why don't use them to attack enemies.",
         "duration": 1,
         "modifiers": [2,0,-1],
-        "damage": 2
+        "damage": 15
+    },
+    {
+        "name":"Haunted pen",
+        "description":"When (name char) arrives to the hall he sees a pen levitating and he decided to took it with him and not for write anything. The oen throws 2 burst of ink that  hurts and decreases the defence of the enemies",
+        "duration": 1,
+        "modifiers": [2,0,-1],
+        "damage": 20 
+    },
+    {
+        "name":"Ceiling light jump",
+        "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
+        "duration": 1,
+        "modifiers": [2,0,-1],
+        "damage": 40
+    },
+    {
+        "name":"Ceiling light jump",
+        "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
+        "duration": 1,
+        "modifiers": [2,0,-1],
+        "damage": 40
+    },
+    {
+        "name":"Ceiling light jump",
+        "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
+        "duration": 1,
+        "modifiers": [2,0,-1],
+        "damage": 40
     }
     ],
 
@@ -74,7 +102,7 @@
         {
             "name":"Deck",
             "image": "Deck.txt",
-            "description": "Prueba 1 2 3 4 5...",
+            "description": "When (name character) arrives to the ship what it is obvious is that he finds the deck where he starts to see some rare things that were not supposed to be there. ",
             "options":
             [   
                 {   
@@ -96,6 +124,7 @@
         },
         {
             "name":"3rd class floor",
+            
             "options":
                 {
                     "Option_A":"DEF",

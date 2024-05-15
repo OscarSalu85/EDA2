@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cJSON.c" // Include the cJSON library header
+#include "cJSON.h" // Include the cJSON library header
+
+#ifndef DATAR_H
+#define DATAR_H
 
 
 //OPENS JSON IN READ MODE
@@ -42,7 +45,7 @@ void save_data(Data *data){
     cJSON *stats = cJSON_GetObjectItem(character, "stats");
     cJSON *skills = cJSON_GetObjectItem(character, "skills");
     cJSON *scenario = cJSON_GetObjectItem(&root, "Current_Scenario");
-    cJson *scenario_name = cJSON_GetObjectItem(scenario, "name");
+    cJSON *scenario_name = cJSON_GetObjectItem(scenario, "name");
 
     //Replace stats,name and scenario in file with current game's data
     cJSON_ReplaceItemInObject(character, "name", cJSON_CreateString(data->character->name));
@@ -102,3 +105,6 @@ void load_data(Data *data){
     //Obtains the scenario in which the data was saved and loads it into the main data structure
     strcpy(data->current_scenario->name, cJSON_Print(scenario_name));
 }
+
+
+#endif

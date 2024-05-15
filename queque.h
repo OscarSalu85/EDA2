@@ -1,5 +1,7 @@
+#ifndef QUEQUE_H
+#define QUEQUE_H
 #include "structures.h"
-#include <cstdlib>
+#include <stdlib.h>
 
 #define NUM_TURNS 20
 
@@ -53,3 +55,4 @@ Queue createQueue(Character *character, Enemy *enemies){
     return queue;
 }
 
+#endif

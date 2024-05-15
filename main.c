@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "structures.h"
-#include "game.c"
+#include "game.h"
 
 int main(){
-    Data* data;
+    Data* data = create_data();
     while(1){
         //Menu inicial
         int main_menu_choice = main_menu(data);
