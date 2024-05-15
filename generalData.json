@@ -58,7 +58,7 @@
         "damage": 40
     },
     {
-        "name":"Ceiling light jump",
+        "name":"",
         "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
         "duration": 1,
         "modifiers": [2,0,-1],
@@ -124,7 +124,7 @@
         },
         {
             "name":"3rd class floor",
-            
+            "descripion":"",
             "options":
                 {
                     "Option_A":"DEF",

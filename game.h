@@ -58,7 +58,7 @@ void configure(Data *data){
 
     for(int i=0; i<MAX_SKILLS;i++){
         int selected_skill = scanf("\nSelect your skill nº%d", i+1);
-        data->skills[i]; // = skill_list[selected_skill];
+        //data->character->skill[i] = skill_list[selected_skill];
     }
 };
 
@@ -85,14 +85,14 @@ Enemy selectTarget(Enemy *enemies){
             printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i].name,enemies[i].hp,enemies[i].atk,enemies[i].def);
         }
     }
-    if(num_alive == 0) return NULL;
-    printf("Chose option:")
+    if(num_alive == 0) return;
+    printf("Chose option:");
     int opt = 0;
     while(opt < 1 || opt > num_enemies){
         scanf("%d", opt);
         if(0 < opt < num_enemies && enemies[opt -1].hp > 0) return enemies[opt - 1];
         opt = 0;
-        printf("Chose valid option:")
+        printf("Chose valid option:");
     }
 }
 
@@ -129,8 +129,8 @@ void playerTurn(Turn *turn, Enemy *enemies, Character *character){
 }
 
 int enemyTurn(Turn *turn, Character *character){
-    Enemy current_enemy = turn.enemy;
-    Skills skill = selectEnemySkill();
+    Enemy *current_enemy = &turn.enemy;
+    Skills *skill = selectEnemySkill();
     //Atack
     int damage = 0;
     if(character > 0) damage = ((current_enemy->atk * skill.damage) / character.def);
