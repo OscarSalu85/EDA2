@@ -6,7 +6,7 @@
 
 #ifndef DATAR_H
 #define DATAR_H
-
+#define SKILL_MAX 20
 
 //OPENS JSON IN READ MODE
 cJSON startup_read(char json[]){
@@ -106,5 +106,10 @@ void load_data(Data *data){
     strcpy(data->current_scenario->name, cJSON_Print(scenario_name));
 }
 
+void get_skill_data(Skills *skill[SKILL_MAX]){
+    //Calls the open file on read function
+    cJSON root = startup_read("generalData.json");
+    
+}
 
 #endif

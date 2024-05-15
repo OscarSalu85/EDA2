@@ -6,7 +6,9 @@
 #include "interface.h"
 #include "queque.h"
 #include "dataR.h"
-
+#define BASE_HP
+#define INITIAL_STATS 20
+#define HP_PER_POINT 5 //Hp value given for every stat point invested
 int main_menu(Data *data){
     printf("1.Continue      2.New Game     3.Configure \n");
     while (1)
@@ -27,15 +29,26 @@ int main_menu(Data *data){
             return 2;
         }
         else if(choice == 3){
-            return 3;
+            if(data->character->name == ""){
+                printf("\nNo saved data found, please start a new game\n");
+            }
+            else{
+                printf("Saved data found, opening character configuration...");
+                return 3;
+            }
         }
     }
 }
 
 void configure(Data *data){
+    int starting_points = INITIAL_STATS;
+    data->character->atk = 0;
+    data->character->def = 0;
+    data->character->hp = 10;
     while (1)
     {
         int count = 0;
+        
         printf("\nSelect your new name: ");
         scanf("\n%s",data->character->name);
         for(int i=0;i<strlen(data->character->name);i++){
@@ -53,8 +66,33 @@ void configure(Data *data){
         if(count == 0){
             break;
         }
-        
     }
+    int current_points = INITIAL_STATS;
+    while(current_points != 0){
+            printf("\nAvailable SP (Stat Points) : %d",current_points)
+            printf("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d", data->character->atk,data->character->def,(data->character->hp-BASE_HP) / HP_PER_POINT);
+            int input = scanf("\nSelect which stat you want to invest in: ");
+            if(input < 1 || input>3){
+                printf("\nSelect a valid element to invest.");
+            }
+            else{
+                int input2 = scanf("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now)");
+                if(input2 > current_points || input2 < 0){
+                    printf("\nNot enough stat points available.");
+                }
+                else if(input2 > 0){
+                    if(input == 1){
+                        data->character->atk += input;
+                    }
+                    else if(input == 2){
+                        data->character->def += input;
+                    }
+                    else if(input == 3){
+                        data->character->hp += input * HP_PER_POINT;
+                    }
+                }
+            }
+        }   
 
     for(int i=0; i<MAX_SKILLS;i++){
         int selected_skill = scanf("\nSelect your skill nº%d", i+1);
@@ -78,7 +116,7 @@ void new_game(Data *data){
         free(data); //Frees saved data
     }
     data = create_data();
-    save_data(data);
+    save_data(data);//Overwrites save file with empty file
     configure(data); //Configures new character and skills
 }
 
