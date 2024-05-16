@@ -6,14 +6,15 @@
 #define MAX_OPTIONS 3
 #define MAX_DECISIONS 3
 #define MAX_SKILLS 4
-
+#define MOD_NUMBER 3
+#define SKILL_DATA_SIZE 10
 //Skills
 typedef struct Skills{
-    char name[MAX_CHAR];
+    char name[MAX_CHAR_NAME];
     char description[MAX_CHAR];
     int duration;
     int damage;
-    char modifiers[MAX_CHAR];
+    int modifiers[MOD_NUMBER];
 }Skills;
 
 //Character
@@ -22,7 +23,7 @@ typedef struct Character{
     int hp;
     int atk;
     int def;
-    Skills skill[MAX_SKILLS];
+    Skills *skill[MAX_SKILLS];
 }Character;
 
 //Enemy

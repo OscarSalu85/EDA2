@@ -109,7 +109,43 @@ void load_data(Data *data){
 void get_skill_data(Skills *skill[SKILL_MAX]){
     //Calls the open file on read function
     cJSON root = startup_read("generalData.json");
-    
+    //Creation of the skill_list data structure
+    Skills *skill_list[SKILL_MAX];
+    for (int i = 0; i < SKILL_MAX; i++) {
+        skill_list[i] = malloc(sizeof(Skills));
+        if (skill_list[i] == NULL) {
+            // Handle memory allocation failure
+            // Free previously allocated memory to avoid issues
+            for (int j = 0; j < i; j++) {
+                free(skill_list[j]);
+            }
+        }
+    }
+    cJSON *skills = cJSON_GetObjectItem(&root, "skills");
+
+    for (int i = 0; i < cJSON_GetArraySize(skills); i++) {
+        //Iterates through the skills array
+        cJSON *skill_index = cJSON_GetArrayItem(skills, i);
+        cJSON *skill_name = cJSON_GetObjectItem(skill_index, "name");
+        cJSON *skill_description = cJSON_GetObjectItem(skill_index, "description");
+        cJSON *skill_duration = cJSON_GetObjectItem(skill_index, "duration");
+        cJSON *skill_damage = cJSON_GetObjectItem(skill_index,"damage");
+        cJSON *skill_mods = cJSON_GetObjectItem(skill_index, "modifiers");
+        cJSON *mod_1 = cJSON_GetArrayItem(skill_mods, 0);
+        cJSON *mod_2 = cJSON_GetArrayItem(skill_mods, 1);
+        cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
+        
+
+        
+        strcpy(skill_list[i]->name, cJSON_Print(skill_name));
+        strcpy(skill_list[i]->description, cJSON_Print(skill_description));
+        skill_list[i]->duration = cJSON_GetNumberValue(skill_duration);
+        skill_list[i]->damage = cJSON_GetNumberValue(skill_damage);
+        
+        skill_list[i]->modifiers[0] = cJSON_GetNumberValue(mod_1);
+        skill_list[i]->modifiers[1] = cJSON_GetNumberValue(mod_2);
+        skill_list[i]->modifiers[2] = cJSON_GetNumberValue(mod_3);
+    }
 }
 
 #endif

@@ -93,13 +93,35 @@ void configure(Data *data){
                 }
             }
         }   
+    Skills *skill_list[SKILL_DATA_SIZE];
+    get_skill_data(skill_list);
+    print_skill_list(skill_list);
 
     for(int i=0; i<MAX_SKILLS;i++){
-        int selected_skill = scanf("\nSelect your skill nº%d", i+1);
-        //data->character->skill[i] = skill_list[selected_skill];
+        while(1){
+            int selected_skill = scanf("\nSelect your skill nº%d", i+1);
+            if(selected_skill<1 || selected_skill >20){
+                printf("\nNo valid skill was selected, please choose a valid skill.");
+            }
+            else{
+                data->character->skill[i] = skill_list[selected_skill-1];
+                printf("\n%s added to your character's skill set", skill_list[selected_skill-1]);
+                break;
+            }
+        }
     }
+    printf("\n%s's current skill set: ")
+    for(int i = 0; i<MAX_SKILLS; i++){
+        printf("\n%s", data->character->skill[i]->name);
+    }
+    
 };
 
+void print_skill_list(Skills* skill_list){
+    for(int i=0; i<SKILL_DATA_SIZE; i++){
+        printf("\n%dSKILL Nº%d: %s", i+1, i+1, skill_list[i]->name);
+    }
+}
 void mainLoop(Data *data){
     Scenario *currentScene = data->current_scenario;
     int active = 1;
