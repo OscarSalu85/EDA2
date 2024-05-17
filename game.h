@@ -21,7 +21,7 @@ int main_menu(Data *data){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
-                printf("Saved data found, continuing game...");
+                printf("Saved data found, continuing game...\n");
                 return 1;
             }
         }
@@ -33,22 +33,39 @@ int main_menu(Data *data){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
-                printf("Saved data found, opening character configuration...");
+                printf("Saved data found, opening character configuration...\n");
                 return 3;
             }
         }
     }
 }
 
-void configure(Data *data){
-    int starting_points = INITIAL_STATS;
-    data->character->atk = 0;
-    data->character->def = 0;
-    data->character->hp = 10;
+void configure_menu(Data *data){
+    while(1){
+        printf("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\nBack to Main Menu");
+        int choice = scanf("\nSelect an option: ");
+        if(choice == 1){
+            configure_name(data);
+        }
+        else if(choice == 2){
+            configure_stats(data);
+        }
+        else if(choice == 3){
+            configure_skills(data);
+        }
+        else if(choice == 4){
+            main_menu(data);
+        }
+        else{
+            printf("No valid option was chosen, please try again.")
+        }
+    }
+};
+
+void configure_name(Data* data){
     while (1)
     {
         int count = 0;
-        
         printf("\nSelect your new name: ");
         scanf("\n%s",data->character->name);
         for(int i=0;i<strlen(data->character->name);i++){
@@ -67,6 +84,16 @@ void configure(Data *data){
             break;
         }
     }
+    return;
+}
+
+
+void configure_stats(Data* data){
+    int starting_points = INITIAL_STATS;
+    data->character->atk = 0;
+    data->character->def = 0;
+    data->character->hp = 10;
+    
     int current_points = INITIAL_STATS;
     while(current_points != 0){
             printf("\nAvailable SP (Stat Points) : %d",current_points)
@@ -92,36 +119,45 @@ void configure(Data *data){
                     }
                 }
             }
-        }   
+        } 
+        return;
+}
+
+void configure_skills(Data* data){
     Skills *skill_list[SKILL_DATA_SIZE];
     get_skill_data(skill_list);
     print_skill_list(skill_list);
-
-    for(int i=0; i<MAX_SKILLS;i++){
-        while(1){
-            int selected_skill = scanf("\nSelect your skill nº%d", i+1);
-            if(selected_skill<1 || selected_skill >20){
-                printf("\nNo valid skill was selected, please choose a valid skill.");
-            }
-            else{
-                data->character->skill[i] = skill_list[selected_skill-1];
-                printf("\n%s added to your character's skill set", skill_list[selected_skill-1]);
-                break;
+    while(1){
+        for(int i=0; i<MAX_SKILLS;i++){
+            while(1){
+                int selected_skill = scanf("\nSelect your skill nº%d", i+1);
+                if(selected_skill<1 || selected_skill >20){
+                    printf("\nNo valid skill was selected, please choose a valid skill.");
+                }
+                else{
+                    data->character->skill[i] = skill_list[selected_skill-1];
+                    printf("\n%s added to your character's skill set", skill_list[selected_skill-1]);
+                    break;
+                }
             }
         }
+        printf("\n%s's current skill set: ", data->character->name);
+        for(int i = 0; i<MAX_SKILLS; i++){
+            printf("\n%s", data->character->skill[i]->name);
+        }
+        int confirm = scanf("\nConfirm skill set?\n1.Yes\n2.No");
+        if(confirm == 1){
+            return;
+        }
     }
-    printf("\n%s's current skill set: ")
-    for(int i = 0; i<MAX_SKILLS; i++){
-        printf("\n%s", data->character->skill[i]->name);
-    }
-    
-};
+}
 
 void print_skill_list(Skills* skill_list){
     for(int i=0; i<SKILL_DATA_SIZE; i++){
         printf("\n%dSKILL Nº%d: %s", i+1, i+1, skill_list[i]->name);
     }
 }
+
 void mainLoop(Data *data){
     Scenario *currentScene = data->current_scenario;
     int active = 1;
@@ -139,7 +175,9 @@ void new_game(Data *data){
     }
     data = create_data();
     save_data(data);//Overwrites save file with empty file
-    configure(data); //Configures new character and skills
+    configure_name(data);
+    configure_stats(data);
+    configure_skills(data);
 }
 
 void continue_game(Data *data){
