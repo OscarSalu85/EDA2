@@ -1,12 +1,11 @@
+#ifndef DATAR_H
+#define DATAR_H
 #include "structures.h"
-#include "graph.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "cJSON.h" // Include the cJSON library header
-
-#ifndef DATAR_H
-#define DATAR_H
+#include <unistd.h>
 #define SKILL_MAX 20
 
 //OPENS JSON IN READ MODE
@@ -14,6 +13,7 @@ cJSON startup_read(char json[]){
    FILE *fp = fopen(json, "r"); 
    cJSON cj;
     if (fp == NULL) { 
+        perror("getcwd() error");
         printf("Error: Unable to open the file.\n"); 
         return cj; 
     } 
@@ -22,8 +22,9 @@ cJSON startup_read(char json[]){
     char buffer[1024]; 
     int len = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
-  
+    
     // parse the JSON data 
+    
     cJSON *root = cJSON_Parse(buffer); 
     if (root == NULL) { 
         const char *error_ptr = cJSON_GetErrorPtr(); 
@@ -31,8 +32,10 @@ cJSON startup_read(char json[]){
             printf("Error: %s\n", error_ptr); 
         } 
         cJSON_Delete(root); 
+        free(root);
         return cj; 
-    } 
+    }
+    
     return *root;
 }
 
@@ -40,7 +43,7 @@ cJSON startup_read(char json[]){
 void save_data(Data *data){
     //Calls the open file on read function
     cJSON root = startup_read("SaveData.json");
-
+    printf("AAA");
     //Gets the necessary items in the json hierarchy
     cJSON *character = cJSON_GetObjectItem(&root, "Character");
     cJSON *stats = cJSON_GetObjectItem(character, "stats");
@@ -75,7 +78,7 @@ void save_data(Data *data){
 void load_data(Data *data){
     //Calls the open file on read function
     cJSON root = startup_read("SaveData.json");
-
+    printf("\nROOT OBTAINED");
     //Gets the necessary items in the json hierarchy
     cJSON *character = cJSON_GetObjectItem(&root, "Character");
     cJSON *stats = cJSON_GetObjectItem(character, "stats");
@@ -148,72 +151,5 @@ void get_skill_data(Skills *skill[SKILL_MAX]){
         skill_list[i]->modifiers[2] = cJSON_GetNumberValue(mod_3);
     }
 }
-
-void load_enemy(Enemy *enemy,char *name[MAX_CHAR_NAME]){
-    cJSON root = startup_read("generalData.json");
-    cJSON *enemy = cJSON_GetObjectItem(&root, "Enemies");
-    cJSON *current_enemy = cJSON_GetObjectItem(enemy, name);
-    cJSON *enemy_atk = cJSON_GetObjectItem(current_enemy, "atk");
-    cJSON *enemy_def = cJSON_GetObjectItem(current_enemy, "def");
-    cJSON *enemy_hp = cJSON_GetObjectItem(current_enemy, "hp");
-
-    enemy->atk = cJSON_GetNumberValue(enemy_atk);
-    enemy->def = cJSON_GetNumberValue(enemy_def);
-    enemy->hp = cJSON_GetNumberValue(enemy_hp);
-    strcpy(enemy->name, name);
-    
-    //Skills 
-}
-
-void load_graph(Graph *graph){
-
-    //Calls the open file on read function
-    cJSON root = startup_read("generalData.json");
-
-    //Gets the necessary items in the json hierarchy
-    cJSON *scenarios = cJSON_GetObjectItem(&root, "Scenarios");
-     for (int i = 0; i < cJSON_GetArraySize(scenarios); i++) {
-        Node_G *node;
-        Scenario *iterated_scene;
-        Decisions *decision;
-        //Iterates through the skills array
-        cJSON *scene = cJSON_GetArrayItem(scenarios, i);
-        cJSON *scenario_name = cJSON_GetObjectItem(scene, "name");
-        cJSON *scenario_description = cJSON_GetObjectItem(scene, "description");
-        cJSON *scenario_image = cJSON_GetObjectItem(scene, "image");
-        cJSON *scenario_question = cJSON_GetObjectItem(scene, "question");
-        strcpy(iterated_scene->name, cJSON_Print(scenario_name));
-        strcpy(iterated_scene->description, cJSON_Print(scenario_description));
-        strcpy(iterated_scene->image, cJSON_Print(scenario_image));
-        strcpy(decision->question, cJSON_Print(scenario_question));
-
-        int num_options = 0;
-        cJSON *options = cJSON_GetObjectItem(scene, "options");
-        for (int x = 0; x < cJSON_GetArraySize(options); x++){
-            Option *current_opt;
-            num_options++;
-            cJSON *iterated_option = cJSON_GetArrayItem(options, x);
-            cJSON *option_r_text= cJSON_GetObjectItem(scene, "r_text");
-            cJSON *option_n_text= cJSON_GetObjectItem(scene, "n_text");
-            strcpy(current_opt->r_text, cJSON_Print(option_r_text));
-            strcpy(current_opt->n_text, cJSON_Print(option_n_text));
-            Enemy *option_Enemies[MAX_ENEMIES];
-
-            cJSON *enemies = cJSON_GetObjectItem(iterated_option, "Combat");
-            for(int y = 0; y < cJSON_GetArraySize(enemies); y++){
-                Enemy *current_enemy;
-                cJSON *iterated_enemy = cJSON_GetArrayItem(enemies, y);
-                char current_enemy_name[MAX_CHAR_NAME];
-                strcpy(current_enemy_name, cJSON_Print(iterated_enemy));
-                load_enemy(current_enemy,current_enemy_name);
-                option_Enemies[y] = current_enemy;
-            }
-        }
-        decision->n_options = num_options;
-    }
-}
-
-
-
 
 #endif
