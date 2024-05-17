@@ -102,6 +102,7 @@
             "name":"Deck",
             "image": "Deck.txt",
             "description": "When (name character) arrives to the ship what it is obvious is that he finds the deck where he starts to see some rare things that were not supposed to be there. ",
+            "question":"Which zone do you want to explore now? The kitchen or the 3rd class floor",
             "options":
             [   
                 {   
@@ -119,27 +120,48 @@
                 }
                     
             ],
-            "next":"3rd class floor"
+            "next_scenarios":
+            {
+                "option_A": "3rd class floor",
+                "option_B": "kitchen"
+            }
         },
         {
             "name":"3rd class floor",
             "descripion":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
+            "question":"Which zone do you want to explore now? The kitchen or the 2nd class floor",
             "options":
                 {
-                    "Option_A":"DEF",
-                    "Option_B":"FED"
+                   "Option_C":"2nd class floor",
+                   "Option_D":"hall"
+                    
                 },
-            "next": "Kitchen"
+            "next_1":
+            {
+                "Option_C":"2nd class floor"
+            },
+            "next_2":
+            {
+                "Option_D":"hall"
+            }
         },
         {
             "name":"Kitchen",
             "description":"After the horrible conditions that he has seen before now he arrives to the kitchen but he was surprised (not for good),he found some strange food and people that he has to pass through to continue his path.",
+            "question":"Which zone do you want to explore now? The 2nd class floor or the hall",
             "options":
                 {
                     "Option_A":"DEF",
                     "Option_B":"FED"
                 },
-            "next": "2nd class floor"
+                "next_1":
+                {
+                    "Option_B":"kitchen"
+                },
+                "next_2":
+                {
+                    "Option_C":"2nd class floor"
+                }
         },
         {
             "name":"2nd class floor",
