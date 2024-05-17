@@ -149,7 +149,21 @@ void get_skill_data(Skills *skill[SKILL_MAX]){
     }
 }
 
+void load_enemy(Enemy *enemy,char *name[MAX_CHAR_NAME]){
+    cJSON root = startup_read("generalData.json");
+    cJSON *enemy = cJSON_GetObjectItem(&root, "Enemies");
+    cJSON *current_enemy = cJSON_GetObjectItem(enemy, name);
+    cJSON *enemy_atk = cJSON_GetObjectItem(current_enemy, "atk");
+    cJSON *enemy_def = cJSON_GetObjectItem(current_enemy, "def");
+    cJSON *enemy_hp = cJSON_GetObjectItem(current_enemy, "hp");
 
+    enemy->atk = cJSON_GetNumberValue(enemy_atk);
+    enemy->def = cJSON_GetNumberValue(enemy_def);
+    enemy->hp = cJSON_GetNumberValue(enemy_hp);
+    strcpy(enemy->name, name);
+    
+    //Skills 
+}
 
 void load_graph(Graph *graph){
 
@@ -174,7 +188,7 @@ void load_graph(Graph *graph){
         strcpy(decision->question, cJSON_Print(scenario_question));
 
         int num_options = 0;
-        cJSON *options = cJSON_GetObjectItem(&scene, "options");
+        cJSON *options = cJSON_GetObjectItem(scene, "options");
         for (int x = 0; x < cJSON_GetArraySize(options); x++){
             Option *current_opt;
             num_options++;
@@ -183,7 +197,17 @@ void load_graph(Graph *graph){
             cJSON *option_n_text= cJSON_GetObjectItem(scene, "n_text");
             strcpy(current_opt->r_text, cJSON_Print(option_r_text));
             strcpy(current_opt->n_text, cJSON_Print(option_n_text));
+            Enemy *option_Enemies[MAX_ENEMIES];
 
+            cJSON *enemies = cJSON_GetObjectItem(iterated_option, "Combat");
+            for(int y = 0; y < cJSON_GetArraySize(enemies); y++){
+                Enemy *current_enemy;
+                cJSON *iterated_enemy = cJSON_GetArrayItem(enemies, y);
+                char current_enemy_name[MAX_CHAR_NAME];
+                strcpy(current_enemy_name, cJSON_Print(iterated_enemy));
+                load_enemy(current_enemy,current_enemy_name);
+                option_Enemies[y] = current_enemy;
+            }
         }
         decision->n_options = num_options;
     }
