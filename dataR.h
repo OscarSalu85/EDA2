@@ -149,6 +149,8 @@ void get_skill_data(Skills *skill[SKILL_MAX]){
     }
 }
 
+
+
 void load_graph(Graph *graph){
 
     //Calls the open file on read function
@@ -157,7 +159,7 @@ void load_graph(Graph *graph){
     //Gets the necessary items in the json hierarchy
     cJSON *scenarios = cJSON_GetObjectItem(&root, "Scenarios");
      for (int i = 0; i < cJSON_GetArraySize(scenarios); i++) {
-        Node *node;
+        Node_G *node;
         Scenario *iterated_scene;
         Decisions *decision;
         //Iterates through the skills array
@@ -174,11 +176,20 @@ void load_graph(Graph *graph){
         int num_options = 0;
         cJSON *options = cJSON_GetObjectItem(&scene, "options");
         for (int x = 0; x < cJSON_GetArraySize(options); x++){
+            Option *current_opt;
             num_options++;
             cJSON *iterated_option = cJSON_GetArrayItem(options, x);
+            cJSON *option_r_text= cJSON_GetObjectItem(scene, "r_text");
+            cJSON *option_n_text= cJSON_GetObjectItem(scene, "n_text");
+            strcpy(current_opt->r_text, cJSON_Print(option_r_text));
+            strcpy(current_opt->n_text, cJSON_Print(option_n_text));
 
         }
+        decision->n_options = num_options;
     }
 }
+
+
+
 
 #endif

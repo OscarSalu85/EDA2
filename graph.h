@@ -1,14 +1,20 @@
-#include "queque.h";
+#include "queque.h"
 
-typedef struct Node{
+
+typedef struct Node_G{
     Scenario scene;
-    struct Node *father;
-    struct Node *child_1;
-    struct Node *child_2;    
-}Node;
+    struct Node_G *father;
+    struct Node_G *child_1;
+    struct Node_G *child_2;    
+}Node_G;
 
 typedef struct Graph{
-    Node *root;
+    Node_G *root;
 }Graph;
+
+
+
+
+
 
 
