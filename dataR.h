@@ -1,4 +1,5 @@
 #include "structures.h"
+#include "graph.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -145,6 +146,38 @@ void get_skill_data(Skills *skill[SKILL_MAX]){
         skill_list[i]->modifiers[0] = cJSON_GetNumberValue(mod_1);
         skill_list[i]->modifiers[1] = cJSON_GetNumberValue(mod_2);
         skill_list[i]->modifiers[2] = cJSON_GetNumberValue(mod_3);
+    }
+}
+
+void load_graph(Graph *graph){
+
+    //Calls the open file on read function
+    cJSON root = startup_read("generalData.json");
+
+    //Gets the necessary items in the json hierarchy
+    cJSON *scenarios = cJSON_GetObjectItem(&root, "Scenarios");
+     for (int i = 0; i < cJSON_GetArraySize(scenarios); i++) {
+        Node *node;
+        Scenario *iterated_scene;
+        Decisions *decision;
+        //Iterates through the skills array
+        cJSON *scene = cJSON_GetArrayItem(scenarios, i);
+        cJSON *scenario_name = cJSON_GetObjectItem(scene, "name");
+        cJSON *scenario_description = cJSON_GetObjectItem(scene, "description");
+        cJSON *scenario_image = cJSON_GetObjectItem(scene, "image");
+        cJSON *scenario_question = cJSON_GetObjectItem(scene, "question");
+        strcpy(iterated_scene->name, cJSON_Print(scenario_name));
+        strcpy(iterated_scene->description, cJSON_Print(scenario_description));
+        strcpy(iterated_scene->image, cJSON_Print(scenario_image));
+        strcpy(decision->question, cJSON_Print(scenario_question));
+
+        int num_options = 0;
+        cJSON *options = cJSON_GetObjectItem(&scene, "options");
+        for (int x = 0; x < cJSON_GetArraySize(options); x++){
+            num_options++;
+            cJSON *iterated_option = cJSON_GetArrayItem(options, x);
+
+        }
     }
 }
 
