@@ -19,20 +19,20 @@ typedef struct Queue{
 
 void AddElement(Turn *turn, Queue *queue){
     if(queue->first == NULL){
-        queue->first = &turn;
-        queue->last = &turn;
+        queue->first = turn;
+        queue->last = turn;
     }
     else if(queue->first == queue->last){
-        queue->last = &turn;
+        queue->last = turn;
         turn->next = queue->first;
     }
     else{
         turn->next = queue->last;
-        queue->last = &turn;
+        queue->last = turn;
     }
 }
 
-Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
+Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queue ){
     for(int i = 0; i < NUM_TURNS; i++){
         Turn *turn;
 
@@ -43,10 +43,12 @@ Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
             turn->type = 0;
         }
         else{
-            random = rand()%(sizeof(enemies)/sizeof(Enemy));
-            turn->enemy = &enemies[random];
-            turn->type = 1;
-            turn->name = enemies[random].name;
+            if(sizeof(&enemies)/sizeof(Enemy) != 0){
+                random = rand()%(sizeof(&enemies)/sizeof(Enemy));
+                turn->enemy = enemies[random];
+                turn->type = 1;
+                turn->name = enemies[random]->name;
+            }
         }
         turn->next = NULL;
         AddElement(turn,queue);

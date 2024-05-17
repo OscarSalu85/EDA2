@@ -17,7 +17,7 @@ int main_menu(Data *data){
         int choice = scanf("Select your option: ");
         if(choice == 1){
             
-            if(data->character->name == ""){
+            if(strcmp(data->character->name, "")){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
@@ -29,7 +29,7 @@ int main_menu(Data *data){
             return 2;
         }
         else if(choice == 3){
-            if(data->character->name == ""){
+            if(strcmp(data->character->name, "")){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
@@ -53,7 +53,7 @@ void configure_name(Data* data){
                 int count = 1;
                 break;
             }
-            else if(data->character->name == ""){
+            else if(strcmp(data->character->name, "")){
                 printf("Name can not be empty. \n");
                 int count = 1;
                 break;
@@ -115,7 +115,8 @@ void configure_skills(Data* data){
     while(1){
         for(int i=0; i<MAX_SKILLS;i++){
             while(1){
-                int selected_skill = scanf("\nSelect your skill nº%d", i+1) -1;
+                printf("\nSelect your skill nº%d: ", i+1);
+                int selected_skill = scanf("") -1;
                 if(selected_skill<0 || selected_skill >19){
                     printf("\nNo valid skill was selected, please choose a valid skill.");
                 }
@@ -128,7 +129,7 @@ void configure_skills(Data* data){
                     printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill]->modifiers[0],skill_list[selected_skill]->modifiers[1],skill_list[selected_skill]->modifiers[2]);
                     int confirm_skill = 
 
-                    printf("\n%s added to your character's skill set", skill_list[selected_skill]);
+                    printf("\n%s added to your character's skill set", skill_list[selected_skill]->name);
                 }
             }
         }
@@ -170,13 +171,13 @@ void selectSkill(Character *character, Skills *skill){
         printf("\n%d.%s\n:",i+1,character->skill[i]->name);
         printf("   -Desc:%s\n",character->skill[i]->description);
         printf("   -Dur:%d\n",character->skill[i]->duration);
-        printf("   -Mod:%s\n",character->skill[i]->modifiers);
+        printf("   -Mod: (%d ATK, %d DEF, %d HP)\n",character->skill[i]->modifiers[0],character->skill[i]->modifiers[1],character->skill[i]->modifiers[2]);
     }
     printf("Chose option:");
     int opt = -1;
     while(opt < 1 || opt > 5){
-        scanf("%d", opt);
-        if(0 < opt < 5) {
+        scanf("%d", &opt);
+        if(0 < opt && opt < 5) {
             skill = character->skill[opt-1];
             return;
         }
@@ -187,7 +188,7 @@ void selectSkill(Character *character, Skills *skill){
 
 int selectTarget(Enemy *enemies[MAX_ENEMIES]){
     int num_alive = 0;
-    int num_enemies = sizeof(enemies)/sizeof(Enemy);
+    int num_enemies = sizeof(&enemies)/sizeof(Enemy);
     for(int i = 0; i < num_enemies; i++){
         if(enemies[i]->hp > 0){
             num_alive++;
@@ -198,11 +199,12 @@ int selectTarget(Enemy *enemies[MAX_ENEMIES]){
     printf("Chose option:");
     int opt = 0;
     while(opt < 1 || opt > num_enemies){
-        scanf("%d", opt);
+        scanf("%d", &opt);
         if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
         opt = 0;
         printf("Chose valid option:");
     }
+    return opt-1;
 }
 
 
@@ -242,7 +244,7 @@ int enemyTurn(Turn *turn, Character *character){
     return 1;
 }
 
-int combat(Character *character, Enemy *enemies){
+int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     int active = 1;
     Queue *queue;
     createQueue(character,enemies, queue);

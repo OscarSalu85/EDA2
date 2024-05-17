@@ -39,7 +39,7 @@ typedef struct Enemy{
 typedef struct Option{
     char r_text[MAX_CHAR];
     char n_text[MAX_CHAR];
-    Enemy enemies[MAX_ENEMIES];
+    Enemy *enemies[MAX_ENEMIES];
 }Option;
 
 //Decision
