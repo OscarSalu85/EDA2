@@ -130,14 +130,20 @@ void configure_skills(Data* data){
     while(1){
         for(int i=0; i<MAX_SKILLS;i++){
             while(1){
-                int selected_skill = scanf("\nSelect your skill nº%d", i+1);
-                if(selected_skill<1 || selected_skill >20){
+                int selected_skill = scanf("\nSelect your skill nº%d", i+1) -1;
+                if(selected_skill<0 || selected_skill >19){
                     printf("\nNo valid skill was selected, please choose a valid skill.");
                 }
                 else{
-                    data->character->skill[i] = skill_list[selected_skill-1];
-                    printf("\n%s added to your character's skill set", skill_list[selected_skill-1]);
-                    break;
+                    data->character->skill[i] = skill_list[selected_skill];
+                    printf("\nSkill Name: %s", skill_list[selected_skill]->name);
+                    printf("\n%s", skill_list[selected_skill]->description);
+                    printf("\nSkill Duration: %d turns", skill_list[selected_skill]->duration);
+                    printf("\nDamage: %d", skill_list[selected_skill]->damage);
+                    printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[select_skill]->atk,skill_list[select_skill]->def,skill_list[select_skill]->hp);
+                    int confirm_skill = 
+
+                    printf("\n%s added to your character's skill set", skill_list[selected_skill]);
                 }
             }
         }
