@@ -247,6 +247,8 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character){
 
 void selectEnemySkill(Enemy *current_enemy, Skills *skill){
     //Select skill randomly
+    int random = rand()%(sizeof(current_enemy->skill)/sizeof(Skills));
+    *skill = current_enemy->skill[random];
 }
 
 

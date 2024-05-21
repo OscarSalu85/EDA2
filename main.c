@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "structures.h"
 #include "game.h"
+#include "cJSON.c"
 
 int main(){
     Data *data;
