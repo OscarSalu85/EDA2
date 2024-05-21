@@ -1,27 +1,22 @@
 {
-    "Character":{
-        "name":"",
-        "stats":{
-            "HP":"",
-            "ATK":"",
-            "DEF":""
-        },
-        "skills":[
-            {
-                "skill_name":""
-            },
-            {
-                "skill_name":""
-            },
-            {
-                "skill_name":""
-            },
-            {
-                "skill_name":""
-            }
-        ]
-    },
-    "Current_Scenario":{
-        "name":""
-        }
+	"Character":	{
+		"name":	"",
+		"stats":	{
+			"HP":	0,
+			"ATK":	0,
+			"DEF":	0
+		},
+		"skills":	[{
+				"skill_name":	""
+			}, {
+				"skill_name":	""
+			}, {
+				"skill_name":	""
+			}, {
+				"skill_name":	""
+			}]
+	},
+	"Current_Scenario":	{
+		"name":	""
+	}
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "structures.h"
 #include "game.h"
+#include "cJSON.c"
 
 int main(){
     Data *data;
@@ -8,7 +9,6 @@ int main(){
     while(1){
         //Menu inicial
         int main_menu_choice = main_menu(data);
-        printf("%d", main_menu_choice);
         if(main_menu_choice == 1){
             //continue_game(data);
         }
@@ -18,6 +18,7 @@ int main(){
         else if(main_menu_choice == 3){
             configure_menu(data);
         }
+        printf("\nAAAAA");
         
     }
 }

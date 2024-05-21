@@ -6,7 +6,7 @@
 #include "interface.h"
 #include "queque.h"
 #include "dataR.h"
-#define BASE_HP 5
+#define BASE_HP 10
 #define INITIAL_STATS 20
 #define HP_PER_POINT 5 //Hp value given for every stat point invested
 int main_menu(Data *data){
@@ -19,7 +19,7 @@ int main_menu(Data *data){
         scanf("%d", &choice);
         if(choice == 1){
             printf("%s", data->character->name);
-            if(strcmp(data->character->name, "")){
+            if(strcmp(data->character->name, "") == 1){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
@@ -31,11 +31,11 @@ int main_menu(Data *data){
             return 2;
         }
         else if(choice == 3){
-            if(strcmp(data->character->name, "")){
+            if(strcmp(data->character->name, "") == 1){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
-                printf("Saved data found, opening character configuration...\n");
+                printf("\nSaved data found, opening character configuration...\n");
                 return 3;
             }
         }
@@ -46,75 +46,95 @@ int main_menu(Data *data){
 void configure_name(Data* data){
     int count = 0;
     int choice = 0;
+    while (getchar() != '\n');
     while (1)
     {
         count = 0;
         printf("\nSelect your new name: ");
-        scanf("%s[^\n]", data->character->name);
+        fgets(data->character->name, sizeof(data->character->name), stdin);
+        printf("%s", data->character->name);
 
-        if (fgets(data->character->name, sizeof(data->character->name), stdin) == NULL) {
-            printf("\nError reading input. Please try again.\n");
-            continue;
+        size_t len = strlen(data->character->name);
+        if (len > 0 && data->character->name[len - 1] == '\n') {
+            data->character->name[len - 1] = '\0';
         }
-        if(data->character->name[0] == '\0') {
+
+        if(strcmp(data->character->name, "")){
+            if(data->character->name[0] == '\0') {
             printf("\nName cannot be empty.\n");
             continue;
         }
-        else{
-            for(int i=0;i<strlen(data->character->name);i++){
-                if (isalpha(data->character->name[i]) && data->character->name[i] == ' '){
-                    printf("\nThe name can only contain letters from the alphabet, try again.");
-                    count = 1;
-                    break;
-                }
-            }
-            if(count == 0){
-                while(1){
-                    printf("\nName Selected: %s\nConfirm name?(1 = yes, 0 = no): ", data->character->name);
-                    scanf("%d",&choice);
-                    if(choice == 1){
-                        return;
-                    }
-                    else if(choice == 0){
+            else{
+                for(int i=0;i<strlen(data->character->name);i++){
+                    if (!isalpha(data->character->name[i]) && data->character->name[i] != ' '){
+                        printf("\nThe name can only contain letters from the alphabet, try again.\n");
+                        count = 1;
                         break;
                     }
+                    
                 }
-                
+                if(count == 0){
+                    while(1){
+                        printf("\nName Selected: %s\nConfirm name? (1 = yes, 0 = no): ", data->character->name);
+                        if (scanf("%d", &choice) != 1) {
+                            printf("\nNot a valid option, try again.\n");
+                            // Clear invalid input from buffer
+                            while (getchar() != '\n');
+                            continue;
+                        }
+                        
+                        // Clear the newline character left in the buffer
+                        while (getchar() != '\n');
+
+                        if (choice == 1) {
+                            return;
+                        } else if (choice == 0) {
+                            break;
+                        } else {
+                            printf("\nNot a valid option, try again.\n");
+                        }
+                    }
+                    
+                }
             }
         }
+        
     }
 }
 
 
 void configure_stats(Data* data){
-    int starting_points = INITIAL_STATS;
     data->character->atk = 0;
     data->character->def = 0;
     data->character->hp = 10;
-    
-    int current_points = INITIAL_STATS;
-    while(current_points != 0){
+    int input;
+    int current_points = 20;
+    while(current_points > 0){
             printf("\nAvailable SP(Stat Points):%d SP",current_points);
             printf("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d", data->character->atk,data->character->def,(data->character->hp-BASE_HP) / HP_PER_POINT);
-            int input = scanf("\nSelect which stat you want to invest in: ");
+            printf("\nSelect which stat you want to invest in: ");
+            scanf("%d", &input);
             if(input < 1 || input>3){
                 printf("\nSelect a valid element to invest.");
             }
             else{
-                int input2 = scanf("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now)");
+                int input2;
+                printf("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ");
+                scanf("%d", &input2);
                 if(input2 > current_points || input2 < 0){
                     printf("\nNot enough stat points available.");
                 }
                 else if(input2 > 0){
                     if(input == 1){
-                        data->character->atk += input;
+                        data->character->atk += input2;
                     }
                     else if(input == 2){
-                        data->character->def += input;
+                        data->character->def += input2;
                     }
                     else if(input == 3){
-                        data->character->hp += input * HP_PER_POINT;
+                        data->character->hp += input2 * HP_PER_POINT;
                     }
+                    current_points -= input2;
                 }
             }
         } 
