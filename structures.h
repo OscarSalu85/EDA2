@@ -10,8 +10,8 @@
 #define SKILL_DATA_SIZE 10
 //Skills
 typedef struct Skills{
-    char name[MAX_CHAR_NAME];
-    char description[MAX_CHAR_DESC];
+    char *name;
+    char *description;
     int duration;
     int damage;
     int modifiers[MOD_NUMBER];
@@ -19,7 +19,7 @@ typedef struct Skills{
 
 //Character
 typedef struct Character{
-    char name[MAX_CHAR_NAME];
+    char *name;
     int hp;
     int atk;
     int def;
@@ -28,7 +28,7 @@ typedef struct Character{
 
 //Enemy
 typedef struct Enemy{
-    char name[MAX_CHAR_NAME];
+    char *name;
     int hp;
     int atk;
     int def;
@@ -37,23 +37,23 @@ typedef struct Enemy{
 
 //Option
 typedef struct Option{
-    char r_text[MAX_CHAR_DESC];
-    char n_text[MAX_CHAR_DESC];
+    char *r_text;
+    char *n_text;
     Enemy *enemies[MAX_ENEMIES];
 }Option;
 
 //Decision
 typedef struct Decision{
-    char question[MAX_CHAR_DESC];
+    char *question;
     int n_options;
     Option *options[MAX_OPTIONS];
 }Decisions;
 
 //Scenario
 typedef struct Scenario{
-    char name[MAX_CHAR_NAME];
-    char description[MAX_CHAR_DESC];
-    char image[MAX_CHAR_DESC];
+    char *name;
+    char *description;
+    char *image;
     Decisions *decision;
     
 }Scenario;

@@ -18,8 +18,7 @@ int main_menu(Data *data){
         printf("\nSelect your choice: ");
         scanf("%d", &choice);
         if(choice == 1){
-            printf("%s", data->character->name);
-            if(strcmp(data->character->name, "") == 1){
+            if(!isalpha(data->character->name[1])){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
@@ -47,11 +46,17 @@ void configure_name(Data* data){
     int count = 0;
     int choice = 0;
     while (getchar() != '\n');
+    data->character->name = malloc(MAX_CHAR_NAME * sizeof(char));
+
+    if (data->character->name == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return;
+    }
     while (1)
     {
         count = 0;
         printf("\nSelect your new name: ");
-        fgets(data->character->name, sizeof(data->character->name), stdin);
+        fgets(data->character->name, MAX_CHAR_NAME, stdin);
         printf("%s", data->character->name);
 
         size_t len = strlen(data->character->name);
@@ -142,35 +147,36 @@ void configure_stats(Data* data){
 }
 
 
-void print_skill_list(Skills *skill_list[SKILL_MAX]){
+void print_skill_list(Skills *skill_list){
     for(int i=0; i<SKILL_MAX; i++){
-        printf("\n%dSKILL Nº%d: %s", i+1, i+1, skill_list[i]->name);
+        printf("\n%d.SKILL Nº%d: %s", i+1, i+1, skill_list[i].name);
     }
 }
 
 void configure_skills(Data* data){
-    printf("\nBBBBB");
-    Skills *skill_list[SKILL_MAX];
-    printf("\nREEEEEE");
-    get_skill_data(skill_list);
-    printf("\nAAAAA");
+    int confirm;
+    int selected_skill;
+    Skills *skill_list;
+    skill_list = get_skill_data();
     print_skill_list(skill_list);
     while(1){
         for(int i=0; i<MAX_SKILLS;i++){
             while(1){
                 printf("\nSelect your skill nº%d: ", i+1);
-                int selected_skill = scanf("") -1;
-                if(selected_skill<0 || selected_skill >19){
+                scanf("%d",&selected_skill);
+                selected_skill--;
+                if(selected_skill<0 || selected_skill >SKILL_MAX){
                     printf("\nNo valid skill was selected, please choose a valid skill.");
                 }
                 else{
-                    data->character->skill[i] = skill_list[selected_skill];
-                    printf("\nSkill Name: %s", skill_list[selected_skill]->name);
-                    printf("\n%s", skill_list[selected_skill]->description);
-                    printf("\nSkill Duration: %d turns", skill_list[selected_skill]->duration);
-                    printf("\nDamage: %d", skill_list[selected_skill]->damage);
-                    printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill]->modifiers[0],skill_list[selected_skill]->modifiers[1],skill_list[selected_skill]->modifiers[2]);
-                    printf("\n%s added to your character's skill set", skill_list[selected_skill]->name);
+                    *data->character->skill[i] = skill_list[selected_skill];
+                    printf("\nSkill Name: %s", skill_list[selected_skill].name);
+                    printf("\n%s", skill_list[selected_skill].description);
+                    printf("\nSkill Duration: %d turns", skill_list[selected_skill].duration);
+                    printf("\nDamage: %d", skill_list[selected_skill].damage);
+                    printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
+                    printf("\n%s added to your character's skill set", skill_list[selected_skill].name);
+                    break;
                 }
             }
         }
@@ -178,7 +184,9 @@ void configure_skills(Data* data){
         for(int i = 0; i<MAX_SKILLS; i++){
             printf("\n%s", data->character->skill[i]->name);
         }
-        int confirm = scanf("\nConfirm skill set?\n1.Yes\n2.No");
+        
+        printf("\nConfirm skill set?\n1.Yes\n2.No\n" );
+        scanf("%d", &confirm);
         if(confirm == 1){
             return;
         }
@@ -186,11 +194,9 @@ void configure_skills(Data* data){
 }
 
 void configure_menu(Data *data){
-    int choice;
     while(1){
         printf("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\nBack to Main Menu");
-        printf("\nSelect an option: ");
-        scanf("%d", &choice);
+        int choice = scanf("\nSelect an option: ");
         if(choice == 1){
             configure_name(data);
         }
@@ -388,10 +394,14 @@ void new_game(Data *data){
         free(data); //Frees saved data
     }
     create_data(&data);
-    save_data(data);//Overwrites save file with empty file
+    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
     configure_name(data);
     configure_stats(data);
     configure_skills(data);
+    //printf("%s",data->character->name);
+    char* scenario = "Deck";
+    data->current_scenario->name = scenario;
+    save_data(data,1); //Saves the configured data
 }
 
 void continue_game(Data *data){
