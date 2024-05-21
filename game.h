@@ -290,40 +290,49 @@ void mainLoop(Data *data){
     }
 }
 
-//FUNCTIONS TO ALLOCATE MEMORY DATA FOR THE 
-void create_data(Data* data){
-    //ALLOCATES MEMORY FOR DATA
-    data = malloc(sizeof(Data));
-    if(data == NULL){
+void create_data(Data **data){
+    // Allocate memory for Data structure
+    *data = (Data*)malloc(sizeof(Data));
+    if (*data == NULL){
+        //Returns if memory could not be allocated correctly
         return;
     }
 
-    //ALLOCATES MEMORY FOR THE CHARACTER
-    data->character = malloc(sizeof(Character));
-    if(data->character == NULL){
-        free(data);
+    //Allocate memory for Character structure
+    (*data)->character = (Character*)malloc(sizeof(Character));
+    if ((*data)->character == NULL){
+        //Returns if memory could not be allocated correctly
+        free(*data);
         return;
     }
 
-    //ALLOCATES MEMORY FOR CHARACTER SKILLS BY ITERATING THROUGH EACH ONE
-    for (int i = 0; i < 4; i++) {
-        data->character->skill[i] = malloc(sizeof(Skills));
-        if (data->character->skill[i] == NULL) {
-            // Handle memory allocation failure
-            // Free previously allocated memory
-            for (int j = 0; j < i; j++) {
-                free(data->character->skill[j]);
+    //Allocate memory for Character's skills 
+    for (int i = 0; i < MAX_SKILLS; i++){
+        (*data)->character->skill[i] = (Skills*)malloc(sizeof(Skills));
+        if ((*data)->character->skill[i] == NULL){
+            //Returns if memory could not be allocated correctly
+            for (int j = 0; j < i; j++){
+                free((*data)->character->skill[j]);
             }
+            free((*data)->character);
+            free(*data);
+            return;
         }
     }
 
-    //ALLOCATES MEMORY FOR THE CURRENT SCENARIO IN THE DATA
-    data->current_scenario = malloc(sizeof(Scenario));
-    if(data->current_scenario == NULL){
-        free(data);
+    // Allocate memory for the current scenario
+    (*data)->current_scenario = (Scenario*)malloc(sizeof(Scenario));
+    if ((*data)->current_scenario == NULL) {
+        // Handle memory allocation failure
+        for (int i = 0; i < MAX_SKILLS; i++) {
+            free((*data)->character->skill[i]);
+        }
+        free((*data)->character);
+        free(*data);
         return;
     }
 }
+
 
 
 

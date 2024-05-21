@@ -3,8 +3,8 @@
 #include "game.h"
 
 int main(){
-    Data* data ;
-    create_data(data);
+    Data *data;
+    create_data(&data);
     while(1){
         //Menu inicial
         int main_menu_choice = main_menu(data);
