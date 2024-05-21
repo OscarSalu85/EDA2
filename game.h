@@ -141,15 +141,17 @@ void configure_stats(Data* data){
         return;
 }
 
-void print_skill_list(Skills *skill_list[SKILL_DATA_SIZE]){
+
+void print_skill_list(Skills *skill_list){
+    
     for(int i=0; i<SKILL_DATA_SIZE; i++){
-        printf("\n%dSKILL Nº%d: %s", i+1, i+1, skill_list[i]->name);
+        printf("\n%dSKILL Nº%d: %s", i+1, i+1, skill_list[i].name);
     }
 }
 
 void configure_skills(Data* data){
-    Skills *skill_list[SKILL_DATA_SIZE];
-    get_skill_data(skill_list);
+    Skills *skill_list = malloc(sizeof(Skills) * SKILL_DATA_SIZE);
+    get_skill_data(&skill_list);
     print_skill_list(skill_list);
     while(1){
         for(int i=0; i<MAX_SKILLS;i++){
@@ -160,15 +162,15 @@ void configure_skills(Data* data){
                     printf("\nNo valid skill was selected, please choose a valid skill.");
                 }
                 else{
-                    data->character->skill[i] = skill_list[selected_skill];
-                    printf("\nSkill Name: %s", skill_list[selected_skill]->name);
-                    printf("\n%s", skill_list[selected_skill]->description);
-                    printf("\nSkill Duration: %d turns", skill_list[selected_skill]->duration);
-                    printf("\nDamage: %d", skill_list[selected_skill]->damage);
-                    printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill]->modifiers[0],skill_list[selected_skill]->modifiers[1],skill_list[selected_skill]->modifiers[2]);
-                    int confirm_skill = 
+                    data->character->skill[i] = &skill_list[selected_skill];
+                    printf("\nSkill Name: %s", skill_list[selected_skill].name);
+                    printf("\n%s", skill_list[selected_skill].description);
+                    printf("\nSkill Duration: %d turns", skill_list[selected_skill].duration);
+                    printf("\nDamage: %d", skill_list[selected_skill].damage);
+                    printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
+                    
 
-                    printf("\n%s added to your character's skill set", skill_list[selected_skill]->name);
+                    printf("\n%s added to your character's skill set", skill_list[selected_skill].name);
                 }
             }
         }

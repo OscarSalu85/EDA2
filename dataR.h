@@ -19,7 +19,7 @@ cJSON startup_read(char json[]){
     } 
   
     // read the file contents into a string 
-    char buffer[1024]; 
+    char buffer[4096]; 
     int len = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
     
@@ -108,21 +108,10 @@ void load_data(Data *data){
     strcpy(data->current_scenario->name, cJSON_Print(scenario_name));
 }
 
-void get_skill_data(Skills *skill[SKILL_MAX]){
+void get_skill_data(Skills *skill_list[SKILL_MAX]){
     //Calls the open file on read function
-    cJSON root = startup_read("generalData.json");
-    //Creation of the skill_list data structure
-    Skills *skill_list[SKILL_MAX];
-    for (int i = 0; i < SKILL_MAX; i++) {
-        skill_list[i] = malloc(sizeof(Skills));
-        if (skill_list[i] == NULL) {
-            // Handle memory allocation failure
-            // Free previously allocated memory to avoid issues
-            for (int j = 0; j < i; j++) {
-                free(skill_list[j]);
-            }
-        }
-    }
+    cJSON root = startup_read("skillData.json");
+    
     cJSON *skills = cJSON_GetObjectItem(&root, "skills");
 
     for (int i = 0; i < cJSON_GetArraySize(skills); i++) {
@@ -136,8 +125,6 @@ void get_skill_data(Skills *skill[SKILL_MAX]){
         cJSON *mod_1 = cJSON_GetArrayItem(skill_mods, 0);
         cJSON *mod_2 = cJSON_GetArrayItem(skill_mods, 1);
         cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
-        
-
         
         strcpy(skill_list[i]->name, cJSON_Print(skill_name));
         strcpy(skill_list[i]->description, cJSON_Print(skill_description));
