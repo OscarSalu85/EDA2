@@ -10,13 +10,15 @@
 #define INITIAL_STATS 20
 #define HP_PER_POINT 5 //Hp value given for every stat point invested
 int main_menu(Data *data){
+    int choice;
+    load_data(data);
     printf("1.Continue      2.New Game     3.Configure \n");
-    while (1)
+    while(1)
     {
-        load_data(data);
-        int choice = scanf("Select your option: ");
+        printf("\nSelect your choice: ");
+        scanf("%d", &choice);
         if(choice == 1){
-            
+            printf("%s", data->character->name);
             if(strcmp(data->character->name, "")){
                 printf("\nNo saved data found, please start a new game\n");
             }
@@ -42,28 +44,45 @@ int main_menu(Data *data){
 
 
 void configure_name(Data* data){
+    int count = 0;
+    int choice = 0;
     while (1)
     {
-        int count = 0;
+        count = 0;
         printf("\nSelect your new name: ");
-        scanf("\n%s",data->character->name);
-        for(int i=0;i<strlen(data->character->name);i++){
-            if(isalpha(data->character->name[i]) == 0){
-                printf("The name can only contain letters from the alphabet, try again.\n");
-                int count = 1;
-                break;
-            }
-            else if(strcmp(data->character->name, "")){
-                printf("Name can not be empty. \n");
-                int count = 1;
-                break;
-            }
+        scanf("%s[^\n]", data->character->name);
+
+        if (fgets(data->character->name, sizeof(data->character->name), stdin) == NULL) {
+            printf("\nError reading input. Please try again.\n");
+            continue;
         }
-        if(count == 0){
-            break;
+        if(data->character->name[0] == '\0') {
+            printf("\nName cannot be empty.\n");
+            continue;
+        }
+        else{
+            for(int i=0;i<strlen(data->character->name);i++){
+                if (isalpha(data->character->name[i]) && data->character->name[i] == ' '){
+                    printf("\nThe name can only contain letters from the alphabet, try again.");
+                    count = 1;
+                    break;
+                }
+            }
+            if(count == 0){
+                while(1){
+                    printf("\nName Selected: %s\nConfirm name?(1 = yes, 0 = no): ", data->character->name);
+                    scanf("%d",&choice);
+                    if(choice == 1){
+                        return;
+                    }
+                    else if(choice == 0){
+                        break;
+                    }
+                }
+                
+            }
         }
     }
-    return;
 }
 
 
@@ -75,7 +94,7 @@ void configure_stats(Data* data){
     
     int current_points = INITIAL_STATS;
     while(current_points != 0){
-            printf("\nAvailable SP (Stat Points) : %d",current_points);
+            printf("\nAvailable SP(Stat Points):%d SP",current_points);
             printf("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d", data->character->atk,data->character->def,(data->character->hp-BASE_HP) / HP_PER_POINT);
             int input = scanf("\nSelect which stat you want to invest in: ");
             if(input < 1 || input>3){
@@ -341,7 +360,7 @@ void new_game(Data *data){
     if(data != NULL){
         free(data); //Frees saved data
     }
-    create_data(data);
+    create_data(&data);
     save_data(data);//Overwrites save file with empty file
     configure_name(data);
     configure_stats(data);
@@ -349,6 +368,7 @@ void new_game(Data *data){
 }
 
 void continue_game(Data *data){
+    printf("\nSTARTING MAIN LOOP");
     mainLoop(data);
 };
 

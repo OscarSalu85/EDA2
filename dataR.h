@@ -43,7 +43,6 @@ cJSON startup_read(char json[]){
 void save_data(Data *data){
     //Calls the open file on read function
     cJSON root = startup_read("SaveData.json");
-    printf("AAA");
     //Gets the necessary items in the json hierarchy
     cJSON *character = cJSON_GetObjectItem(&root, "Character");
     cJSON *stats = cJSON_GetObjectItem(character, "stats");
@@ -78,7 +77,6 @@ void save_data(Data *data){
 void load_data(Data *data){
     //Calls the open file on read function
     cJSON root = startup_read("SaveData.json");
-    printf("\nROOT OBTAINED");
     //Gets the necessary items in the json hierarchy
     cJSON *character = cJSON_GetObjectItem(&root, "Character");
     cJSON *stats = cJSON_GetObjectItem(character, "stats");

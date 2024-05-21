@@ -8,8 +8,9 @@ int main(){
     while(1){
         //Menu inicial
         int main_menu_choice = main_menu(data);
+        printf("%d", main_menu_choice);
         if(main_menu_choice == 1){
-            continue_game(data);
+            //continue_game(data);
         }
         else if(main_menu_choice == 2){
             new_game(data);
@@ -22,3 +23,4 @@ int main(){
 }
 
 
+//gcc -o main main.c cJSON.c
