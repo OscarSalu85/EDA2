@@ -108,7 +108,16 @@ void load_data(Data *data){
     strcpy(data->current_scenario->name, cJSON_Print(scenario_name));
 }
 
-void get_skill_data(Skills *skill_list[SKILL_MAX]){
+void get_skill_data(Skills **skill_list){
+    printf("\nFFFFFF");
+    Skills *skills_array;
+
+    // Allocate memory for n Skills structures
+    skills_array = (Skills *)malloc(SKILL_MAX * sizeof(Skills));
+    if (skills_array == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return;
+    }
     //Calls the open file on read function
     cJSON root = startup_read("skillData.json");
     
@@ -135,6 +144,7 @@ void get_skill_data(Skills *skill_list[SKILL_MAX]){
         skill_list[i]->modifiers[1] = cJSON_GetNumberValue(mod_2);
         skill_list[i]->modifiers[2] = cJSON_GetNumberValue(mod_3);
     }
+    return;
 }
 
 #endif

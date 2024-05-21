@@ -1,6 +1,6 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
-#define MAX_CHAR 100
+#define MAX_CHAR_DESC 1024
 #define MAX_CHAR_NAME 20
 #define MAX_ENEMIES 3
 #define MAX_OPTIONS 3
@@ -11,7 +11,7 @@
 //Skills
 typedef struct Skills{
     char name[MAX_CHAR_NAME];
-    char description[MAX_CHAR];
+    char description[MAX_CHAR_DESC];
     int duration;
     int damage;
     int modifiers[MOD_NUMBER];
@@ -28,7 +28,7 @@ typedef struct Character{
 
 //Enemy
 typedef struct Enemy{
-    char name[MAX_CHAR];
+    char name[MAX_CHAR_NAME];
     int hp;
     int atk;
     int def;
@@ -37,23 +37,23 @@ typedef struct Enemy{
 
 //Option
 typedef struct Option{
-    char r_text[MAX_CHAR];
-    char n_text[MAX_CHAR];
+    char r_text[MAX_CHAR_DESC];
+    char n_text[MAX_CHAR_DESC];
     Enemy *enemies[MAX_ENEMIES];
 }Option;
 
 //Decision
 typedef struct Decision{
-    char question[MAX_CHAR];
+    char question[MAX_CHAR_DESC];
     int n_options;
     Option *options[MAX_OPTIONS];
 }Decisions;
 
 //Scenario
 typedef struct Scenario{
-    char name[MAX_CHAR];
-    char description[MAX_CHAR];
-    char image[MAX_CHAR];
+    char name[MAX_CHAR_NAME];
+    char description[MAX_CHAR_DESC];
+    char image[MAX_CHAR_DESC];
     Decisions *decision;
     
 }Scenario;
