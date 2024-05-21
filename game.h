@@ -270,6 +270,7 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     Queue *queue;
     createQueue(character,enemies, queue);
     while(active && queue->first != NULL){
+        printCombat(enemies);
         //Character
         if(queue->first->type == 0){
             playerTurn(queue->first, enemies, character);

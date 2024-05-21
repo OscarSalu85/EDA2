@@ -39,3 +39,19 @@ void printImage(char fileImage[]){
     }
     fclose(f);
 }
+
+void printCombatImage(char *FileImage[MAX_ENEMIES], int num){
+    FILE *files[MAX_ENEMIES];
+    //Print line by line, Jump after line completed
+    for(int i = 0; i< num; i++){
+        if(FileImage[i] != NULL){
+            char *name = FileImage[i];
+            strcat(name,".txt");
+            files[i] = fopen(name,"r");
+        }
+        else{
+            files[i] = fopen("NULL.txt","r");
+        }
+    }
+
+}
