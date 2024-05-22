@@ -32,7 +32,7 @@ void AddElement(Turn *turn, Queue *queue){
     }
 }
 
-Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queue ){
+Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
     queue->first = NULL;
     queue->last = NULL;
     for(int i = 0; i < NUM_TURNS; i++){
@@ -52,9 +52,9 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
         else{
             if(sizeof(&enemies)/sizeof(Enemy) != 0){
                 random = rand()%(sizeof(&enemies)/sizeof(Enemy));
-                turn->enemy = enemies[random];
+                turn->enemy = &enemies[random];
                 turn->type = 1;
-                turn->name = enemies[random]->name;
+                turn->name = enemies[random].name;
             }
         }
         turn->next = NULL;

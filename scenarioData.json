@@ -11,16 +11,25 @@
             [   
                 {   
                     "optName":"A",
-                    "Combat":["cultist"],
-                    "numberEnemies":[3]
+                    "optText":"AAAAAAA",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"}]
 
                 },
 
                 {
                     "optName":"B",
-                    "Combat":["cultist","cthulu"],
-                    "numberEnemies":[2,1]
-
+                    "optText":"BBBBBBB",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cthulu"}]
                 }
                     
             ],
@@ -34,77 +43,36 @@
             "name":"3rd class floor",
             "descripion":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
             "question":"Which zone do you want to explore now? The kitchen or the 2nd class floor",
-            "options":
+            "options":[
                 {
-                   "Option_C":"2nd class floor",
-                   "Option_D":"hall"
-                    
+                    "optName":"2nd class floor",
+                    "optText":"CCCCCCCC",
+                    "Combat":[{
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                       
+                     
                 },
-            "next_1":
+                {
+                    "optName":"hall",
+                    "optText":"DDDDDDD",
+                    "Combat":[{
+                        "enemyName":"Pedro"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                }
+            ],
+                
+            "next_scenarios":
             {
-                "Option_C":"2nd class floor"
-            },
-            "next_2":
-            {
-                "Option_D":"hall"
+                "Option_A":"2nd class floor",
+                "Option_B":"hall"
             }
-        },
-        {
-            "name":"Kitchen",
-            "description":"After the horrible conditions that he has seen before now he arrives to the kitchen but he was surprised (not for good),he found some strange food and people that he has to pass through to continue his path.",
-            "question":"Which zone do you want to explore now? The 2nd class floor or the hall",
-            "options":
-                {
-                    "Option_A":"DEF",
-                    "Option_B":"FED"
-                },
-                "next_1":
-                {
-                    "Option_B":"kitchen"
-                },
-                "next_2":
-                {
-                    "Option_C":"2nd class floor"
-                }
-        },
-        {
-            "name":"2nd class floor",
-            "description":"Now he arrives to the 2nd class floor, the things have changed unfortunately not in a goodway for (name char), he arrives and see new staff and another type of enemies that he has to beat.¿It might be the end of(name)?",
-            "options":
-                {
-                    "Option_A":"DEF",
-                    "Option_B":"FED"
-                },
-            "next": "hall"
-        },
-        {
-            "name":"hall",
-            "description":"Now he finds the hall, maybe you think that it is strange to find the hall at this point but what is stranger is the objects movements and the special enemies that there arein the hall.",
-            "options":
-                {
-                    "Option_A":"DEF",
-                    "Option_B":"FED"
-                },
-            "next": "1st class floor"
-        },
-        {
-            "name":"1st class floor",
-            "description":"(name char) are sourround by the most sophisticated area of the ship as well as the most sophisticated enemies that there are in the floor.",
-            "options":
-                {
-                    "Option_A":"DEF",
-                    "Option_B":"FED"
-                },
-            "next": "hold"
-        },
-        {
-            "name":"hold",
-            "description":"Finally he arrives to the hold the least floor of the ship. Now he has to fight against the last and most difficult enemy he has never seen",
-            "options":
-                {
-                    "Option_A":"DEF",
-                    "Option_B":"FED"
-                }
         }
     ]
 }

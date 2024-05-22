@@ -10,6 +10,10 @@ int main(){
         //Menu inicial
         int main_menu_choice = main_menu(data);
         if(main_menu_choice == 1){
+            for(int i = 0; i < MAX_SKILLS;i++){
+                load_Skill(data->character->skill[i]);
+                printf("%s-->%d",data->character->skill[i]->name,data->character->skill[i]->damage);
+            }
             //Test combat
             Enemy enemies[1];
             Enemy enemy1;

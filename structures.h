@@ -55,6 +55,8 @@ typedef struct Scenario{
     char *description;
     char *image;
     Decisions *decision;
+    char *next_scenario_name_1;
+    char *next_scenario_name_2;
     
 }Scenario;
 
