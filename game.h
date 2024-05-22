@@ -156,12 +156,14 @@ void print_skill_list(Skills *skill_list){
 void configure_skills(Data* data){
     int confirm;
     int selected_skill;
+    int repeat;
     Skills *skill_list;
     skill_list = get_skill_data();
     print_skill_list(skill_list);
     while(1){
         for(int i=0; i<MAX_SKILLS;i++){
             while(1){
+                repeat = 0;
                 printf("\nSelect your skill nº%d: ", i+1);
                 scanf("%d",&selected_skill);
                 selected_skill--;
@@ -169,13 +171,29 @@ void configure_skills(Data* data){
                     printf("\nNo valid skill was selected, please choose a valid skill.");
                 }
                 else{
-                    *data->character->skill[i] = skill_list[selected_skill];
+                    for(int j = 0; j<MAX_SKILLS;j++){
+                        if(strcmp(skill_list[selected_skill].name, data->character->skill[j]->name) == 0){
+                            repeat = 1;
+                        }
+                    }
+                    if(repeat == 1){
+                        continue;
+                    }
                     printf("\nSkill Name: %s", skill_list[selected_skill].name);
                     printf("\n%s", skill_list[selected_skill].description);
                     printf("\nSkill Duration: %d turns", skill_list[selected_skill].duration);
                     printf("\nDamage: %d", skill_list[selected_skill].damage);
                     printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
-                    printf("\n%s added to your character's skill set", skill_list[selected_skill].name);
+                    
+                    printf("\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No)", i);
+                    scanf("%d", &confirm);
+                    if(confirm == 1){
+                        *data->character->skill[i] = skill_list[selected_skill];
+                        printf("\n%s added to your character's skill set", skill_list[selected_skill].name);
+                    }
+                    else{
+                        continue;
+                    }
                     break;
                 }
             }
