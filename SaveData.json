@@ -1,17 +1,17 @@
 {
 	"Character":	{
-		"name":	"aaaa",
+		"name":	"Sushant La Cabra",
 		"stats":	{
-			"HP":	10,
-			"ATK":	0,
-			"DEF":	20
+			"HP":	35,
+			"ATK":	10,
+			"DEF":	5
 		},
 		"skills":	[{
-				"skill_name":	"Wooden plank"
+				"skill_name":	"Haunted pen"
 			}, {
-				"skill_name":	"The bible"
+				"skill_name":	"Carrot's shurikens"
 			}, {
-				"skill_name":	"Brew"
+				"skill_name":	"Special soup"
 			}, {
 				"skill_name":	"injection"
 			}]

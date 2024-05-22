@@ -149,7 +149,7 @@ void configure_stats(Data* data){
 
 void print_skill_list(Skills *skill_list){
     for(int i=0; i<SKILL_MAX; i++){
-        printf("\n%d.SKILL Nº%d: %s", i+1, i+1, skill_list[i].name);
+        printf("\n%d.: %s", i+1, skill_list[i].name);
     }
 }
 
@@ -213,9 +213,11 @@ void configure_skills(Data* data){
 }
 
 void configure_menu(Data *data){
+    int choice;
     while(1){
-        printf("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\nBack to Main Menu");
-        int choice = scanf("\nSelect an option: ");
+        printf("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\n4.Back to Main Menu");
+        printf("\nSelect an option: ");
+        scanf("%d", &choice);
         if(choice == 1){
             configure_name(data);
         }

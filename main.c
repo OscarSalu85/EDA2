@@ -14,9 +14,9 @@ int main(){
         if(main_menu_choice == 1){
             for(int i = 0; i < MAX_SKILLS;i++){
                 load_Skill(data->character->skill[i]);
-                printf("%s-->%d",data->character->skill[i]->name,data->character->skill[i]->damage);
             }
             //Test combat
+
             Enemy enemies[1];
             Enemy enemy1;
             enemy1.atk = 1;
@@ -28,6 +28,7 @@ int main(){
             enemy1.skill[2] = *data->character->skill[2];
             enemy1.skill[3] = *data->character->skill[3];
             enemies[0] = enemy1;
+
             int sol = combat(data->character,enemies);
             printf("%d",sol);
             //continue_game(data);

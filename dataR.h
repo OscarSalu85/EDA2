@@ -73,11 +73,6 @@ void save_data(Data *data, int mode){
         for (int i = 0; i < cJSON_GetArraySize(skills); i++) {
             //Iterates through the skills array
             cJSON *skill = cJSON_GetArrayItem(skills, i);
-
-
-            //If skill is same --> MU MAL, MALAMENTE TRA TRA
-
-
             skill_name = data->character->skill[i]->name;
             skill_name ++;
             skill_name[strlen(skill_name)-1] = 0;
@@ -140,7 +135,12 @@ void load_Skill(Skills *skill){
     for (int i = 0; i < cJSON_GetArraySize(skills); i++){
         cJSON *skill_index = cJSON_GetArrayItem(skills, i);
         cJSON *skill_name = cJSON_GetObjectItem(skill_index, "name");
-        if(!strcmp(cJSON_Print(skill_name),skill->name)){
+        printf("\nSKILL = %s",cJSON_Print(skill_name));
+        printf("\nSAVED SKILL = %s", skill->name);
+        char *data_skill_name = cJSON_Print(skill_name);
+        data_skill_name ++;
+        data_skill_name[strlen(data_skill_name)-1] = 0;
+        if(strcmp(data_skill_name, skill->name)== 0) {
             cJSON *skill_description = cJSON_GetObjectItem(skill_index, "description");
             cJSON *skill_duration = cJSON_GetObjectItem(skill_index, "duration");
             cJSON *skill_damage = cJSON_GetObjectItem(skill_index,"damage");
@@ -151,15 +151,10 @@ void load_Skill(Skills *skill){
             skill->description = cJSON_Print(skill_description);
             skill->duration = cJSON_GetNumberValue(skill_duration);
             skill->damage = cJSON_GetNumberValue(skill_damage);
-            if (skill_duration && cJSON_IsNumber(skill_duration)){
-                skill->duration = cJSON_IsNumber(skill_duration);
-            } else {
-                skill->duration = 0; // Default value if not found or not a number
-            }
-            skill->damage = cJSON_GetNumberValue(skill_damage);
             skill->modifiers[0] = cJSON_GetNumberValue(mod_1);
             skill->modifiers[1] = cJSON_GetNumberValue(mod_2);
             skill->modifiers[2] = cJSON_GetNumberValue(mod_3);
+            break;
         }
     }
 }
@@ -216,7 +211,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
     //allocate_scenario_list(&scenario_list, cJSON_GetArraySize(scenario));
     for (int i = 0; i < cJSON_GetArraySize(scenario); i++) {
         //Iterates through the skills array
-        printf("\nEEEEEEEE");
         cJSON *array_index = cJSON_GetArrayItem(scenario, i);
         cJSON *scenario_name = cJSON_GetObjectItem(array_index, "name");
         cJSON *scenario_desc = cJSON_GetObjectItem(array_index, "description");
@@ -234,7 +228,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
                 cJSON *enemy_type_list = cJSON_GetArrayItem(combat_array,x);
                 cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
                 scenario_list[i].decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
-                printf("\nENEMY Nº%d ON OPTION Nº%d=%s ",x+1,j+1 ,scenario_list[i].decision->options[j]->enemies[x]->name);
             }
             strcpy(scenario_list[i].decision->options[j]->n_text ,cJSON_Print(optName));
             strcpy(scenario_list[i].decision->options[j]->r_text ,cJSON_Print(optText));
@@ -249,7 +242,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
         strcpy(scenario_list[i].decision->question ,cJSON_Print(scenario_question));
         scenario_list[i].next_scenario_name_1 = cJSON_Print(next_A);
         scenario_list[i].next_scenario_name_2 = cJSON_Print(next_B);
-        printf("\n\nSCENARIO NAME: %s", scenario_list[i].name);
     }
     return scenario_list;
 }
