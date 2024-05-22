@@ -18,7 +18,7 @@ int main_menu(Data *data){
         printf("\nSelect your choice: ");
         scanf("%d", &choice);
         if(choice == 1){
-            if(!isalpha(data->character->name[1])){
+            if(!isalpha(data->character->name[0])){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
@@ -172,7 +172,7 @@ void configure_skills(Data* data){
                 }
                 else{
                     for(int j = 0; j<MAX_SKILLS;j++){
-                        if(strcmp(skill_list[selected_skill].name, data->character->skill[j]->name) == 0){
+                        if(skill_list[selected_skill].name == data->character->skill[j]->name){
                             repeat = 1;
                         }
                     }
@@ -253,23 +253,28 @@ void selectSkill(Character *character, Skills *skill){
     }
 }
 
-int selectTarget(Enemy *enemies[MAX_ENEMIES]){
+int selectTarget(Enemy *enemies){
     int num_alive = 0;
-    int num_enemies = sizeof(&enemies)/sizeof(Enemy);
-    for(int i = 0; i < num_enemies; i++){
-        if(enemies[i]->hp > 0){
+    int num_enemies = 0;
+    for(int i = 0; i < MAX_ENEMIES;i++){
+        if(enemies[i].name != NULL){
+            num_enemies++;
+        }
+    }
+    for(int i = 0; i < num_enemies - 1; i++){
+        if(enemies[i].hp > 0){
             num_alive++;
-            printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i]->name,enemies[i]->hp,enemies[i]->atk,enemies[i]->def);
+            printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i].name,enemies[i].hp,enemies[i].atk,enemies[i].def);
         }
     }
     if(num_alive == 0) return -1;
-    printf("Chose option:");
+    printf("\nChose option:");
     int opt = 0;
     while(opt < 1 || opt > num_enemies){
         scanf("%d", &opt);
-        if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
+        if(0 < opt < num_enemies && enemies[opt -1].hp > 0) return opt-1;
         opt = 0;
-        printf("Chose valid option:");
+        printf("\nChose valid option:");
     }
     return opt-1;
 }
@@ -315,15 +320,19 @@ int enemyTurn(Turn *turn, Character *character){
 
 int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     int active = 1;
-    Queue *queue;
+    Queue *queue = malloc(sizeof(Queue));
     createQueue(character,enemies, queue);
     while(active && queue->first != NULL){
-        printCombat(enemies);
+        //printCombat(enemies);
         //Character
         if(queue->first->type == 0){
+            printf("\nPlayer Turn:");
             playerTurn(queue->first, enemies, character);
         }
-        else active = enemyTurn(queue->first, character);
+        else{
+            printf("\nEnemy Turn:");
+            active = enemyTurn(queue->first, character);
+        } 
         
         if(character->hp <= 0 || queue->first == NULL) return 0;
     }
