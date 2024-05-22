@@ -207,13 +207,16 @@ Skills* get_skill_data(){
 }
 
 
-Scenario* get_scenario_nodes(){
+
+Scenario* get_scenario_nodes(Scenario *scenario_list){
     //Calls the open file on read function
     cJSON root = startup_read("scenarioData.json");
     cJSON *scenario = cJSON_GetObjectItem(&root, "Scenarios");
-    Scenario *scenario_list = malloc(cJSON_GetArraySize(scenario)* sizeof(Scenario));
+    // Allocate memory for n Skills structures
+    //allocate_scenario_list(&scenario_list, cJSON_GetArraySize(scenario));
     for (int i = 0; i < cJSON_GetArraySize(scenario); i++) {
         //Iterates through the skills array
+        printf("\nEEEEEEEE");
         cJSON *array_index = cJSON_GetArrayItem(scenario, i);
         cJSON *scenario_name = cJSON_GetObjectItem(array_index, "name");
         cJSON *scenario_desc = cJSON_GetObjectItem(array_index, "description");
@@ -226,29 +229,31 @@ Scenario* get_scenario_nodes(){
             cJSON *optName = cJSON_GetObjectItem(optIndex, "optName");
             cJSON *optText = cJSON_GetObjectItem(optIndex, "optText");
             cJSON *combat_array = cJSON_GetObjectItem(optIndex, "Combat");
+            
             for(int x = 0; x<cJSON_GetArraySize(combat_array); x++){
                 cJSON *enemy_type_list = cJSON_GetArrayItem(combat_array,x);
                 cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
                 scenario_list[i].decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
-                printf("\nENEMY Nº%d ON OPTION Nº%d=%s ",x,j ,scenario_list[i].decision->options[j]->enemies[x]->name);
+                printf("\nENEMY Nº%d ON OPTION Nº%d=%s ",x+1,j+1 ,scenario_list[i].decision->options[j]->enemies[x]->name);
             }
-            scenario_list[i].decision->options[j]->n_text = cJSON_Print(optName);
-            scenario_list[i].decision->options[j]->r_text = cJSON_Print(optText);
+            strcpy(scenario_list[i].decision->options[j]->n_text ,cJSON_Print(optName));
+            strcpy(scenario_list[i].decision->options[j]->r_text ,cJSON_Print(optText));
         }
-
+        
         cJSON *next_scenario_list = cJSON_GetObjectItem(array_index,"next_scenarios");
         cJSON *next_A = cJSON_GetObjectItem(next_scenario_list,"option_A");
         cJSON *next_B = cJSON_GetObjectItem(next_scenario_list, "option_B");
         scenario_list[i].name = cJSON_Print(scenario_name);
         scenario_list[i].description = cJSON_Print(scenario_desc);
         scenario_list[i].image = cJSON_Print(scenario_image_file);
-        scenario_list[i].decision->question = cJSON_Print(scenario_question);
+        strcpy(scenario_list[i].decision->question ,cJSON_Print(scenario_question));
         scenario_list[i].next_scenario_name_1 = cJSON_Print(next_A);
         scenario_list[i].next_scenario_name_2 = cJSON_Print(next_B);
         printf("\n\nSCENARIO NAME: %s", scenario_list[i].name);
     }
     return scenario_list;
 }
+
 
 
 Skills* get_enemy_data(){

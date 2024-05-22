@@ -413,7 +413,71 @@ void create_data(Data **data){
     }
 }
 
+Scenario* allocate_scenarios(int num_scenarios) {
+    Scenario* scenarios = malloc(num_scenarios * sizeof(Scenario));
+    if (scenarios == NULL) {
+        fprintf(stderr, "Memory allocation failed for scenarios\n");
+        exit(1);
+    }
 
+    for (int i = 0; i < num_scenarios; i++) {
+        scenarios[i].name = malloc(MAX_CHAR_NAME * sizeof(char));
+        if (scenarios[i].name == NULL) {
+            fprintf(stderr, "Memory allocation failed for scenario name\n");
+            exit(1);
+        }
+
+        scenarios[i].description = malloc(MAX_CHAR_DESC * sizeof(char));
+        if (scenarios[i].description == NULL) {
+            fprintf(stderr, "Memory allocation failed for scenario description\n");
+            exit(1);
+        }
+
+  
+
+        scenarios[i].decision = malloc(sizeof(Decision));
+        if (scenarios[i].decision == NULL) {
+            fprintf(stderr, "Memory allocation failed for scenario decision\n");
+            exit(1);
+        }
+
+        for (int j = 0; j < MAX_OPTIONS; j++) {
+            scenarios[i].decision->options[j] = malloc(sizeof(Option));
+            if (scenarios[i].decision->options[j] == NULL) {
+                fprintf(stderr, "Memory allocation failed for decision option\n");
+                exit(1);
+            }
+
+            for (int k = 0; k < MAX_ENEMIES; k++) {
+                scenarios[i].decision->options[j]->enemies[k] = malloc(sizeof(Enemy));
+                if (scenarios[i].decision->options[j]->enemies[k] == NULL) {
+                    fprintf(stderr, "Memory allocation failed for enemy\n");
+                    exit(1);
+                }
+
+                scenarios[i].decision->options[j]->enemies[k]->name = malloc(MAX_CHAR_NAME * sizeof(char));
+                if (scenarios[i].decision->options[j]->enemies[k]->name == NULL) {
+                    fprintf(stderr, "Memory allocation failed for enemy name\n");
+                    exit(1);
+                }
+            }
+        }
+
+        scenarios[i].next_scenario_name_1 = malloc(MAX_CHAR_NAME * sizeof(char));
+        if (scenarios[i].next_scenario_name_1 == NULL) {
+            fprintf(stderr, "Memory allocation failed for next scenario name 1\n");
+            exit(1);
+        }
+
+        scenarios[i].next_scenario_name_2 = malloc(MAX_CHAR_NAME * sizeof(char));
+        if (scenarios[i].next_scenario_name_2 == NULL) {
+            fprintf(stderr, "Memory allocation failed for next scenario name 2\n");
+            exit(1);
+        }
+    }
+
+    return scenarios;
+}
 
 
 //CREATES A NEW GAME

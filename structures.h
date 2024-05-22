@@ -37,14 +37,14 @@ typedef struct Enemy{
 
 //Option
 typedef struct Option{
-    char *r_text;
-    char *n_text;
+    char r_text[MAX_CHAR_DESC];
+    char n_text[MAX_CHAR_DESC];
     Enemy *enemies[MAX_ENEMIES];
 }Option;
 
 //Decision
 typedef struct Decision{
-    char *question;
+    char question[MAX_CHAR_DESC];
     int n_options;
     Option *options[MAX_OPTIONS];
 }Decisions;
@@ -53,12 +53,12 @@ typedef struct Decision{
 typedef struct Scenario{
     char *name;
     char *description;
-    char *image;
+    char image;
     Decisions *decision;
     char *next_scenario_name_1;
     char *next_scenario_name_2;
-    
 }Scenario;
+
 
 
 //DATA

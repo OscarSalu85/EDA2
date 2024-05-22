@@ -6,6 +6,8 @@
 int main(){
     Data *data;
     create_data(&data);
+    Scenario *sceneNodes = allocate_scenarios(2);
+    sceneNodes = get_scenario_nodes(sceneNodes);
     while(1){
         //Menu inicial
         int main_menu_choice = main_menu(data);
