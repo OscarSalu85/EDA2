@@ -172,7 +172,8 @@ void configure_skills(Data* data){
                 }
                 else{
                     for(int j = 0; j<MAX_SKILLS;j++){
-                        if(skill_list[selected_skill].name == data->character->skill[j]->name){
+                        if(skill_list[selected_skill].name ==  data->character->skill[j]->name){
+                            printf("\nYou have already chosen thiss kill, select a different one.");
                             repeat = 1;
                         }
                     }
