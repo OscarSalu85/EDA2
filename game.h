@@ -7,14 +7,16 @@
 #include "queque.h"
 #include "dataR.h"
 #define BASE_HP 10
+#define BASE_DEF 5
+#define BASE_ATK 5
 #define INITIAL_STATS 20
-#define HP_PER_POINT 5 //Hp value given for every stat point invested
+#define HP_PER_POINT 2 //Hp value given for every stat point invested
 int main_menu(Data *data){
     int choice;
     load_data(data);
     printf("1.Continue      2.New Game     3.Configure \n");
     while(1)
-    {
+    {   
         printf("\nSelect your choice: ");
         scanf("%d", &choice);
         if(choice == 1){
@@ -90,7 +92,6 @@ void configure_name(Data* data){
                         
                         // Clear the newline character left in the buffer
                         while (getchar() != '\n');
-
                         if (choice == 1) {
                             return;
                         } else if (choice == 0) {
@@ -98,25 +99,24 @@ void configure_name(Data* data){
                         } else {
                             printf("\nNot a valid option, try again.\n");
                         }
-                    }
-                    
+                    } 
                 }
             }
         }
-        
     }
 }
 
 
 void configure_stats(Data* data){
-    data->character->atk = 0;
-    data->character->def = 0;
-    data->character->hp = 10;
+    data->character->atk = 5;
+    data->character->def = 5;
+    data->character->hp = 10;   //BASE ATK, DEF AND HP VALUES
     int input;
     int current_points = 20;
     while(current_points > 0){
-            printf("\nAvailable SP(Stat Points):%d SP",current_points);
-            printf("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d", data->character->atk,data->character->def,(data->character->hp-BASE_HP) / HP_PER_POINT);
+            printf("\n\n%s's current stats: Atk:%d        Def:%d      Hp:%d\n",data->character->name,data->character->atk,data->character->def,data->character->hp);
+            printf("\nAvailable SP(Stat Points):%d SP\n",current_points);
+            printf("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d\n", data->character->atk-BASE_ATK,data->character->def-BASE_DEF,(data->character->hp-BASE_HP) / HP_PER_POINT);
             printf("\nSelect which stat you want to invest in: ");
             scanf("%d", &input);
             if(input < 1 || input>3){
@@ -213,27 +213,30 @@ void configure_skills(Data* data){
 }
 
 void configure_menu(Data *data){
-    int choice;
+    int choice_configure;
     while(1){
         printf("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\n4.Back to Main Menu");
         printf("\nSelect an option: ");
-        scanf("%d", &choice);
-        if(choice == 1){
+        scanf("%d", &choice_configure);
+        if(choice_configure == 1){
             configure_name(data);
         }
-        else if(choice == 2){
+        else if(choice_configure == 2){
             configure_stats(data);
         }
-        else if(choice == 3){
+        else if(choice_configure == 3){
             configure_skills(data);
         }
-        else if(choice == 4){
-            main_menu(data);
+        else if(choice_configure == 4){
+            return;
         }
         else{
             printf("No valid option was chosen, please try again.");
+            continue;
         }
+        save_data(data,1);
     }
+    
 };
 
 void selectSkill(Character *character, Skills *skill){

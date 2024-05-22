@@ -39,6 +39,7 @@ int main(){
         else if(main_menu_choice == 3){
             configure_menu(data);
         }
+        
     }
 }
 
