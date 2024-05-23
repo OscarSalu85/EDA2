@@ -11,6 +11,8 @@
 #define BASE_ATK 5
 #define INITIAL_STATS 20
 #define HP_PER_POINT 2 //Hp value given for every stat point invested
+
+
 int main_menu(Data *data){
     int choice;
     load_data(data);
@@ -18,8 +20,8 @@ int main_menu(Data *data){
     while(1)
     {   
         printf("\nSelect your choice: ");
-        scanf("%d", &choice);
-        if(choice == 1){
+        scanf("%s", &choice);
+        if(choice == '1'){
             if(!isalpha(data->character->name[0])){
                 printf("\nNo saved data found, please start a new game\n");
             }
@@ -28,10 +30,10 @@ int main_menu(Data *data){
                 return 1;
             }
         }
-        else if(choice == 2){
+        else if(choice == '2'){
             return 2;
         }
-        else if(choice == 3){
+        else if(choice == '3'){
             if(strcmp(data->character->name, "") == 1){
                 printf("\nNo saved data found, please start a new game\n");
             }
@@ -39,6 +41,10 @@ int main_menu(Data *data){
                 printf("\nSaved data found, opening character configuration...\n");
                 return 3;
             }
+        }
+        else{
+            printf("\nNot a valid option, please choose again.");
+            return 0;
         }
     }
 }
@@ -59,7 +65,6 @@ void configure_name(Data* data){
         count = 0;
         printf("\nSelect your new name: ");
         fgets(data->character->name, MAX_CHAR_NAME, stdin);
-        printf("%s", data->character->name);
 
         size_t len = strlen(data->character->name);
         if (len > 0 && data->character->name[len - 1] == '\n') {
@@ -112,6 +117,7 @@ void configure_stats(Data* data){
     data->character->def = 5;
     data->character->hp = 10;   //BASE ATK, DEF AND HP VALUES
     int input;
+    int input2;
     int current_points = 20;
     while(current_points > 0){
             printf("\n\n%s's current stats: Atk:%d        Def:%d      Hp:%d\n",data->character->name,data->character->atk,data->character->def,data->character->hp);
@@ -120,30 +126,66 @@ void configure_stats(Data* data){
             printf("\nSelect which stat you want to invest in: ");
             scanf("%d", &input);
             if(input < 1 || input>3){
-                printf("\nSelect a valid element to invest.");
+                printf("\nNot a valid element, try again.");
+                continue;
             }
             else{
-                int input2;
-                printf("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ");
-                scanf("%d", &input2);
-                if(input2 > current_points || input2 < 0){
-                    printf("\nNot enough stat points available.");
+                while(1){
+                    printf("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ");
+                    scanf("%d", &input2);
+                    printf("\nINPUT 3 = %d", input2);
+                    if(input2 > current_points || input2 < 0){
+                        printf("\nNot enough stat points available.");
+                        continue;
+                    }
+                    else if(input2 > 0){
+                        if(input == 1){
+                            data->character->atk += input2;
+                            current_points -= input2;
+                            break;
+                        }
+                        else if(input == 2){
+                            data->character->def += input2;
+                            current_points -= input2;
+                            break;
+                        }
+                        else if(input == 3){
+                            data->character->hp += input2 * HP_PER_POINT;
+                            current_points -= input2;
+                            break;
+                        }
+                    }
                 }
-                else if(input2 > 0){
-                    if(input == 1){
-                        data->character->atk += input2;
+                
+            }
+            if(current_points == 0){
+                while(1){
+                    while (getchar() != '\n');
+                    int input3;
+
+                    printf("\nFinal stat allocation:    Atk:%d        Def:%d      Hp:%d\n",data->character->atk,data->character->def,data->character->hp);
+                    printf("\nConfirm stat allocation?  1.Yes   2.No: ");
+                    scanf("%d",&input3);
+
+                    if(input3 == 1){
+                        return;
                     }
-                    else if(input == 2){
-                        data->character->def += input2;
+                    else if(input3 == 2){
+                        data->character->atk = 5;
+                        data->character->def = 5;
+                        data->character->hp = 10;
+                        current_points = 20;
+                        break;
                     }
-                    else if(input == 3){
-                        data->character->hp += input2 * HP_PER_POINT;
+                    else{
+                        current_points = 0;
                     }
-                    current_points -= input2;
                 }
+                
+                
             }
         } 
-        return;
+        
 }
 
 

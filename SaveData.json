@@ -1,22 +1,22 @@
 {
 	"Character":	{
-		"name":	"Sushant La Cabra",
+		"name":	"a",
 		"stats":	{
-			"HP":	35,
-			"ATK":	10,
+			"HP":	10,
+			"ATK":	25,
 			"DEF":	5
 		},
 		"skills":	[{
-				"skill_name":	"Haunted pen"
+				"skill_name":	""
 			}, {
-				"skill_name":	"Carrot's shurikens"
+				"skill_name":	""
 			}, {
-				"skill_name":	"Special soup"
+				"skill_name":	""
 			}, {
-				"skill_name":	"injection"
+				"skill_name":	""
 			}]
 	},
 	"Current_Scenario":	{
-		"name":	"Deck"
+		"name":	""
 	}
 }

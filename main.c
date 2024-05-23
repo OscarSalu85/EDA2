@@ -8,9 +8,11 @@ int main(){
     create_data(&data);
     Scenario *sceneNodes = allocate_scenarios(2);
     sceneNodes = get_scenario_nodes(sceneNodes);
+    int main_menu_choice;
     while(1){
         //Menu inicial
-        int main_menu_choice = main_menu(data);
+        main_menu_choice = main_menu(data);
+
         if(main_menu_choice == 1){
             for(int i = 0; i < MAX_SKILLS;i++){
                 load_Skill(data->character->skill[i]);
