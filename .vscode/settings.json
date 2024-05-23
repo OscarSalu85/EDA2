@@ -8,7 +8,10 @@
         "type_traits": "cpp",
         "structures.h": "c",
         "stdio.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "vector": "c",
+        "datar.h": "c",
+        "queque.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
