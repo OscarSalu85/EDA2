@@ -53,7 +53,7 @@ typedef struct Decision{
 typedef struct Scenario{
     char *name;
     char *description;
-    char image;
+    char *image;
     Decisions *decision;
     char *next_scenario_name_1;
     char *next_scenario_name_2;
@@ -65,6 +65,7 @@ typedef struct Scenario{
 typedef struct Data{
     Character *character;
     Scenario *current_scenario;
+    Scenario *sceneNodes;
 }Data;
 
 #endif

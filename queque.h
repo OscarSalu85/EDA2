@@ -40,7 +40,7 @@ Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
         turn->enemy = NULL;
         turn->name = NULL;
         turn->next = NULL;
-        turn->type = NULL;
+        turn->type = -1;
     
 
         int random = rand()%2;

@@ -207,10 +207,9 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
     //Calls the open file on read function
     cJSON root = startup_read("scenarioData.json");
     cJSON *scenario = cJSON_GetObjectItem(&root, "Scenarios");
-    // Allocate memory for n Skills structures
     //allocate_scenario_list(&scenario_list, cJSON_GetArraySize(scenario));
     for (int i = 0; i < cJSON_GetArraySize(scenario); i++) {
-        //Iterates through the skills array
+        //Iterates through the scenarios array
         cJSON *array_index = cJSON_GetArrayItem(scenario, i);
         cJSON *scenario_name = cJSON_GetObjectItem(array_index, "name");
         cJSON *scenario_desc = cJSON_GetObjectItem(array_index, "description");
@@ -245,8 +244,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
     }
     return scenario_list;
 }
-
-
 
 Skills* get_enemy_data(){
     Skills *skills_array;

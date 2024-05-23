@@ -14,7 +14,7 @@
 
 
 int main_menu(Data *data){
-    int choice;
+    char choice;
     load_data(data);
     printf("1.Continue      2.New Game     3.Configure \n");
     while(1)
@@ -331,7 +331,7 @@ int selectTarget(Enemy *enemies){
 void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character){
    if(enemies != NULL){
         Enemy *target; 
-        int chosen_target_index = selectTarget(enemies);
+        int chosen_target_index = selectTarget(*enemies);
         if(chosen_target_index != -1){
             target = enemies[chosen_target_index];
             Skills *skill;
@@ -369,7 +369,7 @@ int enemyTurn(Turn *turn, Character *character){
 int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     int active = 1;
     Queue *queue = malloc(sizeof(Queue));
-    createQueue(character,enemies, queue);
+    createQueue(character,*enemies, queue);
     while(active && queue->first != NULL){
         //printCombat(enemies);
         //Character
@@ -458,6 +458,8 @@ void create_data(Data **data){
         free(*data);
         return;
     }
+
+    
 }
 
 Scenario* allocate_scenarios(int num_scenarios) {
@@ -536,10 +538,14 @@ void new_game(Data *data){
     save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
     configure_name(data);
     configure_stats(data);
+    printf("CHANGING SCENE");
+    printf("AAAA");
     configure_skills(data);
     //printf("%s",data->character->name);
-    char* scenario = "Deck";
-    data->current_scenario->name = scenario;
+    printf("CHANGING SCENE");
+    printf("AAAA");
+    data->current_scenario[0] = data->sceneNodes[0];
+    printf("\nSCENE NAME = %s", data->current_scenario->name);
     save_data(data,1); //Saves the configured data
 }
 
