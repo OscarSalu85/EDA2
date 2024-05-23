@@ -1,9 +1,9 @@
 {
 	"Character":	{
-		"name":	"roig",
+		"name":	"a",
 		"stats":	{
-			"HP":	50,
-			"ATK":	5,
+			"HP":	10,
+			"ATK":	25,
 			"DEF":	5
 		},
 		"skills":	[{
