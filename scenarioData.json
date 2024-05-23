@@ -10,8 +10,8 @@
             "options":
             [   
                 {   
-                    "optName":"A",
-                    "optText":"AAAAAAA",
+                    "optName":"kitchen",
+                    "optText":"Here there is the kitchen is not as supposed to be but it still makes his function, to prepare good mealsb (or something else).",
                     "Combat":[{
                         "enemyName":"cultist"},
                         {
@@ -22,8 +22,8 @@
                 },
 
                 {
-                    "optName":"B",
-                    "optText":"BBBBBBB",
+                    "optName":"3rd class floor",
+                    "optText":"Here is where the 'normal' people resides when they are in the ship. Well thinking that they are normal may be a bit opthimistic.",
                     "Combat":[{
                         "enemyName":"cultist"},
                         {
@@ -43,10 +43,10 @@
             "name":"3rd class floor",
             "image":"3rd class floor.txt",
             "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
-            "question":"Which zone do you want to explore now? The kitchen or the 2nd class floor",
+            "question":"Which zone do you want to explore now? The hall or the 1st class floor",
             "options":[
                 {
-                    "optName":"2nd class floor",
+                    "optName":"1nd class floor",
                     "optText":"CCCCCCCC",
                     "Combat":[{
                         "enemyName":"cthulu"},
@@ -71,9 +71,125 @@
                 
             "next_scenarios":
             {
-                "Option_A":"2nd class floor",
+                "Option_A":"1st class floor",
                 "Option_B":"hall"
             }
+        },
+        {
+            "name":"1st class floor",
+            "image": "1st class floor.txt",
+            "description": "When (name character) finish the work in the 1st class floor he is ready to confront Cthulu in thelast fight",
+            "question":"Congratulations you have arrived to the cellar",
+            "options":
+            [   
+                {   
+                    "optName":"Cellar",
+                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"}]
+
+                }
+            ]
+        },
+        {
+            "name":"hall",
+            "image": "Hall.txt",
+            "description": "After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
+            "question":"Congratulations you have arrived to the cellar",
+            "options":
+            [   
+                {   
+                    "optName":"Cellar",
+                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"}]
+
+                }
+            ]
+        },
+        {
+            "name":"kitchen",
+            "image":"kitchen.txt",
+            "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the kitchen where he didn't find what he expected to find there were some food but in a special way.",
+            "question":"Which zone do you want to explore now? The 2nd class floor or the captain's room",
+            "options":[
+                {
+                    "optName":"2nd class floor",
+                    "optText":"The conditions of this stage are better but the enemies are worse. I don't know if it was the best decision.",
+                    "Combat":[{
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                       
+                     
+                },
+                {
+                    "optName":"captain's room",
+                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "Combat":[{
+                        "enemyName":"Pedro"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                }
+            ],
+                
+            "next_scenarios":
+            {
+                "Option_A":"2nd class floor",
+                "Option_B":"captain's room"
+            }
+        },
+        {
+            "name":"2nd class floor",
+            "image": "2nd class floor.txt",
+            "description": "After visiting the kitchen you will visit the 2nd class floor which is better than the 3rd class floor but just in some aspects....",
+            "question":"Congratulations you have arrived to the cellar",
+            "options":
+            [   
+                {   
+                    "optName":"Cellar",
+                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"}]
+
+                }
+            ]
+        },
+        {
+            "name":"captain's room",
+            "image": "captain's room.txt",
+            "description": "After visiting the kitchen (name char) visits the captain's room in order to be safe and find help but you will find totally the opposite",
+            "question":"Congratulations you have arrived to the cellar",
+            "options":
+            [   
+                {   
+                    "optName":"Cellar",
+                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"}]
+
+                }
+            ]
         }
     ]
 }
