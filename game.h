@@ -355,16 +355,18 @@ void selectEnemySkill(Enemy *current_enemy, Skills *skill){
 
 
 int enemyTurn(Turn *turn, Character *character){
+    int hp = character->hp;
     Enemy *current_enemy = turn->enemy;
-    printf("\n%s attacks you!!!",turn->name);
+    printf("\n-%s attacks you!!!",turn->name);
     Skills *skill;
     selectEnemySkill(current_enemy,skill);
-    printf("\n%s chooses to use the skill %s",turn->name,skill->name);
+    printf("\n-%s chooses the skill %s",turn->name,skill->name);
     //Atack
     int damage = 0;
     if(character->def > 0) damage = ((current_enemy->atk * skill->damage) / character->def);
-    else damage = (current_enemy->atk * skill->damage);
-    character->hp = character->hp - damage;
+    else damage = (current_enemy->atk * skill->damage)/100;
+    character->hp = hp - damage;
+    printf("\n-deals %d damage, remaining health --> %d",damage,character->hp);
     if (character->hp <= 0) return 0;
     return 1;
 }
@@ -381,7 +383,9 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
         }
     }
     Queue *queue = malloc(sizeof(Queue));
-    createQueue(character,enemies,queue,num_enemies);
+    int hp = character->hp;
+    queue = createQueue(character,enemies,queue,num_enemies);
+    character->hp = hp;
     while(active && queue->first != NULL){
         //printCombat(enemies);
         //Character
@@ -392,9 +396,9 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
         else{
             printf("\n\nEnemy Turn:");
             active = enemyTurn(queue->first, character);
-        } 
-        
-        if(character->hp <= 0 || queue->first == NULL) return 0;
+        }     
+        if(character->hp <= 0  || queue->first->previous == NULL) return 0;
+        queue->first = queue->first->previous;
     }
     return 1;
 }

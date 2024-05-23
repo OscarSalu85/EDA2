@@ -10,6 +10,7 @@ typedef struct Turn{
     int type;
     Enemy *enemy;
     struct Turn *next;
+    struct Turn *previous;
 }Turn;
 
 typedef struct Queue{
@@ -25,9 +26,11 @@ void AddElement(Turn *turn, Queue *queue){
     else if(queue->first == queue->last){
         queue->last = turn;
         turn->next = queue->first;
+        queue->first->previous = turn;
     }
     else{
         turn->next = queue->last;
+        queue->last->previous = turn;
         queue->last = turn;
     }
 }
@@ -37,10 +40,11 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
     queue->last = NULL;
     printf("Order combat:\n");
     for(int i = 0; i < NUM_TURNS; i++){
-        Turn *turn;
+        Turn *turn = malloc(sizeof(Turn));
         turn->enemy = NULL;
         turn->name = NULL;
         turn->next = NULL;
+        turn->previous = NULL;
         turn->type = -1;
 
         int random = rand()%2;
@@ -59,9 +63,9 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
                 printf("\n%d.%s(%d)",i,turn->name,random + 1);
             }
         }
-        turn->next = NULL;
         AddElement(turn,queue);
     }
+    printf("%s",queue->first->previous->name);
     return queue;
 }
 #endif

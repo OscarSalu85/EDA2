@@ -231,21 +231,23 @@ void get_enemy_data(Enemy *enemy){
 
     //Skills
     cJSON *en_skills = cJSON_GetObjectItem(enemy_json, "skills");
+    Skills *skill_list = get_skill_data();
     for(int i = 0; i < cJSON_GetArraySize(en_skills);i++){
         cJSON *current_skill = cJSON_GetArrayItem(en_skills, i);
         cJSON *current_skill_name = cJSON_GetObjectItem(current_skill, "name");
         char *name = cJSON_Print(current_skill_name);
         name++;
         name[strlen(name)-1] = 0;
-        Skills *skill_list = get_skill_data();
         for(int x = 0; x < SKILL_MAX; x++){
             if(!strcmp(skill_list[x].name,name)){
+                skills_array[i].name = name;
                 skills_array[i].damage = skill_list[x].damage;
                 skills_array[i].description = skill_list[x].description;
                 skills_array[i].duration = skill_list[x].duration;
                 skills_array[i].modifiers[0] = skill_list[x].modifiers[0];
                 skills_array[i].modifiers[1] = skill_list[x].modifiers[1];
                 skills_array[i].modifiers[2] = skill_list[x].modifiers[2];
+                enemy->skill[i] = skills_array[i];
             }
         }
     }

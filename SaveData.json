@@ -2,8 +2,8 @@
 	"Character":	{
 		"name":	"a",
 		"stats":	{
-			"HP":	10,
-			"ATK":	25,
+			"HP":	50,
+			"ATK":	5,
 			"DEF":	5
 		},
 		"skills":	[{
@@ -11,9 +11,9 @@
 			}, {
 				"skill_name":	"he bibl"
 			}, {
-				"skill_name":	"re"
-			}, {
 				"skill_name":	"njectio"
+			}, {
+				"skill_name":	"re"
 			}]
 	},
 	"Current_Scenario":	{
