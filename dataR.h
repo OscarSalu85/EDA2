@@ -186,7 +186,13 @@ Skills* get_skill_data(){
         cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
         
         skills_array[i].name = cJSON_Print(skill_name);
+        skills_array[i].name++;
+        skills_array[i].name[strlen(skills_array[i].name)-1]= 0;
+
         skills_array[i].description = cJSON_Print(skill_description);
+        skills_array[i].description++;
+        skills_array[i].description[strlen(skills_array[i].description)-1]= 0;
+
         if (skill_duration && cJSON_IsNumber(skill_duration)) {
             skills_array[i].duration = skill_duration->valueint;
         } else {
@@ -201,7 +207,49 @@ Skills* get_skill_data(){
     return skills_array;
 }
 
+void get_enemy_data(Enemy *enemy){
 
+    Skills *skills_array;
+    skills_array = (Skills *)malloc(SKILL_MAX * sizeof(Skills));
+
+    //Calls the open file on read function
+    cJSON root = startup_read("enemyData.json");
+    cJSON *enemies = cJSON_GetObjectItem(&root, "Enemies");
+    cJSON *enemy_json = cJSON_GetObjectItem(enemies, enemy->name);
+    
+    cJSON *en_def = cJSON_GetObjectItem(enemy_json, "def");
+    enemy->def = cJSON_GetNumberValue(en_def);
+
+    cJSON *en_hp = cJSON_GetObjectItem(enemy_json, "hp");
+    enemy->hp = cJSON_GetNumberValue(en_hp);
+
+    cJSON *en_atk= cJSON_GetObjectItem(enemy_json, "atk");
+    enemy->atk = cJSON_GetNumberValue(en_atk);
+
+    cJSON *en_num_sk= cJSON_GetObjectItem(enemy_json, "num_skills");
+    enemy->num_skills = cJSON_GetNumberValue(en_num_sk);
+
+    //Skills
+    cJSON *en_skills = cJSON_GetObjectItem(enemy_json, "skills");
+    for(int i = 0; i < cJSON_GetArraySize(en_skills);i++){
+        cJSON *current_skill = cJSON_GetArrayItem(en_skills, i);
+        cJSON *current_skill_name = cJSON_GetObjectItem(current_skill, "name");
+        char *name = cJSON_Print(current_skill_name);
+        name++;
+        name[strlen(name)-1] = 0;
+        Skills *skill_list = get_skill_data();
+        for(int x = 0; x < SKILL_MAX; x++){
+            if(!strcmp(skill_list[x].name,name)){
+                skills_array[i].damage = skill_list[x].damage;
+                skills_array[i].description = skill_list[x].description;
+                skills_array[i].duration = skill_list[x].duration;
+                skills_array[i].modifiers[0] = skill_list[x].modifiers[0];
+                skills_array[i].modifiers[1] = skill_list[x].modifiers[1];
+                skills_array[i].modifiers[2] = skill_list[x].modifiers[2];
+            }
+        }
+    }
+}
 
 Scenario* get_scenario_nodes(Scenario *scenario_list){
     //Calls the open file on read function
@@ -229,7 +277,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
                 scenario_list[i].decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
                 scenario_list[i].decision->options[j]->enemies[x]->name++;
                 scenario_list[i].decision->options[j]->enemies[x]->name[strlen(scenario_list[i].decision->options[j]->enemies[x]->name)-1] = 0;
-
             }
             strcpy(scenario_list[i].decision->options[j]->n_text ,cJSON_Print(optName));
             strcpy(scenario_list[i].decision->options[j]->r_text ,cJSON_Print(optText));
@@ -259,29 +306,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
     return scenario_list;
 }
 
-void get_enemy_data(Enemy *enemy){
-
-    Skills *skills_array;
-    // Allocate memory for n Skills structures
-    skills_array = (Skills *)malloc(SKILL_MAX * sizeof(Skills));
-    if (skills_array == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        return skills_array;
-    }
-    //Calls the open file on read function
-    cJSON root = startup_read("enemyData.json");
-    cJSON *enemies = cJSON_GetObjectItem(&root, "Enemies");
-    cJSON *enemy_json = cJSON_GetObjectItem(enemies, enemy->name);
-    
-    cJSON *en_def = cJSON_GetObjectItem(enemy_json, "def");
-    enemy->def = cJSON_GetNumberValue(en_def);
-
-    cJSON *en_hp = cJSON_GetObjectItem(enemy_json, "hp");
-    enemy->hp = cJSON_GetNumberValue(en_hp);
-
-    cJSON *en_atk= cJSON_GetObjectItem(enemy_json, "atk");
-    enemy->atk = cJSON_GetNumberValue(en_atk);
-}
 
 
 #endif

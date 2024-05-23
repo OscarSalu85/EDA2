@@ -6,15 +6,10 @@
             "hp":100000,
             "atk":50,
             "def":100,
+            "num_skills":1,
             "skills":[
                 {
-                    "name":
-                },
-                {
-                    "name":
-                },
-                {
-                    "name":
+                    "name":"Wooden plank"
                 }
             ]
         },
@@ -23,16 +18,12 @@
             "hp":100000,
             "atk":50,
             "def":100,
+            "num_skills":1,
             "skills":[
                 {
-                    "name":
-                },
-                {
-                    "name":
-                },
-                {
-                    "name":
+                    "name":"The bible"
                 }
+
             ]
         },
         "Pedro":
@@ -40,15 +31,10 @@
             "hp":100000,
             "atk":50,
             "def":100,
+            "num_skills":1,
             "skills":[
                 {
-                    "name":
-                },
-                {
-                    "name":
-                },
-                {
-                    "name":
+                    "name":"Carrot's shurikens"
                 }
             ]
         }

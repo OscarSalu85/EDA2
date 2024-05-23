@@ -346,13 +346,7 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, i
 
 void selectEnemySkill(Enemy *current_enemy, Skills *skill){
     //Select skill randomly+
-    int n_skills = 0;
-    for(int i = 0; i<MAX_SKILLS;i++){
-        if(current_enemy->skill[i].name != NULL){
-            n_skills++;
-        }
-    }
-    int random = rand()%n_skills;
+    int random = rand()%current_enemy->num_skills;
     *skill = current_enemy->skill[random];
 }
 
@@ -376,8 +370,10 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     printf("\nCOMBAT:\n");
     int active = 1;
     int num_enemies = 0;
+
     for (int i = 0; i<MAX_ENEMIES;i++){
         if(enemies[i] != NULL){
+            get_enemy_data(enemies[i]);
             num_enemies++;
         }
     }

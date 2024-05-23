@@ -32,6 +32,7 @@ typedef struct Enemy{
     int hp;
     int atk;
     int def;
+    int num_skills;
     Skills skill[4];
 }Enemy;
 

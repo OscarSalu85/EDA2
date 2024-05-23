@@ -1,19 +1,19 @@
 {
 	"Character":	{
-		"name":	"a",
+		"name":	"roig",
 		"stats":	{
-			"HP":	10,
-			"ATK":	25,
+			"HP":	50,
+			"ATK":	5,
 			"DEF":	5
 		},
 		"skills":	[{
-				"skill_name":	"Wooden plank"
+				"skill_name":	"ooden plan"
 			}, {
-				"skill_name":	"The bible"
+				"skill_name":	"he bibl"
 			}, {
-				"skill_name":	"Brew"
+				"skill_name":	"re"
 			}, {
-				"skill_name":	"injection"
+				"skill_name":	"njectio"
 			}]
 	},
 	"Current_Scenario":	{
