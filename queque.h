@@ -32,9 +32,10 @@ void AddElement(Turn *turn, Queue *queue){
     }
 }
 
-Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
+Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queue,int num_enemies){
     queue->first = NULL;
     queue->last = NULL;
+    printf("Order combat:\n");
     for(int i = 0; i < NUM_TURNS; i++){
         Turn *turn;
         turn->enemy = NULL;
@@ -50,12 +51,12 @@ Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
             turn->type = 0;
         }
         else{
-            if(sizeof(&enemies)/sizeof(Enemy) != 0){
-                random = rand()%(sizeof(&enemies)/sizeof(Enemy));
+            if(num_enemies != 0){
+                random = rand()%(num_enemies);
                 turn->enemy = &enemies[random];
                 turn->type = 1;
-                turn->name = enemies[random].name;
-                printf("\n%d.%s",turn->name);
+                turn->name = enemies[random]->name;
+                printf("\n%d.%s(%d)",i,turn->name,random + 1);
             }
         }
         turn->next = NULL;
@@ -63,5 +64,4 @@ Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
     }
     return queue;
 }
-
 #endif

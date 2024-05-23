@@ -369,12 +369,16 @@ int enemyTurn(Turn *turn, Character *character){
 }
 
 int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
+    printf("\nCOMBAT:\n");
     int active = 1;
-    int num_enemies = sizeof(enemies)/sizeof(Enemy);
-    printf("%d",num_enemies);
+    int num_enemies = 0;
+    for (int i = 0; i<MAX_ENEMIES;i++){
+        if(enemies[i] != NULL){
+            num_enemies++;
+        }
+    }
     Queue *queue = malloc(sizeof(Queue));
-    createQueue(character,enemies,queue);
-    getchar();
+    createQueue(character,enemies,queue,num_enemies);
     while(active && queue->first != NULL){
         //printCombat(enemies);
         //Character
