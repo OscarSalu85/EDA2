@@ -53,7 +53,7 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
         else{
             if(num_enemies != 0){
                 random = rand()%(num_enemies);
-                turn->enemy = &enemies[random];
+                turn->enemy = enemies[random];
                 turn->type = 1;
                 turn->name = enemies[random]->name;
                 printf("\n%d.%s(%d)",i,turn->name,random + 1);

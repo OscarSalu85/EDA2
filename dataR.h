@@ -259,7 +259,8 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
     return scenario_list;
 }
 
-Skills* get_enemy_data(){
+void get_enemy_data(Enemy *enemy){
+
     Skills *skills_array;
     // Allocate memory for n Skills structures
     skills_array = (Skills *)malloc(SKILL_MAX * sizeof(Skills));
@@ -268,36 +269,18 @@ Skills* get_enemy_data(){
         return skills_array;
     }
     //Calls the open file on read function
-    cJSON root = startup_read("skillData.json");
+    cJSON root = startup_read("enemyData.json");
+    cJSON *enemies = cJSON_GetObjectItem(&root, "Enemies");
+    cJSON *enemy_json = cJSON_GetObjectItem(enemies, enemy->name);
     
-    cJSON *skills = cJSON_GetObjectItem(&root, "skills");
+    cJSON *en_def = cJSON_GetObjectItem(enemy_json, "def");
+    enemy->def = cJSON_GetNumberValue(en_def);
 
-    for (int i = 0; i < cJSON_GetArraySize(skills); i++) {
-        //Iterates through the skills array
-        cJSON *skill_index = cJSON_GetArrayItem(skills, i);
-        cJSON *skill_name = cJSON_GetObjectItem(skill_index, "name");
-        cJSON *skill_description = cJSON_GetObjectItem(skill_index, "description");
-        cJSON *skill_duration = cJSON_GetObjectItem(skill_index, "duration");
-        cJSON *skill_damage = cJSON_GetObjectItem(skill_index,"damage");
-        cJSON *skill_mods = cJSON_GetObjectItem(skill_index, "modifiers");
-        cJSON *mod_1 = cJSON_GetArrayItem(skill_mods, 0);
-        cJSON *mod_2 = cJSON_GetArrayItem(skill_mods, 1);
-        cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
-        
-        skills_array[i].name = cJSON_Print(skill_name);
-        skills_array[i].description = cJSON_Print(skill_description);
-        if (skill_duration && cJSON_IsNumber(skill_duration)) {
-            skills_array[i].duration = skill_duration->valueint;
-        } else {
-            skills_array[i].duration = 0; // Default value if not found or not a number
-        }
-        skills_array[i].damage = cJSON_GetNumberValue(skill_damage);
-        skills_array[i].modifiers[0] = cJSON_GetNumberValue(mod_1);
-        skills_array[i].modifiers[1] = cJSON_GetNumberValue(mod_2);
-        skills_array[i].modifiers[2] = cJSON_GetNumberValue(mod_3);
+    cJSON *en_hp = cJSON_GetObjectItem(enemy_json, "hp");
+    enemy->hp = cJSON_GetNumberValue(en_hp);
 
-    }
-    return skills_array;
+    cJSON *en_atk= cJSON_GetObjectItem(enemy_json, "atk");
+    enemy->atk = cJSON_GetNumberValue(en_atk);
 }
 
 

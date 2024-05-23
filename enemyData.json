@@ -1,13 +1,58 @@
 {
     "Enemies":
-
-        [
-            {
-                "name":"cthulu",
-                "hp":100000,
-                "atk":50,
-                "def":100
-            }
-        ]
+    {
+        "cultist":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "skills":[
+                {
+                    "name":
+                },
+                {
+                    "name":
+                },
+                {
+                    "name":
+                }
+            ]
+        },
+        "cthulu":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "skills":[
+                {
+                    "name":
+                },
+                {
+                    "name":
+                },
+                {
+                    "name":
+                }
+            ]
+        },
+        "Pedro":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "skills":[
+                {
+                    "name":
+                },
+                {
+                    "name":
+                },
+                {
+                    "name":
+                }
+            ]
+        }
+       
+    }
 
 }

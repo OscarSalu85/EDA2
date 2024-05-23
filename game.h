@@ -303,14 +303,9 @@ void selectSkill(Character *character, Skills *skill){
     }
 }
 
-int selectTarget(Enemy *enemies[MAX_ENEMIES]){
+int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
     int num_alive = 0;
-    int num_enemies = 0;
-    for(int i = 0; i < MAX_ENEMIES;i++){
-        if(enemies[i]->name != NULL){
-            num_enemies++;
-        }
-    }
+
     for(int i = 0; i < num_enemies - 1; i++){
         if(enemies[i]->hp > 0){
             num_alive++;
@@ -330,10 +325,10 @@ int selectTarget(Enemy *enemies[MAX_ENEMIES]){
 }
 
 
-void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character){
+void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, int num_enemies){
    if(enemies != NULL){
         Enemy *target; 
-        int chosen_target_index = selectTarget(enemies);
+        int chosen_target_index = selectTarget(enemies,num_enemies);
         if(chosen_target_index != -1){
             target = enemies[chosen_target_index];
             Skills *skill;
@@ -345,20 +340,29 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character){
             target->hp = target->hp - damage;
             //Modifiers
         }
+        else printf("\nNo enemies alive");
    }
 }
 
 void selectEnemySkill(Enemy *current_enemy, Skills *skill){
-    //Select skill randomly
-    int random = rand()%(sizeof(current_enemy->skill)/sizeof(Skills));
+    //Select skill randomly+
+    int n_skills = 0;
+    for(int i = 0; i<MAX_SKILLS;i++){
+        if(current_enemy->skill[i].name != NULL){
+            n_skills++;
+        }
+    }
+    int random = rand()%n_skills;
     *skill = current_enemy->skill[random];
 }
 
 
 int enemyTurn(Turn *turn, Character *character){
     Enemy *current_enemy = turn->enemy;
+    printf("\n%s attacks you!!!",turn->name);
     Skills *skill;
     selectEnemySkill(current_enemy,skill);
+    printf("\n%s chooses to use the skill %s",turn->name,skill->name);
     //Atack
     int damage = 0;
     if(character->def > 0) damage = ((current_enemy->atk * skill->damage) / character->def);
@@ -383,11 +387,11 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
         //printCombat(enemies);
         //Character
         if(queue->first->type == 0){
-            printf("\nPlayer Turn:");
-            playerTurn(queue->first, enemies, character);
+            printf("\n\nPlayer Turn:");
+            playerTurn(queue->first, enemies, character,num_enemies);
         }
         else{
-            printf("\nEnemy Turn:");
+            printf("\n\nEnemy Turn:");
             active = enemyTurn(queue->first, character);
         } 
         
