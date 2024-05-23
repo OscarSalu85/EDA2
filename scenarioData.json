@@ -46,8 +46,8 @@
             "question":"Which zone do you want to explore now? The hall or the 1st class floor",
             "options":[
                 {
-                    "optName":"1nd class floor",
-                    "optText":"CCCCCCCC",
+                    "optName":"1st class floor",
+                    "optText":"In the 1st class floor you find more sophosticated people and more sophisticated enemies.",
                     "Combat":[{
                         "enemyName":"cthulu"},
                         {
@@ -59,7 +59,7 @@
                 },
                 {
                     "optName":"hall",
-                    "optText":"DDDDDDD",
+                    "optText":"After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {
