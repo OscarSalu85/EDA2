@@ -6,11 +6,14 @@
 #include "interface.h"
 #include "queque.h"
 #include "dataR.h"
+#include "graph.h"
 #define BASE_HP 10
 #define BASE_DEF 5
 #define BASE_ATK 5
 #define INITIAL_STATS 20
 #define HP_PER_POINT 2 //Hp value given for every stat point invested
+
+
 
 
 int main_menu(Data *data){

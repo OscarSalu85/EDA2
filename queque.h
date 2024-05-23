@@ -1,8 +1,8 @@
-#ifndef QUEQUE_H
-#define QUEQUE_H
+
 #include "structures.h"
 #include <stdlib.h>
-
+#ifndef QUEQUE_H
+#define QUEQUE_H
 #define NUM_TURNS 20
 
 typedef struct Turn{

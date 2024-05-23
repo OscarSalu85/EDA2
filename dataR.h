@@ -1,5 +1,4 @@
-#ifndef DATAR_H
-#define DATAR_H
+
 #include "structures.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +6,8 @@
 #include "cJSON.h" // Include the cJSON library header
 #include <unistd.h>
 #define SKILL_MAX 10 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
-
+#ifndef DATAR_H
+#define DATAR_H
 //OPENS JSON IN READ MODE
 cJSON startup_read(char json[]){
    FILE *fp = fopen(json, "r"); 
@@ -259,6 +259,76 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
     return scenario_list;
 }
 
+Scenario* get_scenario_node(Scenario *scene, char* child_name){
+    //Calls the open file on read function
+    cJSON root = startup_read("scenarioData.json");
+    cJSON *scenario = cJSON_GetObjectItem(&root, "Scenarios");
+    //allocate_scenario_list(&scenario_list, cJSON_GetArraySize(scenario));
+    for (int i = 0; i < cJSON_GetArraySize(scenario); i++) {
+        //Iterates through the scenarios array
+        cJSON *array_index = cJSON_GetArrayItem(scenario, i);
+        cJSON *scenario_name = cJSON_GetObjectItem(array_index, "name");
+        char* scene_name = cJSON_Print(scenario_name);
+        scene_name ++;
+        scene_name[strlen(scene_name)-1] = 0;
+        printf("\nSCENE NAME = %s", scene_name);
+        printf("\nCHILD NAME = %s", child_name);
+        if(strcmp(scene_name, child_name) == 0){
+            printf("\nSCENARIO FOUND");
+            printf("\nDDDDD");
+            cJSON *scenario_desc = cJSON_GetObjectItem(array_index, "description");
+            cJSON *scenario_image_file = cJSON_GetObjectItem(array_index, "image");
+            cJSON *scenario_question = cJSON_GetObjectItem(array_index,"question");
+            cJSON *options_array = cJSON_GetObjectItem(array_index,"options"); 
+            
+            for(int j = 0; j<cJSON_GetArraySize(options_array); j++){
+                cJSON *optIndex = cJSON_GetArrayItem(options_array, j);
+                cJSON *optName = cJSON_GetObjectItem(optIndex, "optName");
+                cJSON *optText = cJSON_GetObjectItem(optIndex, "optText");
+                cJSON *combat_array = cJSON_GetObjectItem(optIndex, "Combat");
+                
+                for(int x = 0; x<cJSON_GetArraySize(combat_array); x++){
+                    cJSON *enemy_type_list = cJSON_GetArrayItem(combat_array,x);
+                    cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
+                    scene->decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
+                    scene->decision->options[j]->enemies[x]->name++;
+                    scene->decision->options[j]->enemies[x]->name[strlen(scene->decision->options[j]->enemies[x]->name)-1] = 0;
+
+                }
+                strcpy(scene->decision->options[j]->n_text ,cJSON_Print(optName));
+                strcpy(scene->decision->options[j]->r_text ,cJSON_Print(optText));
+            }
+            
+            cJSON *next_scenario_list = cJSON_GetObjectItem(array_index,"next_scenarios");
+            cJSON *next_A = cJSON_GetObjectItem(next_scenario_list,"option_A");
+            cJSON *next_B = cJSON_GetObjectItem(next_scenario_list, "option_B");
+
+            scene->name = cJSON_Print(scenario_name);
+            scene->name++;
+            scene->name[strlen(scene->name)-1] = 0;
+
+            scene->description = cJSON_Print(scenario_desc);
+            scene->description++;
+            scene->description[strlen(scene->description)-1] = 0;
+
+            scene->image = cJSON_Print(scenario_image_file);
+            scene->image++;
+            scene->image[strlen(scene->image)-1] = 0;
+
+            strcpy(scene->decision->question ,cJSON_Print(scenario_question));
+            scene->next_scenario_name_1 = cJSON_Print(next_A);
+            scene->next_scenario_name_2 = cJSON_Print(next_B);
+            //printf("%s",scenario_list[i].name);
+            return scene;
+        }
+    }    
+    printf("\nNO SCENARIO THAT MEETS THE CONDITIONS WAS FOUND");
+    return NULL;
+}
+
+
+
+
 void get_enemy_data(Enemy *enemy){
 
     Skills *skills_array;
@@ -266,7 +336,6 @@ void get_enemy_data(Enemy *enemy){
     skills_array = (Skills *)malloc(SKILL_MAX * sizeof(Skills));
     if (skills_array == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
-        return skills_array;
     }
     //Calls the open file on read function
     cJSON root = startup_read("enemyData.json");
