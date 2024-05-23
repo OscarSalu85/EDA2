@@ -26,6 +26,162 @@
 
             ]
         },
+        "Chef":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "Receptionist ":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "homeless traveller":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "Archduke":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "farmer":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "kitchen assistant":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "marquess":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "haunted captain":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "captain's cat":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "Economist":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "Dealer":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "The hospitable monster":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
+        "Old welcome man":
+        {
+            "hp":100000,
+            "atk":50,
+            "def":100,
+            "num_skills":1,
+            "skills":[
+                {
+                    "name":"Carrot's shurikens"
+                }
+            ]
+        },
         "Pedro":
         {
             "hp":100000,
