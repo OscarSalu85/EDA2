@@ -227,6 +227,9 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
                 cJSON *enemy_type_list = cJSON_GetArrayItem(combat_array,x);
                 cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
                 scenario_list[i].decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
+                scenario_list[i].decision->options[j]->enemies[x]->name++;
+                scenario_list[i].decision->options[j]->enemies[x]->name[strlen(scenario_list[i].decision->options[j]->enemies[x]->name)-1] = 0;
+
             }
             strcpy(scenario_list[i].decision->options[j]->n_text ,cJSON_Print(optName));
             strcpy(scenario_list[i].decision->options[j]->r_text ,cJSON_Print(optText));
@@ -235,12 +238,23 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
         cJSON *next_scenario_list = cJSON_GetObjectItem(array_index,"next_scenarios");
         cJSON *next_A = cJSON_GetObjectItem(next_scenario_list,"option_A");
         cJSON *next_B = cJSON_GetObjectItem(next_scenario_list, "option_B");
+
         scenario_list[i].name = cJSON_Print(scenario_name);
+        scenario_list[i].name++;
+        scenario_list[i].name[strlen(scenario_list[i].name)-1] = 0;
+
         scenario_list[i].description = cJSON_Print(scenario_desc);
+        scenario_list[i].description++;
+        scenario_list[i].description[strlen(scenario_list[i].description)-1] = 0;
+
         scenario_list[i].image = cJSON_Print(scenario_image_file);
+        scenario_list[i].image++;
+        scenario_list[i].image[strlen(scenario_list[i].image)-1] = 0;
+
         strcpy(scenario_list[i].decision->question ,cJSON_Print(scenario_question));
         scenario_list[i].next_scenario_name_1 = cJSON_Print(next_A);
         scenario_list[i].next_scenario_name_2 = cJSON_Print(next_B);
+        //printf("%s",scenario_list[i].name);
     }
     return scenario_list;
 }

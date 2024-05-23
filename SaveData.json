@@ -1,22 +1,22 @@
 {
 	"Character":	{
-		"name":	"",
+		"name":	"ROGI",
 		"stats":	{
-			"HP":	0,
-			"ATK":	0,
-			"DEF":	0
+			"HP":	10,
+			"ATK":	25,
+			"DEF":	5
 		},
 		"skills":	[{
-				"skill_name":	""
+				"skill_name":	"Wooden plank"
 			}, {
-				"skill_name":	""
+				"skill_name":	"The bible"
 			}, {
-				"skill_name":	""
+				"skill_name":	"Brew"
 			}, {
-				"skill_name":	""
+				"skill_name":	"injection"
 			}]
 	},
 	"Current_Scenario":	{
-		"name":	""
+		"name":	"Deck"
 	}
 }

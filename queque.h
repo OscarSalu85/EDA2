@@ -41,10 +41,10 @@ Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
         turn->name = NULL;
         turn->next = NULL;
         turn->type = -1;
-    
 
         int random = rand()%2;
         if(random == 0){
+            printf("\n%d.character",i);
             turn->enemy = NULL;
             turn->name = "character";
             turn->type = 0;
@@ -55,6 +55,7 @@ Queue* createQueue(Character *character, Enemy *enemies,Queue *queue ){
                 turn->enemy = &enemies[random];
                 turn->type = 1;
                 turn->name = enemies[random].name;
+                printf("\n%d.%s",turn->name);
             }
         }
         turn->next = NULL;

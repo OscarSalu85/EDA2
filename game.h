@@ -303,18 +303,18 @@ void selectSkill(Character *character, Skills *skill){
     }
 }
 
-int selectTarget(Enemy *enemies){
+int selectTarget(Enemy *enemies[MAX_ENEMIES]){
     int num_alive = 0;
     int num_enemies = 0;
     for(int i = 0; i < MAX_ENEMIES;i++){
-        if(enemies[i].name != NULL){
+        if(enemies[i]->name != NULL){
             num_enemies++;
         }
     }
     for(int i = 0; i < num_enemies - 1; i++){
-        if(enemies[i].hp > 0){
+        if(enemies[i]->hp > 0){
             num_alive++;
-            printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i].name,enemies[i].hp,enemies[i].atk,enemies[i].def);
+            printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i]->name,enemies[i]->hp,enemies[i]->atk,enemies[i]->def);
         }
     }
     if(num_alive == 0) return -1;
@@ -322,7 +322,7 @@ int selectTarget(Enemy *enemies){
     int opt = 0;
     while(opt < 1 || opt > num_enemies){
         scanf("%d", &opt);
-        if(0 < opt < num_enemies && enemies[opt -1].hp > 0) return opt-1;
+        if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
         opt = 0;
         printf("\nChose valid option:");
     }
@@ -333,7 +333,7 @@ int selectTarget(Enemy *enemies){
 void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character){
    if(enemies != NULL){
         Enemy *target; 
-        int chosen_target_index = selectTarget(*enemies);
+        int chosen_target_index = selectTarget(enemies);
         if(chosen_target_index != -1){
             target = enemies[chosen_target_index];
             Skills *skill;
@@ -370,8 +370,11 @@ int enemyTurn(Turn *turn, Character *character){
 
 int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     int active = 1;
+    int num_enemies = sizeof(enemies)/sizeof(Enemy);
+    printf("%d",num_enemies);
     Queue *queue = malloc(sizeof(Queue));
-    createQueue(character,*enemies, queue);
+    createQueue(character,enemies,queue);
+    getchar();
     while(active && queue->first != NULL){
         //printCombat(enemies);
         //Character
@@ -392,16 +395,29 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
 int Decision(Data *data, Scenario scene){
     
     Decisions *currentDesc = scene.decision;
-    int option = -1;
-    while(option < 0 ||option > currentDesc->n_options){
-        printf("%s",currentDesc->question);
-        scanf("%d",&option);   
+    char option;
+    int num_option;
+    
+    printf("\n%s\n~",currentDesc->question);
+    while(1){
+        while (getchar() != '\n');
+        scanf("%c",&option);
+        if(option == '1'){
+            num_option = 1;
+            break;
+        }
+        else if(option == '2'){
+            num_option = 2;
+            break;
+        }
+        else printf("Must be 1 or 2\n");
     }
-    Option *currentOpt = currentDesc->options[option];
-    printf("%s",currentOpt->r_text);
+    
+    Option *currentOpt = currentDesc->options[num_option -1];
+    //printf("%s",currentOpt->r_text);
     int win = combat(data->character, currentOpt->enemies);
     if(win != 0){
-        printf("%s",currentOpt->n_text);
+        //printf("%s",currentOpt->n_text);
         return 1;
     }
     else return 0;
@@ -414,6 +430,7 @@ void mainLoop(Data *data){
     int active = 1;
     while(active){
         printScenario(currentScene);
+        printf("\nOptions:");
         int active = Decision(data,*currentScene);
 
     }
@@ -530,6 +547,11 @@ Scenario* allocate_scenarios(int num_scenarios) {
     return scenarios;
 }
 
+void continue_game(Data *data){
+    printf("\nSTARTING MAIN LOOP");
+    mainLoop(data);
+}
+
 
 //CREATES A NEW GAME
 void new_game(Data *data){
@@ -537,24 +559,17 @@ void new_game(Data *data){
         free(data); //Frees saved data
     }
     create_data(&data);
+    data->sceneNodes = allocate_scenarios(2);
+    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
     save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
     configure_name(data);
     configure_stats(data);
-    printf("CHANGING SCENE");
-    printf("AAAA");
     configure_skills(data);
-    //printf("%s",data->character->name);
-    printf("CHANGING SCENE");
-    printf("AAAA");
     data->current_scenario[0] = data->sceneNodes[0];
-    printf("\nSCENE NAME = %s", data->current_scenario->name);
     save_data(data,1); //Saves the configured data
+    continue_game(data);
 }
 
-void continue_game(Data *data){
-    printf("\nSTARTING MAIN LOOP");
-    mainLoop(data);
-};
 
 
 

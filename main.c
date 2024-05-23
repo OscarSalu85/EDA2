@@ -11,28 +11,9 @@ int main(){
     int main_menu_choice;
     while(1){
         //Menu inicial
-        main_menu_choice = main_menu(data);
+        main_menu_choice = main_menu(data);   
         if(main_menu_choice == 1){
-            for(int i = 0; i < MAX_SKILLS;i++){
-                load_Skill(data->character->skill[i]);
-            }
-            //Test combat
-
-            Enemy *enemies[1];
-            Enemy *enemy1;
-            enemy1->atk = 1;
-            enemy1->def = 1;
-            enemy1->hp = 1;
-            enemy1->name = "cultist";
-            enemy1->skill[0] = *data->character->skill[0];
-            enemy1->skill[1] = *data->character->skill[1];
-            enemy1->skill[2] = *data->character->skill[2];
-            enemy1->skill[3] = *data->character->skill[3];
-            enemies[0] = enemy1;
-
-            int sol = combat(data->character,enemies);
-            printf("%d",sol);
-            //continue_game(data);
+            continue_game(data);
         }
         else if(main_menu_choice == 2){
             new_game(data);
@@ -43,6 +24,3 @@ int main(){
         
     }
 }
-
-
-//gcc -o main main.c cJSON.c

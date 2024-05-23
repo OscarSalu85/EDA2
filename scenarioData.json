@@ -6,7 +6,7 @@
             "name":"Deck",
             "image": "Deck.txt",
             "description": "When (name character) arrives to the ship what it is obvious is that he finds the deck where he starts to see some rare things that were not supposed to be there. ",
-            "question":"Which zone do you want to explore now? The kitchen or the 3rd class floor",
+            "question":"Which zone do you want to explore now? (1)The kitchen or the (2)3rd class floor",
             "options":
             [   
                 {   
@@ -41,7 +41,8 @@
         },
         {
             "name":"3rd class floor",
-            "descripion":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
+            "image":"3rd class floor.txt",
+            "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
             "question":"Which zone do you want to explore now? The kitchen or the 2nd class floor",
             "options":[
                 {
