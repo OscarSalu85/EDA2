@@ -3,7 +3,7 @@
     {
         "cultist":
         {
-            "hp":25,
+            "hp":75,
             "atk":5,
             "def":10,
             "num_skills":1,
@@ -15,7 +15,7 @@
         },
         "cthulu":
         {
-            "hp":100000,
+            "hp":500,
             "atk":50,
             "def":100,
             "num_skills":1,
@@ -26,7 +26,7 @@
 
             ]
         },
-        "Chef":
+        "Deep one":
         {
             "hp":100000,
             "atk":50,
@@ -38,7 +38,7 @@
                 }
             ]
         },
-        "Receptionist ":
+        "Tsathoggua ":
         {
             "hp":100000,
             "atk":50,
@@ -50,7 +50,7 @@
                 }
             ]
         },
-        "homeless traveller":
+        "Hastur":
         {
             "hp":100000,
             "atk":50,
@@ -62,7 +62,7 @@
                 }
             ]
         },
-        "Archduke":
+        "Dagon":
         {
             "hp":100000,
             "atk":50,
@@ -74,7 +74,7 @@
                 }
             ]
         },
-        "farmer":
+        "Azathoth":
         {
             "hp":100000,
             "atk":50,
@@ -86,7 +86,7 @@
                 }
             ]
         },
-        "kitchen assistant":
+        "Yog-Sothoth":
         {
             "hp":100000,
             "atk":50,
@@ -98,7 +98,7 @@
                 }
             ]
         },
-        "marquess":
+        "Nyarlathotep":
         {
             "hp":100000,
             "atk":50,
@@ -110,7 +110,7 @@
                 }
             ]
         },
-        "haunted captain":
+        "Shub-niggurath":
         {
             "hp":100000,
             "atk":50,
@@ -122,7 +122,7 @@
                 }
             ]
         },
-        "captain's cat":
+        "Yithian possessors":
         {
             "hp":100000,
             "atk":50,
@@ -134,7 +134,7 @@
                 }
             ]
         },
-        "Economist":
+        "Gouls":
         {
             "hp":100000,
             "atk":50,
@@ -146,7 +146,7 @@
                 }
             ]
         },
-        "Dealer":
+        "Byakhees":
         {
             "hp":100000,
             "atk":50,
@@ -158,7 +158,7 @@
                 }
             ]
         },
-        "The hospitable monster":
+        "Shoggoths":
         {
             "hp":100000,
             "atk":50,
@@ -170,7 +170,7 @@
                 }
             ]
         },
-        "Old welcome man":
+        "Night Gaunts":
         {
             "hp":100000,
             "atk":50,
@@ -182,7 +182,7 @@
                 }
             ]
         },
-        "Pedro":
+        "":
         {
             "hp":100000,
             "atk":50,
