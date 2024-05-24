@@ -93,7 +93,12 @@
                         "enemyName":"cultist"}]
 
                 }
-            ]
+            ],
+            "next_scenarios":
+            {
+                "Option_A":"1st class floor",
+                "Option_B":"hall"
+            }
         },
         {
             "name":"hall",
@@ -113,7 +118,13 @@
                         "enemyName":"cultist"}]
 
                 }
-            ]
+            ],
+                
+            "next_scenarios":
+            {
+                "Option_A":"1st class floor",
+                "Option_B":"hall"
+            }
         },
         {
             "name":"kitchen",
@@ -169,7 +180,13 @@
                         "enemyName":"cultist"}]
 
                 }
-            ]
+            ],
+                
+            "next_scenarios":
+            {
+                "Option_A":"1st class floor",
+                "Option_B":"hall"
+            }
         },
         {
             "name":"captain's room",
@@ -189,7 +206,13 @@
                         "enemyName":"cultist"}]
 
                 }
-            ]
+            ],
+                
+            "next_scenarios":
+            {
+                "Option_A":" ",
+                "Option_B":" "
+            }
         }
     ]
 }

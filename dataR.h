@@ -5,7 +5,7 @@
 #include <string.h>
 #include "cJSON.h" // Include the cJSON library header
 #include <unistd.h>
-#define SKILL_MAX 15 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
+#define SKILL_MAX 10 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
 #ifndef DATAR_H
 #define DATAR_H
 //OPENS JSON IN READ MODE
@@ -19,7 +19,7 @@ cJSON startup_read(char json[]){
     } 
   
     // read the file contents into a string 
-    char buffer[8192]; 
+    char buffer[9024]; 
     int len = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
     
@@ -35,7 +35,6 @@ cJSON startup_read(char json[]){
         free(root);
         return cj; 
     }
-    
     return *root;
 }
 
@@ -74,8 +73,6 @@ void save_data(Data *data, int mode){
             //Iterates through the skills array
             cJSON *skill = cJSON_GetArrayItem(skills, i);
             skill_name = data->character->skill[i]->name;
-            skill_name ++;
-            skill_name[strlen(skill_name)-1] = 0;
             cJSON_ReplaceItemInObject(skill, "skill_name", cJSON_CreateString(skill_name));
         }
         cJSON_ReplaceItemInObject(scenario,"name",cJSON_CreateString(data->current_scenario->name));
@@ -108,9 +105,7 @@ void load_data(Data *data){
     cJSON *hp = cJSON_GetObjectItem(stats, "HP");
 
     //Obtains the character data and loads it into the main data structure
-    data->character->name = cJSON_Print(name);
-    data->character->name++;
-    data->character->name[strlen(data->character->name)-1] = 0;
+    data->character->name = name->valuestring;
     data->character->atk = cJSON_GetNumberValue(atk);
     data->character->def = cJSON_GetNumberValue(def);
     data->character->hp = cJSON_GetNumberValue(hp);
@@ -120,13 +115,11 @@ void load_data(Data *data){
         //Iterates through the skills array
         cJSON *skill_index = cJSON_GetArrayItem(skills, i);
         cJSON *skill_current = cJSON_GetObjectItem(skill_index, "skill_name");
-        data->character->skill[i]->name = cJSON_Print(skill_current);
-        data->character->skill[i]->name++;
-        data->character->skill[i]->name[strlen(data->character->skill[i]->name)-1] = '\0';
+        data->character->skill[i]->name = skill_current->valuestring;
     }
     
     //Obtains the scenario in which the data was saved and loads it into the main data structure
-    data->current_scenario->name = cJSON_Print(scenario_name);
+    data->current_scenario->name = scenario_name->valuestring;
 }
 
 void load_Skill(Skills *skill){
@@ -135,11 +128,8 @@ void load_Skill(Skills *skill){
     for (int i = 0; i < cJSON_GetArraySize(skills); i++){
         cJSON *skill_index = cJSON_GetArrayItem(skills, i);
         cJSON *skill_name = cJSON_GetObjectItem(skill_index, "name");
-        printf("\nSKILL = %s",cJSON_Print(skill_name));
-        printf("\nSAVED SKILL = %s", skill->name);
-        char *data_skill_name = cJSON_Print(skill_name);
-        data_skill_name ++;
-        data_skill_name[strlen(data_skill_name)-1] = 0;
+        char *data_skill_name =skill_name->valuestring;
+       
         if(strcmp(data_skill_name, skill->name)== 0) {
             cJSON *skill_description = cJSON_GetObjectItem(skill_index, "description");
             cJSON *skill_duration = cJSON_GetObjectItem(skill_index, "duration");
@@ -148,7 +138,7 @@ void load_Skill(Skills *skill){
             cJSON *mod_1 = cJSON_GetArrayItem(skill_mods, 0);
             cJSON *mod_2 = cJSON_GetArrayItem(skill_mods, 1);
             cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
-            skill->description = cJSON_Print(skill_description);
+            skill->description = skill_description->valuestring;
             skill->duration = cJSON_GetNumberValue(skill_duration);
             skill->damage = cJSON_GetNumberValue(skill_damage);
             skill->modifiers[0] = cJSON_GetNumberValue(mod_1);
@@ -185,13 +175,9 @@ Skills* get_skill_data(){
         cJSON *mod_2 = cJSON_GetArrayItem(skill_mods, 1);
         cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
         
-        skills_array[i].name = cJSON_Print(skill_name);
-        skills_array[i].name++;
-        skills_array[i].name[strlen(skills_array[i].name)-1]= 0;
-
-        skills_array[i].description = cJSON_Print(skill_description);
-        skills_array[i].description++;
-        skills_array[i].description[strlen(skills_array[i].description)-1]= 0;
+        skills_array[i].name = skill_name->valuestring;
+        
+        skills_array[i].description = skill_description->valuestring;
 
         if (skill_duration && cJSON_IsNumber(skill_duration)) {
             skills_array[i].duration = skill_duration->valueint;
@@ -235,9 +221,8 @@ void get_enemy_data(Enemy *enemy){
     for(int i = 0; i < cJSON_GetArraySize(en_skills);i++){
         cJSON *current_skill = cJSON_GetArrayItem(en_skills, i);
         cJSON *current_skill_name = cJSON_GetObjectItem(current_skill, "name");
-        char *name = cJSON_Print(current_skill_name);
-        name++;
-        name[strlen(name)-1] = 0;
+        char *name = current_skill_name->valuestring;
+        printf("\nSKILL NAME ENEMY = %s", name);
         for(int x = 0; x < SKILL_MAX; x++){
             if(!strcmp(skill_list[x].name,name)){
                 skills_array[i].name = name;
@@ -276,33 +261,26 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
             for(int x = 0; x<cJSON_GetArraySize(combat_array); x++){
                 cJSON *enemy_type_list = cJSON_GetArrayItem(combat_array,x);
                 cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
-                scenario_list[i].decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
-                scenario_list[i].decision->options[j]->enemies[x]->name++;
-                scenario_list[i].decision->options[j]->enemies[x]->name[strlen(scenario_list[i].decision->options[j]->enemies[x]->name)-1] = 0;
+                scenario_list[i].decision->options[j]->enemies[x]->name = enemy_type->valuestring;
             }
-            strcpy(scenario_list[i].decision->options[j]->n_text ,cJSON_Print(optName));
-            strcpy(scenario_list[i].decision->options[j]->r_text ,cJSON_Print(optText));
+            strcpy(scenario_list[i].decision->options[j]->n_text , optName->valuestring);
+            strcpy(scenario_list[i].decision->options[j]->r_text ,optText->valuestring);
         }
         
         cJSON *next_scenario_list = cJSON_GetObjectItem(array_index,"next_scenarios");
         cJSON *next_A = cJSON_GetObjectItem(next_scenario_list,"option_A");
         cJSON *next_B = cJSON_GetObjectItem(next_scenario_list, "option_B");
 
-        scenario_list[i].name = cJSON_Print(scenario_name);
-        scenario_list[i].name++;
-        scenario_list[i].name[strlen(scenario_list[i].name)-1] = 0;
+        scenario_list[i].name = scenario_name->valuestring;
+    
+        scenario_list[i].description = scenario_desc->valuestring;
 
-        scenario_list[i].description = cJSON_Print(scenario_desc);
-        scenario_list[i].description++;
-        scenario_list[i].description[strlen(scenario_list[i].description)-1] = 0;
-
-        scenario_list[i].image = cJSON_Print(scenario_image_file);
-        scenario_list[i].image++;
-        scenario_list[i].image[strlen(scenario_list[i].image)-1] = 0;
-
-        strcpy(scenario_list[i].decision->question ,cJSON_Print(scenario_question));
-        scenario_list[i].next_scenario_name_1 = cJSON_Print(next_A);
-        scenario_list[i].next_scenario_name_2 = cJSON_Print(next_B);
+        scenario_list[i].image = scenario_image_file->valuestring;
+      
+        
+        strcpy(scenario_list[i].decision->question ,scenario_question->valuestring);
+        scenario_list[i].next_scenario_name_1 = next_A->valuestring;
+        scenario_list[i].next_scenario_name_2 = next_B->valuestring;
         //printf("%s",scenario_list[i].name);
     }
     return scenario_list;
@@ -317,14 +295,10 @@ Scenario* get_scenario_node(Scenario *scene, char* child_name){
         //Iterates through the scenarios array
         cJSON *array_index = cJSON_GetArrayItem(scenario, i);
         cJSON *scenario_name = cJSON_GetObjectItem(array_index, "name");
-        char* scene_name = cJSON_Print(scenario_name);
-        scene_name ++;
-        scene_name[strlen(scene_name)-1] = 0;
-        printf("\nSCENE NAME = %s", scene_name);
-        printf("\nCHILD NAME = %s", child_name);
+        char* scene_name = scenario_name->valuestring;
+     
         if(strcmp(scene_name, child_name) == 0){
-            printf("\nSCENARIO FOUND");
-            printf("\nDDDDD");
+       
             cJSON *scenario_desc = cJSON_GetObjectItem(array_index, "description");
             cJSON *scenario_image_file = cJSON_GetObjectItem(array_index, "image");
             cJSON *scenario_question = cJSON_GetObjectItem(array_index,"question");
@@ -339,39 +313,32 @@ Scenario* get_scenario_node(Scenario *scene, char* child_name){
                 for(int x = 0; x<cJSON_GetArraySize(combat_array); x++){
                     cJSON *enemy_type_list = cJSON_GetArrayItem(combat_array,x);
                     cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
-                    scene->decision->options[j]->enemies[x]->name = cJSON_Print(enemy_type);
-                    scene->decision->options[j]->enemies[x]->name++;
-                    scene->decision->options[j]->enemies[x]->name[strlen(scene->decision->options[j]->enemies[x]->name)-1] = 0;
+                    scene->decision->options[j]->enemies[x]->name = enemy_type->valuestring;
 
                 }
-                strcpy(scene->decision->options[j]->n_text ,cJSON_Print(optName));
-                strcpy(scene->decision->options[j]->r_text ,cJSON_Print(optText));
+                strcpy(scene->decision->options[j]->n_text ,optName->valuestring);
+                strcpy(scene->decision->options[j]->r_text ,optText->valuestring);
             }
             
+
             cJSON *next_scenario_list = cJSON_GetObjectItem(array_index,"next_scenarios");
             cJSON *next_A = cJSON_GetObjectItem(next_scenario_list,"option_A");
             cJSON *next_B = cJSON_GetObjectItem(next_scenario_list, "option_B");
 
-            scene->name = cJSON_Print(scenario_name);
-            scene->name++;
-            scene->name[strlen(scene->name)-1] = 0;
+            scene->name = scenario_name->valuestring;
 
-            scene->description = cJSON_Print(scenario_desc);
-            scene->description++;
-            scene->description[strlen(scene->description)-1] = 0;
+            scene->description = scenario_desc->valuestring;
 
-            scene->image = cJSON_Print(scenario_image_file);
-            scene->image++;
-            scene->image[strlen(scene->image)-1] = 0;
+            scene->image = scenario_image_file->valuestring;
 
-            strcpy(scene->decision->question ,cJSON_Print(scenario_question));
-            scene->next_scenario_name_1 = cJSON_Print(next_A);
-            scene->next_scenario_name_2 = cJSON_Print(next_B);
+
+            strcpy(scene->decision->question ,scenario_question->valuestring);
+            scene->next_scenario_name_1 = next_A->valuestring;
+            scene->next_scenario_name_2 = next_B->valuestring;
             //printf("%s",scenario_list[i].name);
             return scene;
         }
     }    
-    printf("\nNO SCENARIO THAT MEETS THE CONDITIONS WAS FOUND");
     return NULL;
 }
 
@@ -381,4 +348,3 @@ Scenario* get_scenario_node(Scenario *scene, char* child_name){
 
 
 #endif
-

@@ -286,30 +286,31 @@ void configure_menu(Data *data){
     
 };
 
-void selectSkill(Character *character, Skills *skill){
+Skills* selectSkill(Character *character){
     for(int i = 0; i < 4;i++){
-        printf("\n%d.%s\n:",i+1,character->skill[i]->name);
+        printf("\n%d.%s:\n",i+1,character->skill[i]->name);
         printf("   -Desc:%s\n",character->skill[i]->description);
         printf("   -Dur:%d\n",character->skill[i]->duration);
+        printf("   -Dam:%d\n",character->skill[i]->damage);
         printf("   -Mod: (%d ATK, %d DEF, %d HP)\n",character->skill[i]->modifiers[0],character->skill[i]->modifiers[1],character->skill[i]->modifiers[2]);
     }
-    printf("Chose option:");
+    printf("Choose option:");
     int opt = -1;
     while(opt < 1 || opt > 5){
         scanf("%d", &opt);
         if(0 < opt && opt < 5) {
-            skill = character->skill[opt-1];
-            return;
+
+            return character->skill[opt-1];;
         }
         opt = 0;
-        printf("Chose valid option:");
+        printf("Choose valid option:");
     }
 }
 
 int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
     int num_alive = 0;
 
-    for(int i = 0; i < num_enemies - 1; i++){
+    for(int i = 0; i < num_enemies; i++){
         if(enemies[i]->hp > 0){
             num_alive++;
             printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i]->name,enemies[i]->hp,enemies[i]->atk,enemies[i]->def);
@@ -328,22 +329,28 @@ int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
 }
 
 
-void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, int num_enemies){
+void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, int num_enemies, int *active){
    if(enemies != NULL){
         Enemy *target; 
         int chosen_target_index = selectTarget(enemies,num_enemies);
         if(chosen_target_index != -1){
             target = enemies[chosen_target_index];
             Skills *skill;
-            selectSkill(character,skill);
+            skill = selectSkill(character);
             //Attack
             int damage = 0;
+            printf("\nSKILL USED = %s",skill->name);
+            printf("\nSKILL DMG = %d\n", skill->damage);
             if(target->def > 0) damage = ((character->atk * skill->damage) / target->def);
             else damage = (character->atk * skill->damage);
             target->hp = target->hp - damage;
+            printf("You deal %d damage to enemy, %s has %d health",damage,target->name,target->hp);
             //Modifiers
         }
-        else printf("\nNo enemies alive");
+        else{
+            printf("\nNo enemies alive");
+            *active = 0;
+        } 
    }
 }
 
@@ -354,21 +361,25 @@ void selectEnemySkill(Enemy *current_enemy, Skills *skill){
 }
 
 
-int enemyTurn(Turn *turn, Character *character){
+Queue* enemyTurn(Queue *queue, Character *character, int *active){
     int hp = character->hp;
-    Enemy *current_enemy = turn->enemy;
-    printf("\n-%s attacks you!!!",turn->name);
+    Enemy *current_enemy = queue->first->enemy;
+    printf("\n-%s attacks you!!!",queue->first->name);
     Skills *skill;
     selectEnemySkill(current_enemy,skill);
-    printf("\n-%s chooses the skill %s",turn->name,skill->name);
+    printf("\n-%s chooses the skill %s",queue->first->name,skill->name);
     //Atack
     int damage = 0;
-    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) / character->def);
+    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) / character->def)/100;
     else damage = (current_enemy->atk * skill->damage)/100;
     character->hp = hp - damage;
     printf("\n-deals %d damage, remaining health --> %d",damage,character->hp);
-    if (character->hp <= 0) return 0;
-    return 1;
+    if (character->hp <= 0){
+        *active = 1;
+        return queue;
+    }
+    *active = 0;
+    return queue;
 }
 
 int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
@@ -383,23 +394,23 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
         }
     }
     Queue *queue = malloc(sizeof(Queue));
-    int hp = character->hp;
     queue = createQueue(character,enemies,queue,num_enemies);
-    character->hp = hp;
     while(active && queue->first != NULL){
         //printCombat(enemies);
         //Character
+        printf("\nBefore = %s", queue->first->name);
         if(queue->first->type == 0){
             printf("\n\nPlayer Turn:");
-            playerTurn(queue->first, enemies, character,num_enemies);
+            playerTurn(queue->first, enemies, character,num_enemies,&active);
         }
         else{
             printf("\n\nEnemy Turn:");
-            active = enemyTurn(queue->first, character);
-        }     
-        if(character->hp <= 0  || queue->first->previous == NULL) return 0;
-        queue->first = queue->first->previous;
+            queue = enemyTurn(queue, character,&active);
+        } 
+        if(character->hp <= 0  || queue->first->next == NULL) return 0;
+        queue->first = queue->first->next;
     }
+    printf("\nYOU WIN");
     return 1;
 }
 
@@ -428,11 +439,21 @@ int Decision(Data *data, Scenario scene){
     //printf("%s",currentOpt->r_text);
     int win = combat(data->character, currentOpt->enemies);
     if(win != 0){
-        //printf("%s",currentOpt->n_text);
+        char *next;
+        if(num_option == 2){
+            next = scene.next_scenario_name_2;
+        }
+        else if(num_option == 1){
+            next = scene.next_scenario_name_1;
+        }
+        for(int i = 0;i<SCENARIO_N;i++){
+            if(!strcmp(next,data->sceneNodes[i].name)){
+                *data->current_scenario = data->sceneNodes[i];
+            }
+        }
         return 1;
     }
     else return 0;
-    
 }
 
 
@@ -443,6 +464,7 @@ void mainLoop(Data *data){
         printScenario(currentScene);
         printf("\nOptions:");
         int active = Decision(data,*currentScene);
+        currentScene = data->current_scenario;
 
     }
 }
@@ -512,36 +534,38 @@ Scenario* allocate_scenarios(int num_scenarios) {
             exit(1);
         }
 
-  
-
-        scenarios[i].decision = malloc(sizeof(Decision));
+        Decisions *dec = malloc(sizeof(Decisions));
+        scenarios[i].decision = dec;
         if (scenarios[i].decision == NULL) {
             fprintf(stderr, "Memory allocation failed for scenario decision\n");
             exit(1);
         }
 
         for (int j = 0; j < MAX_OPTIONS; j++) {
-            scenarios[i].decision->options[j] = malloc(sizeof(Option));
+            Option *opt = malloc(sizeof(Option));
+            scenarios[i].decision->options[j] = opt;
             if (scenarios[i].decision->options[j] == NULL) {
                 fprintf(stderr, "Memory allocation failed for decision option\n");
                 exit(1);
             }
 
             for (int k = 0; k < MAX_ENEMIES; k++) {
-                scenarios[i].decision->options[j]->enemies[k] = malloc(sizeof(Enemy));
+                Enemy *enemy = malloc(sizeof(Enemy));
+                scenarios[i].decision->options[j]->enemies[k] = enemy;
                 if (scenarios[i].decision->options[j]->enemies[k] == NULL) {
                     fprintf(stderr, "Memory allocation failed for enemy\n");
                     exit(1);
                 }
 
-                scenarios[i].decision->options[j]->enemies[k]->name = malloc(MAX_CHAR_NAME * sizeof(char));
+                char *name;
+                scenarios[i].decision->options[j]->enemies[k]->name = name;
                 if (scenarios[i].decision->options[j]->enemies[k]->name == NULL) {
                     fprintf(stderr, "Memory allocation failed for enemy name\n");
                     exit(1);
                 }
             }
         }
-
+        
         scenarios[i].next_scenario_name_1 = malloc(MAX_CHAR_NAME * sizeof(char));
         if (scenarios[i].next_scenario_name_1 == NULL) {
             fprintf(stderr, "Memory allocation failed for next scenario name 1\n");
@@ -570,7 +594,7 @@ void new_game(Data *data){
         free(data); //Frees saved data
     }
     create_data(&data);
-    data->sceneNodes = allocate_scenarios(2);
+    data->sceneNodes = allocate_scenarios(8);
     data->sceneNodes = get_scenario_nodes(data->sceneNodes);
     save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
     configure_name(data);

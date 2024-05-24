@@ -8,6 +8,7 @@
 #define MAX_SKILLS 4
 #define MOD_NUMBER 3
 #define SKILL_DATA_SIZE 10
+#define SCENARIO_N 8
 //Skills
 typedef struct Skills{
     char *name;
@@ -44,7 +45,7 @@ typedef struct Option{
 }Option;
 
 //Decision
-typedef struct Decision{
+typedef struct Decisions{
     char question[MAX_CHAR_DESC];
     int n_options;
     Option *options[MAX_OPTIONS];

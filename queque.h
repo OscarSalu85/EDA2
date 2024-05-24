@@ -3,14 +3,13 @@
 #include <stdlib.h>
 #ifndef QUEQUE_H
 #define QUEQUE_H
-#define NUM_TURNS 20
+#define NUM_TURNS 50
 
 typedef struct Turn{
     char *name;
     int type;
     Enemy *enemy;
     struct Turn *next;
-    struct Turn *previous;
 }Turn;
 
 typedef struct Queue{
@@ -25,12 +24,10 @@ void AddElement(Turn *turn, Queue *queue){
     }
     else if(queue->first == queue->last){
         queue->last = turn;
-        turn->next = queue->first;
-        queue->first->previous = turn;
+        queue->first->next = turn;
     }
     else{
-        turn->next = queue->last;
-        queue->last->previous = turn;
+        queue->last->next = turn;
         queue->last = turn;
     }
 }
@@ -44,12 +41,10 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
         turn->enemy = NULL;
         turn->name = NULL;
         turn->next = NULL;
-        turn->previous = NULL;
         turn->type = -1;
 
         int random = rand()%2;
         if(random == 0){
-            printf("\n%d.character",i);
             turn->enemy = NULL;
             turn->name = "character";
             turn->type = 0;
@@ -60,12 +55,11 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
                 turn->enemy = enemies[random];
                 turn->type = 1;
                 turn->name = enemies[random]->name;
-                printf("\n%d.%s(%d)",i,turn->name,random + 1);
             }
         }
         AddElement(turn,queue);
+        //printf("%s",queue->last->name);
     }
-    printf("%s",queue->first->previous->name);
     return queue;
 }
 #endif

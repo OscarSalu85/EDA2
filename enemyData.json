@@ -3,9 +3,9 @@
     {
         "cultist":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":25,
+            "atk":5,
+            "def":10,
             "num_skills":1,
             "skills":[
                 {
