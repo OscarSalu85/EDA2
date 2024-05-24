@@ -11,7 +11,8 @@
         "sstream": "c",
         "vector": "c",
         "datar.h": "c",
-        "queque.h": "c"
+        "queque.h": "c",
+        "game.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
