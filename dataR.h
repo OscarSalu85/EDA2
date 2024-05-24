@@ -5,7 +5,7 @@
 #include <string.h>
 #include "cJSON.h" // Include the cJSON library header
 #include <unistd.h>
-#define SKILL_MAX 10 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
+#define SKILL_MAX 15 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
 #ifndef DATAR_H
 #define DATAR_H
 //OPENS JSON IN READ MODE
@@ -19,7 +19,7 @@ cJSON startup_read(char json[]){
     } 
   
     // read the file contents into a string 
-    char buffer[4096]; 
+    char buffer[8192]; 
     int len = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
     
