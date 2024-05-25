@@ -3,7 +3,7 @@
 		"name":	"Alex Roig",
 		"stats":	{
 			"HP":	10,
-			"ATK":	25,
+			"ATK":	2500,
 			"DEF":	5
 		},
 		"skills":	[{
