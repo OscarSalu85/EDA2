@@ -4,7 +4,7 @@
 #include <string.h>
 #include "structures.h"
 #include "interface.h"
-#include "queque.h"
+#include "queue.h"
 #include "dataR.h"
 #include "graph.h"
 #define BASE_HP 10
@@ -22,8 +22,10 @@ int main_menu(Data *data){
     printf("1.Continue      2.New Game     3.Configure \n");
     while(1)
     {   
+        
         printf("\nSelect your choice: ");
-        scanf("%s", &choice);
+        scanf("%c", &choice);
+
         if(choice == '1'){
             if(!isalpha(data->character->name[0])){
                 printf("\nNo saved data found, please start a new game\n");
@@ -37,7 +39,7 @@ int main_menu(Data *data){
             return 2;
         }
         else if(choice == '3'){
-            if(strcmp(data->character->name, "") == 1){
+            if(!isalpha(data->character->name[0])){
                 printf("\nNo saved data found, please start a new game\n");
             }
             else{
@@ -49,6 +51,8 @@ int main_menu(Data *data){
             printf("\nNot a valid option, please choose again.");
             return 0;
         }
+        while (getchar() != '\n');
+
     }
 }
 
@@ -415,14 +419,12 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
 }
 
 int Decision(Data *data, Scenario scene){
-    
     Decisions *currentDesc = scene.decision;
     char option;
     int num_option;
     
     printf("\n%s\n~",currentDesc->question);
     while(1){
-        while (getchar() != '\n');
         scanf("%c",&option);
         if(option == '1'){
             num_option = 1;
@@ -578,15 +580,22 @@ Scenario* allocate_scenarios(int num_scenarios) {
             exit(1);
         }
     }
-
     return scenarios;
 }
 
 void continue_game(Data *data){
-    printf("\nSTARTING MAIN LOOP");
+    Scenario *scene = allocate_scenarios(1);
+    scene = get_scenario_node(scene, data->current_scenario->name);
+    data->current_scenario = scene;
+    Skills skill[MAX_SKILLS];
+    
+    for(int i = 0; i<MAX_SKILLS; i++){
+        skill[i].name = data->character->skill[i]->name;
+        load_Skill(&skill[i]);
+        *data->character->skill[i] = skill[i];
+    }
     mainLoop(data);
 }
-
 
 //CREATES A NEW GAME
 void new_game(Data *data){

@@ -7,7 +7,6 @@ void displaySkills_New(Skills skill_list){
 }
 
 void printScenario(Scenario *Scene){
-    printf("\nScenario: %s\n",Scene->name);
     printImage(Scene->image);
     printf("%s",Scene->description);
 }

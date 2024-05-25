@@ -1,18 +1,5 @@
 {
     "files.associations": {
-        "stdlib.h": "c",
-        "array": "c",
-        "string": "c",
-        "string_view": "c",
-        "typeinfo": "c",
-        "type_traits": "cpp",
-        "structures.h": "c",
-        "stdio.h": "c",
-        "sstream": "c",
-        "vector": "c",
-        "datar.h": "c",
-        "queque.h": "c",
-        "game.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "enabled"
+        "typeinfo": "c"
+    }
 }
