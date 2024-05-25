@@ -417,47 +417,65 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     printf("\nYOU WIN");
     return 1;
 }
-
 int Decision(Data *data, Scenario scene){
     Decisions *currentDesc = scene.decision;
     char option;
     int num_option;
-    
-    printf("\n%s\n~",currentDesc->question);
-    while(1){
-        scanf("%c",&option);
-        if(option == '1'){
-            num_option = 1;
-            break;
-        }
-        else if(option == '2'){
-            num_option = 2;
-            break;
-        }
-        else printf("Must be 1 or 2\n");
-    }
-    
-    Option *currentOpt = currentDesc->options[num_option -1];
-    //printf("%s",currentOpt->r_text);
-    int win = combat(data->character, currentOpt->enemies);
-    if(win != 0){
-        char *next;
-        if(num_option == 2){
-            next = scene.next_scenario_name_2;
-        }
-        else if(num_option == 1){
-            next = scene.next_scenario_name_1;
-        }
-        for(int i = 0;i<SCENARIO_N;i++){
-            if(!strcmp(next,data->sceneNodes[i].name)){
-                *data->current_scenario = data->sceneNodes[i];
+    if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
+        printf("\n%s\n~",currentDesc->question);
+        while(1){
+            scanf("%c",&option);
+            if(option == '1'){
+                num_option = 1;
+                break;
             }
+            else if(option == '2'){
+                num_option = 2;
+                break;
+            }
+            else printf("Must be 1 or 2\n");
         }
-        return 1;
+        
+        Option *currentOpt = currentDesc->options[num_option -1];
+        //printf("%s",currentOpt->r_text);
+        int win = combat(data->character, currentOpt->enemies);
+        if(win != 0){
+            char *next;
+            
+            if(num_option == 2){
+                next = scene.next_scenario_name_2;
+            }
+            else if(num_option == 1){
+                next = scene.next_scenario_name_1;
+            }
+            for(int i = 0;i<SCENARIO_N;i++){
+                if(!strcmp(next,data->sceneNodes[i].name)){
+                    *data->current_scenario = data->sceneNodes[i];
+                }
+            }
+            return 1;
+        }
+        else return 0;
     }
-    else return 0;
+    else{
+        return 3;
+    }
+    
 }
-
+void isTerminal(Data *data){
+    printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
+    char decision;
+    scanf("%c", &decision);
+    if(decision == '1'){
+        new_game(data);
+    }
+    else if(decision == '2'){
+        printf("\nEnding game...");
+        printf("\nThanks for playing!");
+        save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
+        exit(1);
+    }
+}
 
 void mainLoop(Data *data){
     Scenario *currentScene = data->current_scenario;
