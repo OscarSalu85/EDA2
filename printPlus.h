@@ -39,9 +39,8 @@ void printImage(char fileImage[]){
     }
     fclose(f);
 }
-
-void printCombatImage(char *FileImage[MAX_ENEMIES], int num){
-    FILE *files[MAX_ENEMIES];
+/*void printCombatImage(char *FileImage, int num){
+    FILE *files;
     //Print line by line, Jump after line completed
     for(int i = 0; i< num; i++){
         if(FileImage[i] != NULL){
@@ -54,4 +53,4 @@ void printCombatImage(char *FileImage[MAX_ENEMIES], int num){
         }
     }
 
-}
+}*/
