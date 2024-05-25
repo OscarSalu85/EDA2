@@ -602,7 +602,7 @@ void new_game(Data *data){
     configure_skills(data);
     data->current_scenario[0] = data->sceneNodes[0];
     save_data(data,1); //Saves the configured data
-    continue_game(data);
+    mainLoop(data);
 }
 
 
