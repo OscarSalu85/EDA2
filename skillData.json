@@ -57,18 +57,53 @@
             "damage": 40
         },
         {
-            "name":"",
-            "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
+            "name":"Whisperwind sweep",
+            "description":"It is an enchanted broom that transcends its mundane origins to become a formidable tool of combat",
             "duration": 1,
             "modifiers": [2,0,-1],
             "damage": 40
         },
         {
-            "name":"Ceiling light jump",
-            "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
+            "name":"Warming chandelier",
+            "description":"This object keeps (name) warm and gains hp and attack for the rest of the combat",
             "duration": 1,
             "modifiers": [2,0,-1],
-            "damage": 40
+            "damage": 0
+        },
+        {
+            "name":"Sclading sip",
+            "description":"Taking a little sip of this cup of tea makes to everyone a sensation of being stronger and increases de defense",
+            "duration": 1,
+            "modifiers": [2,0,-1],
+            "damage": 0
+        },
+        {
+            "name":"Umbrella's fury",
+            "description":"An umbrella found in a little space that makes two incredible hits to the enemies one when it is closed and another when it is opened. ",
+            "duration": 1,
+            "modifiers": [2,0,-1],
+            "damage": 70
+        },
+        {
+            "name":"Rudder's spin",
+            "description":"It creates a wheel that hits the enemies 20 times and makes 4 of damage each time",
+            "duration": 1,
+            "modifiers": [2,0,-1],
+            "damage": 80
+        },
+        {
+            "name":"Telescope vision",
+            "description":"With the captain's telescope you can see your enemies from everywhere and this can be helpful to recover some life and prepare your next attack ",
+            "duration": 1,
+            "modifiers": [2,0,-1],
+            "damage": 0
+        },
+        {
+            "name":"The ultimate attack",
+            "description":"This is the ultimate attack it is given in the last enemy to try to beat Cthulu and it increases the hp and defense ",
+            "duration": 1,
+            "modifiers": [2,0,-1],
+            "damage": 10000
         }
         ]
 }
