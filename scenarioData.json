@@ -96,8 +96,8 @@
             ],
             "next_scenarios":
             {
-                "Option_A":"1st class floor",
-                "Option_B":"hall"
+                "Option_A":"Cellar"
+     
             }
         },
         {
@@ -122,8 +122,7 @@
                 
             "next_scenarios":
             {
-                "Option_A":"1st class floor",
-                "Option_B":"captain's room"
+                "Option_A":"Cellar"
             }
         },
         {
@@ -184,8 +183,7 @@
                 
             "next_scenarios":
             {
-                "Option_A":"1st class floor",
-                "Option_B":"hall"
+                "Option_A":"Cellar"
             }
         },
         {
@@ -210,9 +208,35 @@
                 
             "next_scenarios":
             {
-                "Option_A":" ",
-                "Option_B":" "
+                "Option_A":"Cellar"
+            }
+        },
+
+        {
+            "name":"Cellar",
+            "image": "Cellar.txt",
+            "description": "You seem to arrive to the last stage of your adventure but whatever there is in this celler will let you speechless.",
+            "question":"Welcome to the cellar the last stage of your adventure, only if you can leave this place...",
+            "options":
+            [
+                {
+                    "optName":"Cellar",
+                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                    "Combat":[{
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"},
+                        {
+                        "enemyName":"cultist"}]
+
+                }
+            ],
+
+            "next_scenarios":
+            {
+                "Option_A":""
             }
         }
     ]
+
 }
