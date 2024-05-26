@@ -9,188 +9,269 @@
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Wooden plank"
+                    "name":"Wooden plank",
+                    "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies."
+                },
+                {  
+                    "name":"deflm",
+                    "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies."
                 }
             ]
         },
         "cthulu":
         {
-            "hp":500,
-            "atk":50,
+            "hp":550,
+            "atk":100,
             "def":100,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"The bible"
+                    "name":"Psychic Terror",
+                    "description":"Cthulhu invades the minds of those nearby, causing intense fear, hallucinations, and madness."
+                },
+                {  
+                    "name":"Tentacle Crush",
+                    "description":"Using his massive tentacles, Cthulhu crushes and constricts his enemies, dealing devastating physical damage."
                 }
 
             ]
         },
         "Deep one":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":100,
+            "atk":8,
+            "def":8,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Oceanic Assault",
+                    "description":"Deep Ones use their aquatic abilities to launch coordinated attacks from the water."
+                },
+                {  
+                    "name":"Claw and Bite",
+                    "description":"Deep Ones use their claws and teeth to maul their enemies."
                 }
             ]
         },
         "Tsathoggua ":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":125,
+            "atk":12,
+            "def":10,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Slothful Corruption",
+                    "description":"Tsathoggua releases a miasma that induces lethargy, weakening his enemies and slowing their movements."
+                },
+                {  
+                    "name":"Voracious Maw",
+                    "description":"Tsathoggua uses his cavernous mouth to engulf and consume enemies."
                 }
             ]
         },
         "Hastur":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":150,
+            "atk":18,
+            "def":9,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Madness Aura",
+                    "description":"Hastur emits an aura that drives those nearby insane, causing hallucinations, paranoia, and violent behavior."
+                },
+                {  
+                    "name":"Eldritch Blast",
+                    "description":"Hastur unleashes powerful blasts of energy that warp reality and cause severe physical and mental damage."
                 }
             ]
         },
         "Dagon":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":200,
+            "atk":20,
+            "def":20,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Tidal Wave",
+                    "description":"Dagon summons massive waves to flood and crush coastal regions, drowning and smashing anything in their path.",
+                    "duration": 1 
+                },
+                {  
+                    "name":"Crushing Grip",
+                    "description":"Dagon uses his immense strength to grab and crush ships, buildings, or individuals."
                 }
             ]
         },
         "Azathoth":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":230,
+            "atk":27,
+            "def":21,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Chaotic Emanations",
+                    "description":"Azathoth emits bursts of chaotic energy that warp and destroy anything in their path."
+                },
+                {  
+                    "name":"Reality Devour",
+                    "description":"Azathoth consumes parts of the universe's fabric, causing areas to blink out of existence."
                 }
             ]
         },
         "Yog-Sothoth":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":250,
+            "atk":33,
+            "def":30,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Temporal Distortion",
+                    "description":"Yog-Sothoth manipulates time and space, causing enemies to experience accelerated aging or temporal traps."
+                },
+                {  
+                    "name":"Reality Shred",
+                    "description":"Yog-Sothoth distorts the fabric of reality, causing areas to warp and unravel, dealing catastrophic damage"
                 }
             ]
         },
         "Nyarlathotep":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":300,
+            "atk":45,
+            "def":60,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Shape-Shifting Assault",
+                    "description":"Nyarlathotep transforms into a terrifying form to directly attack his victims, inducing panic and confusion."
+                },
+                {  
+                    "name":"Mind Corruption",
+                    "description":"Nyarlathotep corrupts the minds of individuals, leading them to insanity or forcing them to act as his agents."
                 }
             ]
         },
         "Shub-niggurath":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":350,
+            "atk":78,
+            "def":75,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Spawn Swarm",
+                    "description":"Shub-Niggurath releases hordes of monstrous offspring to swarm and overwhelm her enemies."
+                },
+                {  
+                    "name":"Fertility Curse",
+                    "description":"Shub-Niggurath induces rapid, uncontrolled growth of organic matter, causing flesh, plants, or other substances to explode uncontrollably."
                 }
             ]
         },
         "Yithian possessors":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":390,
+            "atk":85,
+            "def":75,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Mind Control",
+                    "description":"Yithians take over the minds of their victims, controlling their actions completely."
+                },
+                {  
+                    "name":"Knowledge Overload",
+                    "description":"Yithians bombard their enemies with an overwhelming amount of knowledge, causing mental collapse."
                 }
             ]
         },
         "Gouls":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":425,
+            "atk":91,
+            "def":84,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Flesh Devour",
+                    "description":"Ghouls bite and tear at their enemies, consuming flesh and causing severe physical wounds."
+                },
+                {  
+                    "name":"Graveyard Miasma",
+                    "description":"Ghouls exhale a toxic breath that saps the strength and vitality of those nearby."
                 }
             ]
         },
         "Byakhees":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":475,
+            "atk":99,
+            "def":97,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Dimensional Flight",
+                    "description":"Byakhees transport themselves and their riders through interstellar space, causing disorientation and fear."
+                },
+                {  
+                    "name":"Talon Strike",
+                    "description":"Byakhees use their talons to strike and slash at their enemies."
                 }
             ]
         },
         "Shoggoths":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":490,
+            "atk":105,
+            "def":95,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Engulf",
+                    "description":"Shoggoths engulf their victims in their amorphous mass, crushing and digesting them."
+                },
+                {  
+                    "name":"Protoplasmic Assault",
+                    "description":"Shoggoths reshape their bodies into deadly forms, such as spikes and blades, to attack their enemies."
                 }
             ]
         },
         "Night Gaunts":
         {
-            "hp":100000,
-            "atk":50,
-            "def":100,
+            "hp":530,
+            "atk":97,
+            "def":109,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Silent Abduction",
+                    "description":"Night Gaunts silently grab and carry away their victims to unknown realms."
+                },
+                {  
+                    "name":"Claw Swipe",
+                    "description":"Night Gaunts use their clawed hands to rend and tear at their enemies."
                 }
             ]
         },
-        "Pedro":
+        "Mi-Go":
         {
-            "hp":100,
-            "atk":50,
-            "def":100,
+            "hp":90,
+            "atk":9,
+            "def":4,
             "num_skills":1,
             "skills":[
                 {
-                    "name":"Carrot's shurikens"
+                    "name":"Brain Extraction",
+                    "description":"The Mi-Go use advanced tools to extract the brains of their victims for experimentation."
+                },
+                {  
+                    "name":"Stun Ray",
+                    "description":"The Mi-Go emit a ray that temporarily stuns and paralyzes their targets."
                 }
             ]
         }
