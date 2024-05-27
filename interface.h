@@ -8,7 +8,8 @@ void displaySkills_New(Skills skill_list){
 
 void printScenario(Scenario *Scene){
     printImage(Scene->image);
-    printf("%s",Scene->description);
+    printFormattedText("%s",Scene->description);
+    sleep(5);
 }
 
 void printCombat(Enemy *enemies[MAX_ENEMIES]){

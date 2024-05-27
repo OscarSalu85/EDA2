@@ -49,7 +49,7 @@ void printText(const char *text) {
     for (int i = 0; i < strlen(text); i++) {
         printf("%c", text[i]);
         fflush(stdout);  // Prints the character immediately
-        usleep(10000);   // 20 milliseconds
+        usleep(10000);   // 1 milliseconds
     }
 }
 //Function provided by chatGPT to format the text so that it can be printed by the printtext function correctly

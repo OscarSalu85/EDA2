@@ -97,12 +97,12 @@ void configure_name(Data* data){
             data->character->name[len - 1] = '\0';
         }
 
-        if(strcmp(data->character->name, "") || strcmp(data->character->name[0], "")){
+        if(strcmp(data->character->name, "")){
             if(data->character->name[0] == '\0') {
-            printText("\nName cannot be empty, please try again.");
-            sleep(1);
-            continue;
-        }
+                printText("\nName cannot be empty, please try again.");
+                sleep(1);
+                continue;
+            }
             else{
                 for(int i=0;i<strlen(data->character->name);i++){
                     if (!isalpha(data->character->name[i]) && data->character->name[i] != ' '){
@@ -114,9 +114,10 @@ void configure_name(Data* data){
                 }
                 if(count == 0){
                     while(1){
-                        printf("\nName Selected: %s\nConfirm name? (1 = yes, 0 = no): ", data->character->name);
+                        printFormattedText("\nName Selected: %s\nConfirm name? (1 = yes, 0 = no): ", data->character->name);
                         if (scanf("%d", &choice) != 1) {
-                            printf("\nNot a valid option, try again.\n");
+                            printText("\nNot a valid option, try again.\n");
+                            sleep(1);
                             // Clear invalid input from buffer
                             while (getchar() != '\n');
                             continue;
@@ -129,7 +130,8 @@ void configure_name(Data* data){
                         } else if (choice == 0) {
                             break;
                         } else {
-                            printf("\nNot a valid option, try again.\n");
+                            printText("\nNot a valid option, try again.\n");
+                            sleep(1);
                         }
                     } 
                 }
@@ -147,22 +149,25 @@ void configure_stats(Data* data){
     int input2;
     int current_points = 20;
     while(current_points > 0){
-            printf("\n\n%s's current stats: Atk:%d        Def:%d      Hp:%d\n",data->character->name,data->character->atk,data->character->def,data->character->hp);
-            printf("\nAvailable SP(Stat Points):%d SP\n",current_points);
-            printf("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d\n", data->character->atk-BASE_ATK,data->character->def-BASE_DEF,(data->character->hp-BASE_HP) / HP_PER_POINT);
-            printf("\nSelect which stat you want to invest in: ");
+        clearScreen();
+            printFormattedText("\n\n%s's current stats: Atk:%d        Def:%d      Hp:%d\n",data->character->name,data->character->atk,data->character->def,data->character->hp);
+            printFormattedText("\nAvailable SP(Stat Points):%d SP\n",current_points);
+            printFormattedText("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d\n", data->character->atk-BASE_ATK,data->character->def-BASE_DEF,(data->character->hp-BASE_HP) / HP_PER_POINT);
+            printText("\nSelect which stat you want to invest in: ");
             scanf("%d", &input);
             if(input < 1 || input>3){
-                printf("\nNot a valid element, try again.");
+                printText("\nNot a valid element, try again.");
+                sleep(1);
                 continue;
             }
             else{
                 while(1){
-                    printf("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ");
+                    clearScreen();
+                    printText("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ");
                     scanf("%d", &input2);
-                    printf("\nINPUT 3 = %d", input2);
                     if(input2 > current_points || input2 < 0){
-                        printf("\nNot enough stat points available.");
+                        printText("\nNot enough stat points available.");
+                        sleep(1);
                         continue;
                     }
                     else if(input2 > 0){
@@ -187,11 +192,12 @@ void configure_stats(Data* data){
             }
             if(current_points == 0){
                 while(1){
+                    clearScreen();
                     while (getchar() != '\n');
                     int input3;
 
-                    printf("\nFinal stat allocation:    Atk:%d        Def:%d      Hp:%d\n",data->character->atk,data->character->def,data->character->hp);
-                    printf("\nConfirm stat allocation?  1.Yes   2.No: ");
+                    printFormattedText("\nFinal stat allocation:    Atk:%d        Def:%d      Hp:%d\n",data->character->atk,data->character->def,data->character->hp);
+                    printText("\nConfirm stat allocation?  1.Yes   2.No: ");
                     scanf("%d",&input3);
 
                     if(input3 == 1){
@@ -217,6 +223,7 @@ void configure_stats(Data* data){
 
 
 void print_skill_list(Skills *skill_list){
+    clearScreen();
     for(int i=0; i<SKILL_MAX; i++){
         printf("\n%d.: %s", i+1, skill_list[i].name);
     }
@@ -228,39 +235,46 @@ void configure_skills(Data* data){
     int repeat;
     Skills *skill_list;
     skill_list = get_skill_data();
-    print_skill_list(skill_list);
     while(1){
+        
         for(int i=0; i<MAX_SKILLS;i++){
             while(1){
+                clearScreen();
+                print_skill_list(skill_list);
                 repeat = 0;
-                printf("\nSelect your skill nº%d: ", i+1);
+                printFormattedText("\nSelect your skill nº%d: ", i+1);
                 scanf("%d",&selected_skill);
                 selected_skill--;
                 if(selected_skill<0 || selected_skill >SKILL_MAX){
-                    printf("\nNo valid skill was selected, please choose a valid skill.");
+                    printText("\nNo valid skill was selected, please choose a valid skill.");
+                    sleep(1);
+                    continue;
                 }
                 else{
                     for(int j = 0; j<MAX_SKILLS;j++){
                         if(skill_list[selected_skill].name ==  data->character->skill[j]->name){
-                            printf("\nYou have already chosen this skill, select a different one.");
+                            printText("\nYou have already chosen this skill, select a different one.");
+                            sleep(1);
                             repeat = 1;
+                            break;
                         }
                     }
                     if(repeat == 1){
                         repeat = 0;
                         continue;
                     }
-                    printf("\nSkill Name: %s", skill_list[selected_skill].name);
-                    printf("\n%s", skill_list[selected_skill].description);
-                    printf("\nSkill Duration: %d turns", skill_list[selected_skill].duration);
-                    printf("\nDamage: %d", skill_list[selected_skill].damage);
-                    printf("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
+                    printFormattedText("\nSkill Name: %s", skill_list[selected_skill].name);
+                    printFormattedText("\n%s", skill_list[selected_skill].description);
+                    printFormattedText("\nSkill Duration: %d turns", skill_list[selected_skill].duration);
+                    printFormattedText("\nDamage: %d", skill_list[selected_skill].damage);
+                    printFormattedText("\nSelf modifiers: (%d ATK, %d DEF, %d HP)", skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
                     
-                    printf("\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No)", i);
+                    printFormattedText("\n\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No): ", i);
                     scanf("%d", &confirm);
                     if(confirm == 1){
+                        clearScreen();
                         *data->character->skill[i] = skill_list[selected_skill];
-                        printf("\n%s added to your character's skill set", skill_list[selected_skill].name);
+                        printFormattedText("\n%s added to your character's skill set", skill_list[selected_skill].name);
                     }
                     else{
                         continue;
@@ -269,12 +283,13 @@ void configure_skills(Data* data){
                 }
             }
         }
-        printf("\n%s's current skill set: ", data->character->name);
+        clearScreen();
+        printFormattedText("\n%s's current skill set: ", data->character->name);
         for(int i = 0; i<MAX_SKILLS; i++){
-            printf("\n%s", data->character->skill[i]->name);
+            printFormattedText("\n%s", data->character->skill[i]->name);
         }
         
-        printf("\nConfirm skill set?\n1.Yes\n2.No\n" );
+        printText("\nConfirm skill set?\n1.Yes\n2.No\n" );
         scanf("%d", &confirm);
         if(confirm == 1){
             return;
@@ -286,8 +301,9 @@ void configure_skills(Data* data){
 void configure_menu(Data *data){
     int choice_configure;
     while(1){
-        printf("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\n4.Back to Main Menu");
-        printf("\nSelect an option: ");
+        clearScreen();
+        printText("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\n4.Back to Main Menu");
+        printText("\nSelect an option: ");
         scanf("%d", &choice_configure);
         if(choice_configure == 1){
             configure_name(data);
@@ -303,6 +319,7 @@ void configure_menu(Data *data){
         }
         else{
             printf("No valid option was chosen, please try again.");
+            sleep(1);
             continue;
         }
         save_data(data,1);
@@ -311,50 +328,66 @@ void configure_menu(Data *data){
 };
 
 Skills* selectSkill(Character *character){
-    for(int i = 0; i < 4;i++){
-        printf("\n%d.%s:\n",i+1,character->skill[i]->name);
-        printf("   -Desc:%s\n",character->skill[i]->description);
-        printf("   -Dur:%d\n",character->skill[i]->duration);
-        printf("   -Dam:%d\n",character->skill[i]->damage);
-        printf("   -Mod: (%d ATK, %d DEF, %d HP)\n",character->skill[i]->modifiers[0],character->skill[i]->modifiers[1],character->skill[i]->modifiers[2]);
-    }
-    printf("Choose option:");
     int opt = -1;
-    while(opt < 1 || opt > 5){
-        scanf("%d", &opt);
-        if(0 < opt && opt < 5) {
+    while(1){
+        for(int i = 0; i < 4;i++){
+            printFormattedText("\n%d.%s:\n",i+1,character->skill[i]->name);
+        }
 
+        printText("\nChoose option (press 5 if you want to see the skill information): ");
+        scanf("%d", &opt);
+        while (getchar() != '\n');
+        if(0 < opt && opt < 5) {
             return character->skill[opt-1];;
         }
+        else if(opt == 5){
+            clearScreen();
+            for(int i = 0; i < 4;i++){
+                printf("\n%d.%s:\n",i+1,character->skill[i]->name);
+                printf("   -Desc:%s\n",character->skill[i]->description);
+                printf("   -Dur:%d\n",character->skill[i]->duration);
+                printf("   -Dam:%d\n",character->skill[i]->damage);
+                printf("   -Mod: (%d ATK, %d DEF, %d HP)\n",character->skill[i]->modifiers[0],character->skill[i]->modifiers[1],character->skill[i]->modifiers[2]);
+            }  
+        }
         opt = 0;
-        printText("Choose valid option:");
+        clearScreen();
+        printText("\nChoose a valid option.");
+        sleep(1);
+        clearScreen();
     }
 }
 
 int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
     int num_alive = 0;
-
-    for(int i = 0; i < num_enemies; i++){
-        if(enemies[i]->hp > 0){
-            num_alive++;
-            printf("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i]->name,enemies[i]->hp,enemies[i]->atk,enemies[i]->def);
-        }
-    }
-    if(num_alive == 0) return -1;
-    printf("\nChoose option:");
     int opt = 0;
-    while(opt < 1 || opt > num_enemies){
-        scanf("%d", &opt);
-        if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
+    while(1){
+        clearScreen();
+        for(int i = 0; i < num_enemies; i++){
+            if(enemies[i]->hp > 0){
+                num_alive++;
+                printFormattedText("\n%d.%s(hp:%d,atk:%d,def:%d)",i+1,enemies[i]->name,enemies[i]->hp,enemies[i]->atk,enemies[i]->def);
+            }
+        }
+        if(num_alive == 0) return -1;
+        printText("\nChoose option: ");
         opt = 0;
-        printText("Choose valid option:");
+        if(opt < 1 || opt > num_enemies){
+            scanf("%d", &opt);
+            if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
+            opt = 0;
+            printText("\nChoose a valid option.");
+        }
+        
     }
     return opt-1;
 }
 
 
 void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, int num_enemies, int *active){
-   if(enemies != NULL){
+    clearScreen();
+    if(enemies != NULL){
+        printText("Player Turn:\n");
         Enemy *target; 
         int chosen_target_index = selectTarget(enemies,num_enemies);
         if(chosen_target_index != -1){
@@ -372,16 +405,21 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, i
                 current_turn->mod[2] += skill->modifiers[2];
                 if(current_turn->next != NULL) current_turn = current_turn->next;
             }
+            printFormattedText("\nModifiers this turn ATK:%d,DEF:%d,HP:%d)",current_turn->mod[0],current_turn->mod[1],current_turn->mod[2]);
             //Attack
             int damage = 0;
             if(target->def > 0) damage = (((character->atk + turn->mod[0]) * skill->damage) - target->def);
             else damage = (character->atk * skill->damage);
             if(damage > target->hp) damage = target->hp;
             target->hp = target->hp - damage;
-            printFormattedText("You deal %d damage to enemy, %s has %d health", damage, target->name, target->hp);
+            if(target->hp< 0)   target->hp=0;
+            printFormattedText("\nYou deal %d damage to enemy, %s has %d health", damage, target->name, target->hp);
+            sleep(1);
         }
         else{
-            printf("\nNo enemies alive");
+            printText("\nNo enemies alive, you have defeated every enemy on this area.");
+            sleep(2);
+            clearScreen();
             *active = 0;
         } 
    }
@@ -395,15 +433,18 @@ void selectEnemySkill(Enemy *current_enemy, Skills *skill){
 
 
 Queue* enemyTurn(Queue *queue, Character *character, int *active){
+    sleep(1);
+    clearScreen();
     int hp = character->current_hp;
     Enemy *current_enemy = queue->first->enemy;
-    if(current_enemy->hp <= 0){
+    if(current_enemy->hp <= 0){ 
         return queue;
     }
-    printf("\n-%s attacks you!!!",queue->first->name);
+    printText("Enemy Turn:\n");
+    printFormattedText("\n-%s attacks you!!!",queue->first->name);
     Skills *skill = malloc(MAX_SKILLS*sizeof(Skills));
     selectEnemySkill(current_enemy,skill);
-    printf("\n-%s chooses the skill %s",queue->first->name,skill->name);
+    printFormattedText("\n-%s uses the skill %s",queue->first->name,skill->name);
     //Modifiers
     Turn *current_turn = queue->first;
     for(int i = 0;i < skill->duration;i++){
@@ -415,14 +456,18 @@ Queue* enemyTurn(Queue *queue, Character *character, int *active){
         current_turn->mod[2] += skill->modifiers[2];
         if(current_turn->next != NULL) current_turn = current_turn->next;
     }
-
+    
+    current_turn = queue->first;
+    printFormattedText("\nModifiers this turn ATK:%d,DEF:%d,HP:%d)",current_turn->mod[0],current_turn->mod[1],current_turn->mod[2]);
+    sleep(2);
     //Atack
     int damage = 0;
-    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) - (character->def + skill->modifiers[1]))/10;
+    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) - (character->def + current_turn->mod[1]))/10;
     else damage = (current_enemy->atk * skill->damage)/10;
-    if(hp + skill->modifiers[3] > damage) damage = 0;
-    character->current_hp = hp - damage;
+    character->current_hp = hp + current_turn->mod[2] - damage;
+    if(character->current_hp < 0)   character->current_hp=0;
     printFormattedText("\n-deals %d damage, remaining health --> %d",damage,character->current_hp);
+    sleep(1);
     if (character->current_hp <= 0){
         *active = 0;
         return queue;
@@ -432,6 +477,7 @@ Queue* enemyTurn(Queue *queue, Character *character, int *active){
 }
 
 int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
+    clearScreen();
     printf("\nCOMBAT:\n");
     int active = 1;
     int num_enemies = 0;
@@ -445,21 +491,22 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     Queue *queue = malloc(sizeof(Queue));
     queue = createQueue(character,enemies,queue,num_enemies);
     while(active && queue->first != NULL){
+        clearScreen();
         //printCombat(enemies);
         //Character
-        printf("\nBefore = %s", queue->first->name);
         if(queue->first->type == 0){
-            printf("\n\nPlayer Turn:");
             playerTurn(queue->first, enemies, character,num_enemies,&active);
+            sleep(1);
         }
         else{
-            printf("\n\nEnemy Turn:");
             queue = enemyTurn(queue, character,&active);
+            
         } 
         if(character->current_hp <= 0  || queue->first->next == NULL) return 0;
         queue->first = queue->first->next;
     }
-    printf("\nYOU WIN\n");
+    printText("\nYOU WIN\n");
+    add_stats(character,20);
     return 1;
 }
 
@@ -472,7 +519,6 @@ void create_data(Data **data){
         //Returns if memory could not be allocated correctly
         return;
     }
-
     //Allocate memory for Character structure
     (*data)->character = (Character*)malloc(sizeof(Character));
     if ((*data)->character == NULL){
@@ -505,9 +551,7 @@ void create_data(Data **data){
         free((*data)->character);
         free(*data);
         return;
-    }
-
-    
+    }    
 }
 
 Scenario* allocate_scenarios(int num_scenarios) {
@@ -594,15 +638,16 @@ void new_game(Data *data){
 }
 
 void isTerminal(Data *data){
-    printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
+    printText("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
     char decision;
     scanf(" %c", &decision);
     if(decision == '1'){
         new_game(data);
     }
     else if(decision == '2'){
-        printf("\nEnding game...");
-        printf("\nThanks for playing!");
+        printText("\nEnding game...");
+        printText("\nThanks for playing!");
+        sleep(3);
         save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
         exit(1);
     }
@@ -610,6 +655,7 @@ void isTerminal(Data *data){
 
 
 int Decision(Data *data, Scenario scene){
+    printScenario(data->current_scenario);
     Decisions *currentDesc = scene.decision;
     char option;
     int num_option;
@@ -621,6 +667,7 @@ int Decision(Data *data, Scenario scene){
     }
     if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
         printText(currentDesc->question);
+        printf("\n");
         while(1){
             if(scene.next_scenario_name_1 != NULL && scene.next_scenario_name_2 != NULL){
                 scanf(" %c",&option);
@@ -632,12 +679,15 @@ int Decision(Data *data, Scenario scene){
                     num_option = 2;
                     break;
                 }
-                else printText("Must be 1 or 2");
+                else {
+                    printText("\nMust be 1 or 2.\n");
+                    sleep(1);
+                    continue;
                 }
-
+            }
             else if(scene.next_scenario_name_1 == NULL){
                 printText("The only option now is going to Cellar and confronting the evil presence. There is no way back.");
-                printText("1.Cellar     2.Cellar");
+                printText("\n1.Cellar     2.Cellar\n");
                 fflush(stdout);
                 scanf(" %c",&option);
                 if(option == '1' || option == '2'){
@@ -645,20 +695,10 @@ int Decision(Data *data, Scenario scene){
                     break;
                 }
                 else{
-                    printText("You can't turn back now, you must step down to the cellar.");
-                }
-            }
-            else if(scene.next_scenario_name_2 == NULL){
-                printText("You are in front of the Captain's room. There is no way back.");
-                printText("1.Captain's room     2.Captain's room");
-                fflush(stdout);
-                scanf(" %c",&option);
-                if(option == '1' || option == '2'){
-                    num_option = 1;
-                    break;
-                }
-                else{
-                    printText("You can't turn back now, you must step in the Captain's room.");
+                    printText("\nYou can't turn back now, you must step down to the cellar.");
+                    sleep(1);
+                    clearScreen();
+                    continue;
                 }
             }
         }
@@ -684,7 +724,7 @@ int Decision(Data *data, Scenario scene){
             return 1;
         }
         else{
-            printf("\nYou lost the battle, after backing up for a little you returned to the room\n");
+            printText("\nYou lost the battle, after backing up for a little you returned to the room\n");
             data->character->current_hp= data->character->hp;
             save_data(data,1);
             return 0;
@@ -696,7 +736,7 @@ int Decision(Data *data, Scenario scene){
         Option *currentOpt = currentDesc->options[0];
         int win = combat(data->character, currentOpt->enemies);
         if(win == 0){
-            printf("\nYou lost the battle, after backing up for a little you returned to the room\n");
+            printText("\nYou lost the battle, after backing up for a little you returned to the room\n");
             data->character->current_hp= data->character->hp;
             save_data(data,1);
             return 0;
@@ -710,10 +750,8 @@ void mainLoop(Data *data){
     Scenario *currentScene = data->current_scenario;
     int active = 1;
     while(active){
-        printScenario(currentScene);
         int active = Decision(data,*currentScene);
         currentScene = data->current_scenario;
-
     }
 }
 
@@ -729,8 +767,87 @@ void continue_game(Data *data){
         *data->character->skill[i] = skill[i];
     }
    return;
-}
+} 
 
+void add_stats(Character *character,int num){
+    clearScreen();
+    int input;
+    int input2;
+    int current_points = num;
+    int base_atk = character->atk;
+    int base_def = character->def;;
+    int base_hp = character->hp;;
+    printFormattedText("\nYou have obtained %d point to upgrade your stats",num);
+    sleep(3);
+    while(current_points > 0){
+        clearScreen();
+            printFormattedText("\n\n%s's current stats: Atk:%d        Def:%d      Hp:%d\n",character->name,character->atk,character->def,character->hp);
+            printFormattedText("\nAvailable SP(Stat Points):%d SP\n",current_points);
+            printFormattedText("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d\n", character->atk-base_atk,character->def-base_def,(character->hp-base_hp) / HP_PER_POINT);
+            printText("\nSelect which stat you want to invest in: ");
+            scanf("%d", &input);
+            if(input < 1 || input>3){
+                printText("\nNot a valid element, try again.");
+                sleep(1);
+                continue;
+            }
+            else{
+                while(1){
+                    clearScreen();
+                    printText("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ");
+                    scanf("%d", &input2);
+                    if(input2 > current_points || input2 < 0){
+                        printText("\nNot enough stat points available.");
+                        sleep(1);
+                        continue;
+                    }
+                    else if(input2 > 0){
+                        if(input == 1){
+                            character->atk += input2;
+                            current_points -= input2;
+                            break;
+                        }
+                        else if(input == 2){
+                            character->def += input2;
+                            current_points -= input2;
+                            break;
+                        }
+                        else if(input == 3){
+                            character->hp += input2 * HP_PER_POINT;
+                            current_points -= input2;
+                            break;
+                        }
+                    }
+                }
+                
+            }
+            if(current_points == 0){
+                while(1){
+                    clearScreen();
+                    while (getchar() != '\n');
+                    int input3;
+
+                    printFormattedText("\nFinal stat allocation:    Atk:%d        Def:%d      Hp:%d\n",character->atk,character->def,character->hp);
+                    printText("\nConfirm stat allocation?  1.Yes   2.No: ");
+                    scanf("%d",&input3);
+
+                    if(input3 == 1){
+                        return;
+                    }
+                    else if(input3 == 2){
+                        character->atk = 5;
+                        character->def = 5;
+                        character->hp = 10;
+                        current_points = 20;
+                        break;
+                    }
+                    else{
+                        current_points = 0;
+                    }
+                }
+            }
+        } 
+}
 
 
 
