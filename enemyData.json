@@ -10,11 +10,17 @@
             "skills":[
                 {
                     "name":"Wooden plank",
-                    "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies."
+                    "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"deflm",
-                    "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies."
+                    "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -27,11 +33,17 @@
             "skills":[
                 {
                     "name":"Psychic Terror",
-                    "description":"Cthulhu invades the minds of those nearby, causing intense fear, hallucinations, and madness."
+                    "description":"Cthulhu invades the minds of those nearby, causing intense fear, hallucinations, and madness.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Tentacle Crush",
-                    "description":"Using his massive tentacles, Cthulhu crushes and constricts his enemies, dealing devastating physical damage."
+                    "description":"Using his massive tentacles, Cthulhu crushes and constricts his enemies, dealing devastating physical damage.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
 
             ]
@@ -45,15 +57,21 @@
             "skills":[
                 {
                     "name":"Oceanic Assault",
-                    "description":"Deep Ones use their aquatic abilities to launch coordinated attacks from the water."
+                    "description":"Deep Ones use their aquatic abilities to launch coordinated attacks from the water.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Claw and Bite",
-                    "description":"Deep Ones use their claws and teeth to maul their enemies."
+                    "description":"Deep Ones use their claws and teeth to maul their enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
-        "Tsathoggua ":
+        "Tsathoggua":
         {
             "hp":125,
             "atk":12,
@@ -62,11 +80,17 @@
             "skills":[
                 {
                     "name":"Slothful Corruption",
-                    "description":"Tsathoggua releases a miasma that induces lethargy, weakening his enemies and slowing their movements."
+                    "description":"Tsathoggua releases a miasma that induces lethargy, weakening his enemies and slowing their movements.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Voracious Maw",
-                    "description":"Tsathoggua uses his cavernous mouth to engulf and consume enemies."
+                    "description":"Tsathoggua uses his cavernous mouth to engulf and consume enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -79,11 +103,17 @@
             "skills":[
                 {
                     "name":"Madness Aura",
-                    "description":"Hastur emits an aura that drives those nearby insane, causing hallucinations, paranoia, and violent behavior."
+                    "description":"Hastur emits an aura that drives those nearby insane, causing hallucinations, paranoia, and violent behavior.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Eldritch Blast",
-                    "description":"Hastur unleashes powerful blasts of energy that warp reality and cause severe physical and mental damage."
+                    "description":"Hastur unleashes powerful blasts of energy that warp reality and cause severe physical and mental damage.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -97,11 +127,16 @@
                 {
                     "name":"Tidal Wave",
                     "description":"Dagon summons massive waves to flood and crush coastal regions, drowning and smashing anything in their path.",
-                    "duration": 1 
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Crushing Grip",
-                    "description":"Dagon uses his immense strength to grab and crush ships, buildings, or individuals."
+                    "description":"Dagon uses his immense strength to grab and crush ships, buildings, or individuals.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -114,11 +149,17 @@
             "skills":[
                 {
                     "name":"Chaotic Emanations",
-                    "description":"Azathoth emits bursts of chaotic energy that warp and destroy anything in their path."
+                    "description":"Azathoth emits bursts of chaotic energy that warp and destroy anything in their path.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Reality Devour",
-                    "description":"Azathoth consumes parts of the universe's fabric, causing areas to blink out of existence."
+                    "description":"Azathoth consumes parts of the universe's fabric, causing areas to blink out of existence.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -131,11 +172,17 @@
             "skills":[
                 {
                     "name":"Temporal Distortion",
-                    "description":"Yog-Sothoth manipulates time and space, causing enemies to experience accelerated aging or temporal traps."
+                    "description":"Yog-Sothoth manipulates time and space, causing enemies to experience accelerated aging or temporal traps.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Reality Shred",
-                    "description":"Yog-Sothoth distorts the fabric of reality, causing areas to warp and unravel, dealing catastrophic damage"
+                    "description":"Yog-Sothoth distorts the fabric of reality, causing areas to warp and unravel, dealing catastrophic damage",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -148,11 +195,17 @@
             "skills":[
                 {
                     "name":"Shape-Shifting Assault",
-                    "description":"Nyarlathotep transforms into a terrifying form to directly attack his victims, inducing panic and confusion."
+                    "description":"Nyarlathotep transforms into a terrifying form to directly attack his victims, inducing panic and confusion.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Mind Corruption",
-                    "description":"Nyarlathotep corrupts the minds of individuals, leading them to insanity or forcing them to act as his agents."
+                    "description":"Nyarlathotep corrupts the minds of individuals, leading them to insanity or forcing them to act as his agents.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -165,11 +218,17 @@
             "skills":[
                 {
                     "name":"Spawn Swarm",
-                    "description":"Shub-Niggurath releases hordes of monstrous offspring to swarm and overwhelm her enemies."
+                    "description":"Shub-Niggurath releases hordes of monstrous offspring to swarm and overwhelm her enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Fertility Curse",
-                    "description":"Shub-Niggurath induces rapid, uncontrolled growth of organic matter, causing flesh, plants, or other substances to explode uncontrollably."
+                    "description":"Shub-Niggurath induces rapid, uncontrolled growth of organic matter, causing flesh, plants, or other substances to explode uncontrollably.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -182,11 +241,17 @@
             "skills":[
                 {
                     "name":"Mind Control",
-                    "description":"Yithians take over the minds of their victims, controlling their actions completely."
+                    "description":"Yithians take over the minds of their victims, controlling their actions completely.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Knowledge Overload",
-                    "description":"Yithians bombard their enemies with an overwhelming amount of knowledge, causing mental collapse."
+                    "description":"Yithians bombard their enemies with an overwhelming amount of knowledge, causing mental collapse.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -199,11 +264,17 @@
             "skills":[
                 {
                     "name":"Flesh Devour",
-                    "description":"Ghouls bite and tear at their enemies, consuming flesh and causing severe physical wounds."
+                    "description":"Ghouls bite and tear at their enemies, consuming flesh and causing severe physical wounds.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Graveyard Miasma",
-                    "description":"Ghouls exhale a toxic breath that saps the strength and vitality of those nearby."
+                    "description":"Ghouls exhale a toxic breath that saps the strength and vitality of those nearby.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -216,11 +287,17 @@
             "skills":[
                 {
                     "name":"Dimensional Flight",
-                    "description":"Byakhees transport themselves and their riders through interstellar space, causing disorientation and fear."
+                    "description":"Byakhees transport themselves and their riders through interstellar space, causing disorientation and fear.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Talon Strike",
-                    "description":"Byakhees use their talons to strike and slash at their enemies."
+                    "description":"Byakhees use their talons to strike and slash at their enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -233,11 +310,17 @@
             "skills":[
                 {
                     "name":"Engulf",
-                    "description":"Shoggoths engulf their victims in their amorphous mass, crushing and digesting them."
+                    "description":"Shoggoths engulf their victims in their amorphous mass, crushing and digesting them.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Protoplasmic Assault",
-                    "description":"Shoggoths reshape their bodies into deadly forms, such as spikes and blades, to attack their enemies."
+                    "description":"Shoggoths reshape their bodies into deadly forms, such as spikes and blades, to attack their enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -250,11 +333,17 @@
             "skills":[
                 {
                     "name":"Silent Abduction",
-                    "description":"Night Gaunts silently grab and carry away their victims to unknown realms."
+                    "description":"Night Gaunts silently grab and carry away their victims to unknown realms.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Claw Swipe",
-                    "description":"Night Gaunts use their clawed hands to rend and tear at their enemies."
+                    "description":"Night Gaunts use their clawed hands to rend and tear at their enemies.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         },
@@ -267,11 +356,17 @@
             "skills":[
                 {
                     "name":"Brain Extraction",
-                    "description":"The Mi-Go use advanced tools to extract the brains of their victims for experimentation."
+                    "description":"The Mi-Go use advanced tools to extract the brains of their victims for experimentation.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 },
                 {  
                     "name":"Stun Ray",
-                    "description":"The Mi-Go emit a ray that temporarily stuns and paralyzes their targets."
+                    "description":"The Mi-Go emit a ray that temporarily stuns and paralyzes their targets.",
+                    "duration": 1 ,
+                    "modifiers": [2,0,-1], 
+                    "damage": 10
                 }
             ]
         }
