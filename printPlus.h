@@ -41,6 +41,15 @@ void printImage(char fileImage[]){
     fclose(f);
 }
 
+void printText(const char *text) {
+    printf("\n");
+    for (int i = 0; i < strlen(text); i++) {
+        printf("%c", text[i]);
+        fflush(stdout);  // Prints the character immediately
+        usleep(20000);   // 20 milliseconds
+    }
+    printf("\n");
+}
 //Function provided by chatGPT to format the text so that it can be printed by the printtext function correctly
 void printFormattedText(const char *format, ...) {
     char buffer[BUFFER_SIZE];
@@ -51,15 +60,6 @@ void printFormattedText(const char *format, ...) {
     printText(buffer);
 }
 
-void printText(const char *text) {
-    printf("\n");
-    for (int i = 0; i < strlen(text); i++) {
-        printf("%c", text[i]);
-        fflush(stdout);  // Prints the character immediately
-        usleep(20000);   // 20 milliseconds
-    }
-    printf("\n");
-}
 /*void printCombatImage(char *FileImage, int num){
     FILE *files;
     //Print line by line, Jump after line completed

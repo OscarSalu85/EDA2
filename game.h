@@ -7,9 +7,9 @@
 #include "queue.h"
 #include "dataR.h"
 #include "graph.h"
-#define BASE_HP 10
-#define BASE_DEF 5
-#define BASE_ATK 5
+#define BASE_HP 25
+#define BASE_DEF 20
+#define BASE_ATK 15
 #define INITIAL_STATS 20
 #define HP_PER_POINT 2 //Hp value given for every stat point invested
 
@@ -120,9 +120,9 @@ void configure_name(Data* data){
 
 
 void configure_stats(Data* data){
-    data->character->atk = 5;
-    data->character->def = 5;
-    data->character->hp = 10;   //BASE ATK, DEF AND HP VALUES
+    data->character->atk = BASE_ATK;
+    data->character->def = BASE_DEF;
+    data->character->hp = BASE_HP;   //BASE ATK, DEF AND HP VALUES
     int input;
     int input2;
     int current_points = 20;
@@ -375,8 +375,11 @@ void selectEnemySkill(Enemy *current_enemy, Skills *skill){
 
 
 Queue* enemyTurn(Queue *queue, Character *character, int *active){
-    int hp = character->hp;
+    int hp = character->current_hp;
     Enemy *current_enemy = queue->first->enemy;
+    if(current_enemy->hp <= 0){
+        return queue;
+    }
     printf("\n-%s attacks you!!!",queue->first->name);
     Skills *skill = malloc(MAX_SKILLS*sizeof(Skills));
     selectEnemySkill(current_enemy,skill);
@@ -395,12 +398,12 @@ Queue* enemyTurn(Queue *queue, Character *character, int *active){
 
     //Atack
     int damage = 0;
-    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) - (character->def + skill->modifiers[1]))/100;
-    else damage = (current_enemy->atk * skill->damage)/100;
+    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) - (character->def + skill->modifiers[1]))/10;
+    else damage = (current_enemy->atk * skill->damage)/10;
     if(hp + skill->modifiers[3] > damage) damage = 0;
-    character->hp = hp - damage;
-    printFormattedText("\n-deals %d damage, remaining health --> %d",damage,character->hp);
-    if (character->hp <= 0){
+    character->current_hp = hp - damage;
+    printFormattedText("\n-deals %d damage, remaining health --> %d",damage,character->current_hp);
+    if (character->current_hp <= 0){
         *active = 0;
         return queue;
     }
@@ -433,7 +436,7 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
             printf("\n\nEnemy Turn:");
             queue = enemyTurn(queue, character,&active);
         } 
-        if(character->hp <= 0  || queue->first->next == NULL) return 0;
+        if(character->current_hp <= 0  || queue->first->next == NULL) return 0;
         queue->first = queue->first->next;
     }
     printf("\nYOU WIN\n");
@@ -575,9 +578,7 @@ void new_game(Data *data){
     configure_stats(data);
     configure_skills(data);
     data->current_scenario[0] = data->sceneNodes[0];
-    printf("\nAAAA");
     save_data(data,1); //Saves the configured data
-    printf("\nBBBBB");
     mainLoop(data);
 }
 
@@ -602,8 +603,10 @@ int Decision(Data *data, Scenario scene){
     char option;
     int num_option;
     if(strcmp(scene.next_scenario_name_2, "") == 0){
-        scene.next_scenario_name_1 = NULL;
         scene.next_scenario_name_2 = NULL;
+    }
+    if(strcmp(scene.next_scenario_name_1, "") == 0){
+        scene.next_scenario_name_1 = NULL;
     }
     if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
         printText(currentDesc->question);
@@ -621,16 +624,30 @@ int Decision(Data *data, Scenario scene){
                 else printText("Must be 1 or 2");
                 }
 
-            else if(scene.next_scenario_name_2 == NULL){
-                printText("The only option now is going to the cellar and confronting the evil presence. There is no way back.");
+            else if(scene.next_scenario_name_1 == NULL){
+                printText("The only option now is going to Cellar and confronting the evil presence. There is no way back.");
                 printText("1.Cellar     2.Cellar");
-                scanf("c",&option);
+                fflush(stdout);
+                scanf("%c",&option);
+                if(option == '1' || option == '2'){
+                    num_option = 2;
+                    break;
+                }
+                else{
+                    printText("You can't turn back now, you must step down to the cellar.");
+                }
+            }
+            else if(scene.next_scenario_name_2 == NULL){
+                printText("You are in front of the Captain's room. There is no way back.");
+                printText("1.Captain's room     2.Captain's room");
+                fflush(stdout);
+                scanf("%c",&option);
                 if(option == '1' || option == '2'){
                     num_option = 1;
                     break;
                 }
                 else{
-                    printText("You can't turn back now, you must step down to the cellar.");
+                    printText("You can't turn back now, you must step in the Captain's room.");
                 }
             }
         }
@@ -655,13 +672,19 @@ int Decision(Data *data, Scenario scene){
             }
             return 1;
         }
-        else return 0;
+        else{
+            printf("\nYou lost the battle, after backing up for a little you returned to the room\n");
+            data->character->current_hp= data->character->hp;
+            save_data(data,1);
+            return 0;
+        } 
     }
     else{
         isTerminal(data);
         return 0;
     }
 }
+
 
 
 

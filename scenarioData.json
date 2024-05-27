@@ -108,22 +108,21 @@
             "question":"Congratulations you have arrived to the cellar",
             "options":
             [   
-                {   
-                    "optName":"Cellar",
-                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                {
+                    "optName":"captain's room",
+                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
                     "Combat":[{
-                        "enemyName":"cultist"},
+                        "enemyName":"Pedro"},
                         {
-                        "enemyName":"cultist"},
+                        "enemyName":"cthulu"},
                         {
                         "enemyName":"cultist"}]
-
                 }
             ],
                 
             "next_scenarios":
             {
-                "option_A":"Cellar",
+                "option_A":"captain's room",
                 "option_B":""
             }
         },
@@ -170,22 +169,21 @@
             "question":"Congratulations you have arrived to the cellar",
             "options":
             [   
-                {   
-                    "optName":"Cellar",
-                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                {
+                    "optName":"captain's room",
+                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
                     "Combat":[{
-                        "enemyName":"cultist"},
+                        "enemyName":"Pedro"},
                         {
-                        "enemyName":"cultist"},
+                        "enemyName":"cthulu"},
                         {
                         "enemyName":"cultist"}]
-
                 }
             ],
                 
             "next_scenarios":
             {
-                "option_A":"Cellar",
+                "option_A":"Captain's room",
                 "option_B":""
             }
         },
@@ -196,23 +194,22 @@
             "question":"Congratulations you have arrived to the cellar",
             "options":
             [   
-                {   
-                    "optName":"Cellar",
-                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                {
+                    "optName":"captain's room",
+                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
                     "Combat":[{
-                        "enemyName":"cultist"},
+                        "enemyName":"Pedro"},
                         {
-                        "enemyName":"cultist"},
+                        "enemyName":"cthulu"},
                         {
                         "enemyName":"cultist"}]
-
                 }
             ],
                 
             "next_scenarios":
             {
-                "option_A":"Cellar",
-                "option_B":""
+                "option_A":"",
+                "option_B":"Cellar"
             }
         },
 

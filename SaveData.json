@@ -1,22 +1,22 @@
 {
 	"Character":	{
-		"name":	"a",
+		"name":	"aa",
 		"stats":	{
-			"HP":	10,
+			"HP":	45,
 			"ATK":	25,
-			"DEF":	5
+			"DEF":	20
 		},
 		"skills":	[{
 				"skill_name":	"The ultimate attack"
 			}, {
-				"skill_name":	"Wooden plank"
-			}, {
 				"skill_name":	"The bible"
 			}, {
 				"skill_name":	"Brew"
+			}, {
+				"skill_name":	"injection"
 			}]
 	},
 	"Current_Scenario":	{
-		"name":	"Deck"
+		"name":	"2nd class floor"
 	}
 }
