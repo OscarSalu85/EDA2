@@ -14,12 +14,16 @@ int main(){
         main_menu_choice = main_menu(data);   
         if(main_menu_choice == 1){
             continue_game(data);
+            break;
         }
         else if(main_menu_choice == 2){
             new_game(data);
+            break;
         }
         else if(main_menu_choice == 3){
             configure_menu(data);
         }
     }
+    mainLoop(data);
 }
+

@@ -11,6 +11,10 @@ void printColor(char message[],char F_RBG[], char B_RBG[]){
     printf( "\e[38;2;%sm" "\e[48;2;%sm" "%s" "\e[0m",F_RBG, B_RBG, message);
 }
 
+void clearScreen() {
+    printf("\033[2J\033[H");
+    fflush(stdout); // Ensure the escape code is sent immediately
+}
 /*
 fileImage: "name.txt"
 file format:
@@ -42,13 +46,11 @@ void printImage(char fileImage[]){
 }
 
 void printText(const char *text) {
-    printf("\n");
     for (int i = 0; i < strlen(text); i++) {
         printf("%c", text[i]);
         fflush(stdout);  // Prints the character immediately
-        usleep(20000);   // 20 milliseconds
+        usleep(10000);   // 20 milliseconds
     }
-    printf("\n");
 }
 //Function provided by chatGPT to format the text so that it can be printed by the printtext function correctly
 void printFormattedText(const char *format, ...) {

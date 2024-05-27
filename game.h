@@ -14,44 +14,63 @@
 
 
 
-
 int main_menu(Data *data){
     char choice;
+    char choice2;
     load_data(data);
-    printf("1.Continue      2.New Game     3.Configure \n");
+    
     while(1)
     {   
-        
-        printf("\nSelect your choice: ");
+        printf("\n1.Continue      2.New Game     3.Configure \n");
+        printText("\nSelect your choice:\n ");
         scanf("%c", &choice);
 
         if(choice == '1'){
+            clearScreen();
             if(!isalpha(data->character->name[0])){
-                printf("\nNo saved data found, please start a new game\n");
+                printText("\nNo saved data found, please start a new game");
+                sleep(2);
             }
             else{
-                printf("Saved data found, continuing game...\n");
+                printText("\nSaved data found, continuing game...\n");
+                sleep(2);
+                
                 return 1;
             }
         }
         else if(choice == '2'){
-            return 2;
+            clearScreen();
+            printText("Are you sure you want to start a new game? All save data will be deleted.(1.Yes  2.No)");
+            while (getchar() != '\n');
+            scanf("%c", &choice2);
+            if(choice2 == '1'){
+                printText("\nStarting new game...");
+                sleep(2);
+                clearScreen();
+                return 2;
+            }
+            clearScreen();
         }
         else if(choice == '3'){
+            clearScreen();
             if(!isalpha(data->character->name[0])){
-                printf("\nNo saved data found, please start a new game\n");
+                printText("\nNo saved data found, please start a new game\n");
+                sleep(2);
             }
             else{
-                printf("\nSaved data found, opening character configuration...\n");
+                printText("\nSaved data found, opening character configuration...");
+                sleep(2);
+                clearScreen();
                 return 3;
             }
         }
         else{
-            printf("\nNot a valid option, please choose again.");
-            return 0;
+            clearScreen();
+            printText("\nNot a valid option, please choose again.");
+            sleep(2);
         }
         while (getchar() != '\n');
-
+    clearScreen();
     }
 }
 
@@ -68,8 +87,9 @@ void configure_name(Data* data){
     }
     while (1)
     {
+        clearScreen();
         count = 0;
-        printf("\nSelect your new name: ");
+        printText("Select your new name: ");
         fgets(data->character->name, MAX_CHAR_NAME, stdin);
 
         size_t len = strlen(data->character->name);
@@ -77,9 +97,10 @@ void configure_name(Data* data){
             data->character->name[len - 1] = '\0';
         }
 
-        if(strcmp(data->character->name, "")){
+        if(strcmp(data->character->name, "") || strcmp(data->character->name[0], "")){
             if(data->character->name[0] == '\0') {
-            printf("\nName cannot be empty.\n");
+            printText("\nName cannot be empty, please try again.");
+            sleep(1);
             continue;
         }
             else{
@@ -556,6 +577,21 @@ Scenario* allocate_scenarios(int num_scenarios) {
     return scenarios;
 }
 //CREATES A NEW GAME
+void new_game(Data *data){
+    if(data != NULL){
+        free(data); //Frees saved data
+    }
+    create_data(&data);
+    data->sceneNodes = allocate_scenarios(8);
+    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
+    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
+    configure_name(data);
+    configure_stats(data);
+    configure_skills(data);
+    data->current_scenario[0] = data->sceneNodes[0];
+    save_data(data,1); //Saves the configured data
+    return;
+}
 
 void isTerminal(Data *data){
     printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
@@ -692,24 +728,9 @@ void continue_game(Data *data){
         load_Skill(&skill[i]);
         *data->character->skill[i] = skill[i];
     }
-    mainLoop(data);
+   return;
 }
 
-void new_game(Data *data){
-    if(data != NULL){
-        free(data); //Frees saved data
-    }
-    create_data(&data);
-    data->sceneNodes = allocate_scenarios(8);
-    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
-    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
-    configure_name(data);
-    configure_stats(data);
-    configure_skills(data);
-    data->current_scenario[0] = data->sceneNodes[0];
-    save_data(data,1); //Saves the configured data
-    mainLoop(data);
-}
 
 
 
