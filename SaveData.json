@@ -1,9 +1,9 @@
 {
 	"Character":	{
-		"name":	"aa",
+		"name":	"a",
 		"stats":	{
-			"HP":	45,
-			"ATK":	25,
+			"HP":	25,
+			"ATK":	35,
 			"DEF":	20
 		},
 		"skills":	[{
@@ -17,6 +17,6 @@
 			}]
 	},
 	"Current_Scenario":	{
-		"name":	"2nd class floor"
+		"name":	"captain's room"
 	}
 }

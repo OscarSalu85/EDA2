@@ -443,16 +443,7 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     return 1;
 }
 
-void mainLoop(Data *data){
-    Scenario *currentScene = data->current_scenario;
-    int active = 1;
-    while(active){
-        printScenario(currentScene);
-        int active = Decision(data,*currentScene);
-        currentScene = data->current_scenario;
 
-    }
-}
 
 void create_data(Data **data){
     // Allocate memory for Data structure
@@ -566,21 +557,6 @@ Scenario* allocate_scenarios(int num_scenarios) {
     return scenarios;
 }
 //CREATES A NEW GAME
-void new_game(Data *data){
-    if(data != NULL){
-        free(data); //Frees saved data
-    }
-    create_data(&data);
-    data->sceneNodes = allocate_scenarios(8);
-    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
-    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
-    configure_name(data);
-    configure_stats(data);
-    configure_skills(data);
-    data->current_scenario[0] = data->sceneNodes[0];
-    save_data(data,1); //Saves the configured data
-    mainLoop(data);
-}
 
 void isTerminal(Data *data){
     printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
@@ -685,9 +661,16 @@ int Decision(Data *data, Scenario scene){
     }
 }
 
+void mainLoop(Data *data){
+    Scenario *currentScene = data->current_scenario;
+    int active = 1;
+    while(active){
+        printScenario(currentScene);
+        int active = Decision(data,*currentScene);
+        currentScene = data->current_scenario;
 
-
-
+    }
+}
 
 void continue_game(Data *data){
     Scenario *scene = allocate_scenarios(1);
@@ -703,7 +686,21 @@ void continue_game(Data *data){
     mainLoop(data);
 }
 
-
+void new_game(Data *data){
+    if(data != NULL){
+        free(data); //Frees saved data
+    }
+    create_data(&data);
+    data->sceneNodes = allocate_scenarios(8);
+    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
+    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
+    configure_name(data);
+    configure_stats(data);
+    configure_skills(data);
+    data->current_scenario[0] = data->sceneNodes[0];
+    save_data(data,1); //Saves the configured data
+    mainLoop(data);
+}
 
 
 
