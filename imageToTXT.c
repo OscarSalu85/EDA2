@@ -60,6 +60,6 @@ void convert(char img[], char dest[],int height, int width){
 }
 
 int main(){
-    convert("kitchenRGB.txt","kitchen.txt",24,48);
-    printImage("kitchen.txt");
+    convert("3rd class floorRGB.txt","3rd class floor.txt",24,48);
+    printImage("3rd class floor.txt");
 }

@@ -307,7 +307,7 @@ Skills* selectSkill(Character *character){
             return character->skill[opt-1];;
         }
         opt = 0;
-        printf("Choose valid option:");
+        printText("Choose valid option:");
     }
 }
 
@@ -321,13 +321,13 @@ int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
         }
     }
     if(num_alive == 0) return -1;
-    printf("\nChose option:");
+    printf("\nChoose option:");
     int opt = 0;
     while(opt < 1 || opt > num_enemies){
         scanf("%d", &opt);
         if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
         opt = 0;
-        printf("\nChose valid option:");
+        printText("Choose valid option:");
     }
     return opt-1;
 }
@@ -341,15 +341,24 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, i
             target = enemies[chosen_target_index];
             Skills *skill;
             skill = selectSkill(character);
+            //Modifiers
+            Turn *current_turn = turn;
+            for(int i = 0;i < skill->duration;i++){
+                //Atk
+                current_turn->mod[0] += skill->modifiers[0];
+                //Def
+                current_turn->mod[1] += skill->modifiers[1];
+                //Hp
+                current_turn->mod[2] += skill->modifiers[2];
+                if(current_turn->next != NULL) current_turn = current_turn->next;
+            }
             //Attack
             int damage = 0;
-            printf("\nSKILL USED = %s",skill->name);
-            printf("\nSKILL DMG = %d\n", skill->damage);
-            if(target->def > 0) damage = ((character->atk * skill->damage) / target->def);
+            if(target->def > 0) damage = (((character->atk + turn->mod[0]) * skill->damage) - target->def);
             else damage = (character->atk * skill->damage);
+            if(damage > target->hp) damage = target->hp;
             target->hp = target->hp - damage;
-            printf("You deal %d damage to enemy, %s has %d health",damage,target->name,target->hp);
-            //Modifiers
+            printFormattedText("You deal %d damage to enemy, %s has %d health", damage, target->name, target->hp);
         }
         else{
             printf("\nNo enemies alive");
@@ -369,20 +378,33 @@ Queue* enemyTurn(Queue *queue, Character *character, int *active){
     int hp = character->hp;
     Enemy *current_enemy = queue->first->enemy;
     printf("\n-%s attacks you!!!",queue->first->name);
-    Skills *skill;
+    Skills *skill = malloc(MAX_SKILLS*sizeof(Skills));
     selectEnemySkill(current_enemy,skill);
     printf("\n-%s chooses the skill %s",queue->first->name,skill->name);
+    //Modifiers
+    Turn *current_turn = queue->first;
+    for(int i = 0;i < skill->duration;i++){
+        //Atk
+        current_turn->mod[0] += skill->modifiers[0];
+        //Def
+        current_turn->mod[1] += skill->modifiers[1];
+        //Hp
+        current_turn->mod[2] += skill->modifiers[2];
+        if(current_turn->next != NULL) current_turn = current_turn->next;
+    }
+
     //Atack
     int damage = 0;
-    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) / character->def)/100;
+    if(character->def > 0) damage = ((current_enemy->atk * skill->damage) - (character->def + skill->modifiers[1]))/100;
     else damage = (current_enemy->atk * skill->damage)/100;
+    if(hp + skill->modifiers[3] > damage) damage = 0;
     character->hp = hp - damage;
-    printf("\n-deals %d damage, remaining health --> %d",damage,character->hp);
+    printFormattedText("\n-deals %d damage, remaining health --> %d",damage,character->hp);
     if (character->hp <= 0){
-        *active = 1;
+        *active = 0;
         return queue;
     }
-    *active = 0;
+    *active = 1;
     return queue;
 }
 
@@ -414,67 +436,8 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
         if(character->hp <= 0  || queue->first->next == NULL) return 0;
         queue->first = queue->first->next;
     }
-    printf("\nYOU WIN");
+    printf("\nYOU WIN\n");
     return 1;
-}
-int Decision(Data *data, Scenario scene){
-    Decisions *currentDesc = scene.decision;
-    char option;
-    int num_option;
-    if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
-        printf("\n%s\n~",currentDesc->question);
-        while(1){
-            scanf("%c",&option);
-            if(option == '1'){
-                num_option = 1;
-                break;
-            }
-            else if(option == '2'){
-                num_option = 2;
-                break;
-            }
-            else printf("Must be 1 or 2\n");
-        }
-        
-        Option *currentOpt = currentDesc->options[num_option -1];
-        //printf("%s",currentOpt->r_text);
-        int win = combat(data->character, currentOpt->enemies);
-        if(win != 0){
-            char *next;
-            
-            if(num_option == 2){
-                next = scene.next_scenario_name_2;
-            }
-            else if(num_option == 1){
-                next = scene.next_scenario_name_1;
-            }
-            for(int i = 0;i<SCENARIO_N;i++){
-                if(!strcmp(next,data->sceneNodes[i].name)){
-                    *data->current_scenario = data->sceneNodes[i];
-                }
-            }
-            return 1;
-        }
-        else return 0;
-    }
-    else{
-        return 3;
-    }
-    
-}
-void isTerminal(Data *data){
-    printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
-    char decision;
-    scanf("%c", &decision);
-    if(decision == '1'){
-        new_game(data);
-    }
-    else if(decision == '2'){
-        printf("\nEnding game...");
-        printf("\nThanks for playing!");
-        save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
-        exit(1);
-    }
 }
 
 void mainLoop(Data *data){
@@ -482,7 +445,6 @@ void mainLoop(Data *data){
     int active = 1;
     while(active){
         printScenario(currentScene);
-        printf("\nOptions:");
         int active = Decision(data,*currentScene);
         currentScene = data->current_scenario;
 
@@ -600,6 +562,109 @@ Scenario* allocate_scenarios(int num_scenarios) {
     }
     return scenarios;
 }
+//CREATES A NEW GAME
+void new_game(Data *data){
+    if(data != NULL){
+        free(data); //Frees saved data
+    }
+    create_data(&data);
+    data->sceneNodes = allocate_scenarios(8);
+    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
+    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
+    configure_name(data);
+    configure_stats(data);
+    configure_skills(data);
+    data->current_scenario[0] = data->sceneNodes[0];
+    printf("\nAAAA");
+    save_data(data,1); //Saves the configured data
+    printf("\nBBBBB");
+    mainLoop(data);
+}
+
+void isTerminal(Data *data){
+    printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
+    char decision;
+    scanf("%c", &decision);
+    if(decision == '1'){
+        new_game(data);
+    }
+    else if(decision == '2'){
+        printf("\nEnding game...");
+        printf("\nThanks for playing!");
+        save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
+        exit(1);
+    }
+}
+
+
+int Decision(Data *data, Scenario scene){
+    Decisions *currentDesc = scene.decision;
+    char option;
+    int num_option;
+    if(strcmp(scene.next_scenario_name_2, "") == 0){
+        scene.next_scenario_name_1 = NULL;
+        scene.next_scenario_name_2 = NULL;
+    }
+    if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
+        printText(currentDesc->question);
+        while(1){
+            if(scene.next_scenario_name_1 != NULL && scene.next_scenario_name_2 != NULL){
+                scanf("%c",&option);
+                if(option == '1'){
+                    num_option = 1;
+                    break;
+                }
+                else if(option == '2'){
+                    num_option = 2;
+                    break;
+                }
+                else printText("Must be 1 or 2");
+                }
+
+            else if(scene.next_scenario_name_2 == NULL){
+                printText("The only option now is going to the cellar and confronting the evil presence. There is no way back.");
+                printText("1.Cellar     2.Cellar");
+                scanf("c",&option);
+                if(option == '1' || option == '2'){
+                    num_option = 1;
+                    break;
+                }
+                else{
+                    printText("You can't turn back now, you must step down to the cellar.");
+                }
+            }
+        }
+        
+        data->character->current_hp = data->character->hp; //Heals in between scenarios
+        save_data(data,1);
+        Option *currentOpt = currentDesc->options[num_option -1];
+        int win = combat(data->character, currentOpt->enemies);
+        if(win != 0){
+            char *next;
+            
+            if(num_option == 2){
+                next = scene.next_scenario_name_2;
+            }
+            else if(num_option == 1){
+                next = scene.next_scenario_name_1;
+            }
+            for(int i = 0;i<SCENARIO_N;i++){
+                if(!strcmp(next,data->sceneNodes[i].name)){
+                    *data->current_scenario = data->sceneNodes[i];
+                }
+            }
+            return 1;
+        }
+        else return 0;
+    }
+    else{
+        isTerminal(data);
+        return 0;
+    }
+}
+
+
+
 
 void continue_game(Data *data){
     Scenario *scene = allocate_scenarios(1);
@@ -615,22 +680,7 @@ void continue_game(Data *data){
     mainLoop(data);
 }
 
-//CREATES A NEW GAME
-void new_game(Data *data){
-    if(data != NULL){
-        free(data); //Frees saved data
-    }
-    create_data(&data);
-    data->sceneNodes = allocate_scenarios(8);
-    data->sceneNodes = get_scenario_nodes(data->sceneNodes);
-    save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
-    configure_name(data);
-    configure_stats(data);
-    configure_skills(data);
-    data->current_scenario[0] = data->sceneNodes[0];
-    save_data(data,1); //Saves the configured data
-    mainLoop(data);
-}
+
 
 
 

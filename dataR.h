@@ -5,7 +5,8 @@
 #include <string.h>
 #include "cJSON.h" // Include the cJSON library header
 #include <unistd.h>
-#define SKILL_MAX 10 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
+#define SKILL_MAX 15 //NUMBER OF SKILLS IN THE GAME THAT THE PLAYER CAN OBTAIN
+#define ENEMY_SKILL_MAX 32
 #ifndef DATAR_H
 #define DATAR_H
 //OPENS JSON IN READ MODE
@@ -19,7 +20,7 @@ cJSON startup_read(char json[]){
     } 
   
     // read the file contents into a string 
-    char buffer[9024]; 
+    char buffer[10024]; 
     int len = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
     
@@ -193,6 +194,50 @@ Skills* get_skill_data(){
     return skills_array;
 }
 
+Skills* get_enemy_skill_data(){
+    Skills *skills_array;
+
+    // Allocate memory for n Skills structures
+    skills_array = (Skills *)malloc(ENEMY_SKILL_MAX * sizeof(Skills));
+    if (skills_array == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return skills_array;
+    }
+    //Calls the open file on read function
+    cJSON root = startup_read("enemySkill.json");
+    
+    cJSON *skills = cJSON_GetObjectItem(&root, "skills");
+
+    for (int i = 0; i < cJSON_GetArraySize(skills); i++) {
+        //Iterates through the skills array
+        cJSON *skill_index = cJSON_GetArrayItem(skills, i);
+        cJSON *skill_name = cJSON_GetObjectItem(skill_index, "name");
+        cJSON *skill_description = cJSON_GetObjectItem(skill_index, "description");
+        cJSON *skill_duration = cJSON_GetObjectItem(skill_index, "duration");
+        cJSON *skill_damage = cJSON_GetObjectItem(skill_index,"damage");
+        cJSON *skill_mods = cJSON_GetObjectItem(skill_index, "modifiers");
+        cJSON *mod_1 = cJSON_GetArrayItem(skill_mods, 0);
+        cJSON *mod_2 = cJSON_GetArrayItem(skill_mods, 1);
+        cJSON *mod_3 = cJSON_GetArrayItem(skill_mods, 2);
+        
+        skills_array[i].name = skill_name->valuestring;
+        
+        skills_array[i].description = skill_description->valuestring;
+
+        if (skill_duration && cJSON_IsNumber(skill_duration)) {
+            skills_array[i].duration = skill_duration->valueint;
+        } else {
+            skills_array[i].duration = 0; // Default value if not found or not a number
+        }
+        skills_array[i].damage = cJSON_GetNumberValue(skill_damage);
+        skills_array[i].modifiers[0] = cJSON_GetNumberValue(mod_1);
+        skills_array[i].modifiers[1] = cJSON_GetNumberValue(mod_2);
+        skills_array[i].modifiers[2] = cJSON_GetNumberValue(mod_3);
+
+    }
+    return skills_array;
+}
+
 void get_enemy_data(Enemy *enemy){
 
     Skills *skills_array;
@@ -217,22 +262,17 @@ void get_enemy_data(Enemy *enemy){
 
     //Skills
     cJSON *en_skills = cJSON_GetObjectItem(enemy_json, "skills");
-    Skills *skill_list = get_skill_data();
+    Skills *skill_list = get_enemy_skill_data();
     for(int i = 0; i < cJSON_GetArraySize(en_skills);i++){
         cJSON *current_skill = cJSON_GetArrayItem(en_skills, i);
         cJSON *current_skill_name = cJSON_GetObjectItem(current_skill, "name");
         char *name = current_skill_name->valuestring;
-        printf("\nSKILL NAME ENEMY = %s", name);
-        for(int x = 0; x < SKILL_MAX; x++){
-            if(!strcmp(skill_list[x].name,name)){
-                skills_array[i].name = name;
-                skills_array[i].damage = skill_list[x].damage;
-                skills_array[i].description = skill_list[x].description;
-                skills_array[i].duration = skill_list[x].duration;
-                skills_array[i].modifiers[0] = skill_list[x].modifiers[0];
-                skills_array[i].modifiers[1] = skill_list[x].modifiers[1];
-                skills_array[i].modifiers[2] = skill_list[x].modifiers[2];
-                enemy->skill[i] = skills_array[i];
+        Skills *skill = get_enemy_skill_data();
+        for(int j = 0; j<ENEMY_SKILL_MAX ;j++){
+            if(strcmp(name, skill[j].name) == 0){
+                enemy->skill[i] = skill[j];
+                printf("\nENEMY = %s", enemy->name);
+                printf("\nENEMY SKILL= %s", enemy->skill->name);
             }
         }
     }
@@ -341,10 +381,6 @@ Scenario* get_scenario_node(Scenario *scene, char* child_name){
     }    
     return NULL;
 }
-
-
-
-
 
 
 #endif

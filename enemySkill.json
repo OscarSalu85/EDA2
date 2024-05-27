@@ -1,0 +1,228 @@
+{
+    "skills":[
+        {
+            "name":"Wooden plank",
+            "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies.",
+            "duration": 1 ,
+            "modifiers": [2,0,-1], 
+            "damage": 10
+        },
+        {
+            "name":"deflm",
+            "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies.",
+            "duration": 1 ,
+            "modifiers": [2,0,-1], 
+            "damage": 10
+        },
+        {
+            "name":"Psychic Terror",
+            "description":"Cthulhu invades the minds of those nearby, causing intense fear, hallucinations, and madness.",
+            "duration": 1 ,
+            "modifiers": [-90,0,-90], 
+            "damage": 95
+        },
+        {
+            "name":"Tentacle Crush",
+            "description":"Using his massive tentacles, Cthulhu crushes and constricts his enemies, dealing devastating physical damage.",
+            "duration": 1 ,
+            "modifiers": [-50,0,0], 
+            "damage":80
+        },
+        {
+            "name":"Oceanic Assault",
+            "description":"Deep Ones use their aquatic abilities to launch coordinated attacks from the water.",
+            "duration": 1 ,
+            "modifiers": [-5,0,0], 
+            "damage": 12
+        },
+        {
+            "name":"Claw and Bite",
+            "description":"Deep Ones use their claws and teeth to maul their enemies.",
+            "duration": 1 ,
+            "modifiers": [0,-6,0], 
+            "damage": 10
+        },
+        {
+            "name":"Slothful Corruption",
+            "description":"Tsathoggua releases a miasma that induces lethargy, weakening his enemies and slowing their movements.",
+            "duration": 1 ,
+            "modifiers": [0,-8,0], 
+            "damage": 0
+        },
+        {
+            "name":"Voracious Maw",
+            "description":"Tsathoggua uses his cavernous mouth to engulf and consume enemies.",
+            "duration": 1 ,
+            "modifiers": [-5,0,-5], 
+            "damage": 14
+        },
+        {
+            "name":"Madness Aura",
+            "description":"Hastur emits an aura that drives those nearby insane, causing hallucinations, paranoia, and violent behavior.",
+            "duration": 1 ,
+            "modifiers": [0,-10,-4], 
+            "damage": 0
+        },
+        {
+            "name":"Eldritch Blast",
+            "description":"Hastur unleashes powerful blasts of energy that warp reality and cause severe physical and mental damage.",
+            "duration": 1 ,
+            "modifiers": [-10,0,0], 
+            "damage": 15
+        },
+        {
+            "name":"Tidal Wave",
+            "description":"Dagon summons massive waves to flood and crush coastal regions, drowning and smashing anything in their path.",
+            "duration": 1 ,
+            "modifiers": [0,0,-16], 
+            "damage": 14
+        },
+        {
+            "name":"Crushing Grip",
+            "description":"Dagon uses his immense strength to grab and crush ships, buildings, or individuals.",
+            "duration": 1 ,
+            "modifiers": [-12,0,0], 
+            "damage": 20
+        },
+        {
+            "name":"Chaotic Emanations",
+            "description":"Azathoth emits bursts of chaotic energy that warp and destroy anything in their path.",
+            "duration": 1 ,
+            "modifiers": [0,0,-10], 
+            "damage": 25
+        },
+        {
+            "name":"Reality Devour",
+            "description":"Azathoth consumes parts of the universe's fabric, causing areas to blink out of existence.",
+            "duration": 1 ,
+            "modifiers": [0,-20,0], 
+            "damage": 19
+        },
+        {
+            "name":"Temporal Distortion",
+            "description":"Yog-Sothoth manipulates time and space, causing enemies to experience accelerated aging or temporal traps.",
+            "duration": 1 ,
+            "modifiers": [0,0,-25], 
+            "damage": 15
+        },
+        {  
+            "name":"Reality Shred",
+            "description":"Yog-Sothoth distorts the fabric of reality, causing areas to warp and unravel, dealing catastrophic damage",
+            "duration": 1 ,
+            "modifiers": [0,-20,-20], 
+            "damage": 14
+        },
+        {
+            "name":"Shape-Shifting Assault",
+            "description":"Nyarlathotep transforms into a terrifying form to directly attack his victims, inducing panic and confusion.",
+            "duration": 1 ,
+            "modifiers": [-15,-20,0], 
+            "damage": 0
+        },
+        {  
+            "name":"Mind Corruption",
+            "description":"Nyarlathotep corrupts the minds of individuals, leading them to insanity or forcing them to act as his agents.",
+            "duration": 1 ,
+            "modifiers": [0,0,-25], 
+            "damage": 20
+        },
+        {
+            "name":"Spawn Swarm",
+            "description":"Shub-Niggurath releases hordes of monstrous offspring to swarm and overwhelm her enemies.",
+            "duration": 1 ,
+            "modifiers": [0,-30,0], 
+            "damage": 17
+        },
+        {  
+            "name":"Fertility Curse",
+            "description":"Shub-Niggurath induces rapid, uncontrolled growth of organic matter, causing flesh, plants, or other substances to explode uncontrollably.",
+            "duration": 1 ,
+            "modifiers": [-10,-20,0], 
+            "damage": 5
+        },
+        {
+            "name":"Mind Control",
+            "description":"Yithians take over the minds of their victims, controlling their actions completely.",
+            "duration": 1 ,
+            "modifiers": [-20,-20,0], 
+            "damage": 15
+        },
+        {  
+            "name":"Knowledge Overload",
+            "description":"Yithians bombard their enemies with an overwhelming amount of knowledge, causing mental collapse.",
+            "duration": 1 ,
+            "modifiers": [-15,-20,-15], 
+            "damage": 20
+        },
+        {
+            "name":"Flesh Devour",
+            "description":"Ghouls bite and tear at their enemies, consuming flesh and causing severe physical wounds.",
+            "duration": 1 ,
+            "modifiers": [0,-40,0], 
+            "damage": 35
+        },
+        {  
+            "name":"Graveyard Miasma",
+            "description":"Ghouls exhale a toxic breath that saps the strength and vitality of those nearby.",
+            "duration": 1 ,
+            "modifiers": [0,-40,-35], 
+            "damage": 35
+        },
+        {
+            "name":"Dimensional Flight",
+            "description":"Byakhees transport themselves and their riders through interstellar space, causing disorientation and fear.",
+            "duration": 1 ,
+            "modifiers": [0,-23,-40], 
+            "damage": 15
+        },
+        {  
+            "name":"Talon Strike",
+            "description":"Byakhees use their talons to strike and slash at their enemies.",
+            "duration": 1 ,
+            "modifiers": [-50,0,0], 
+            "damage": 37
+        },
+        {
+            "name":"Engulf",
+            "description":"Shoggoths engulf their victims in their amorphous mass, crushing and digesting them.",
+            "duration": 1 ,
+            "modifiers": [-30,0,-50], 
+            "damage": 80
+        },
+        {  
+            "name":"Protoplasmic Assault",
+            "description":"Shoggoths reshape their bodies into deadly forms, such as spikes and blades, to attack their enemies.",
+            "duration": 1 ,
+            "modifiers": [-30,-40,0], 
+            "damage": 65
+        },
+        {
+            "name":"Silent Abduction",
+            "description":"Night Gaunts silently grab and carry away their victims to unknown realms.",
+            "duration": 1 ,
+            "modifiers": [-80,0,-40], 
+            "damage": 44
+        },
+        {  
+            "name":"Claw Swipe",
+            "description":"Night Gaunts use their clawed hands to rend and tear at their enemies.",
+            "duration": 1 ,
+            "modifiers": [0,0,-60], 
+            "damage": 50
+        },
+        {
+            "name":"Brain Extraction",
+            "description":"The Mi-Go use advanced tools to extract the brains of their victims for experimentation.",
+            "duration": 1 ,
+            "modifiers": [-3,-4,-5], 
+            "damage": 12
+        },
+        {  
+            "name":"Stun Ray",
+            "description":"The Mi-Go emit a ray that temporarily stuns and reduces the defense of their targets.",
+            "duration": 1 ,
+            "modifiers": [0,-7,0], 
+            "damage": 9
+        }
+        ]
+}

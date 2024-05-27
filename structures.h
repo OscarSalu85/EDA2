@@ -9,6 +9,7 @@
 #define MOD_NUMBER 3
 #define SKILL_DATA_SIZE 10
 #define SCENARIO_N 8
+#define ENEMY_SKILL_AMM 2
 //Skills
 typedef struct Skills{
     char *name;
@@ -22,6 +23,7 @@ typedef struct Skills{
 typedef struct Character{
     char *name;
     int hp;
+    int current_hp;
     int atk;
     int def;
     Skills *skill[MAX_SKILLS];
@@ -34,7 +36,7 @@ typedef struct Enemy{
     int atk;
     int def;
     int num_skills;
-    Skills skill[4];
+    Skills skill[ENEMY_SKILL_AMM];
 }Enemy;
 
 //Option

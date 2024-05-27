@@ -7,6 +7,7 @@
 
 typedef struct Turn{
     char *name;
+    int mod[3];
     int type;
     Enemy *enemy;
     struct Turn *next;
@@ -41,6 +42,9 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
         turn->enemy = NULL;
         turn->name = NULL;
         turn->next = NULL;
+        turn->mod[0] = 0;
+        turn->mod[1] = 0;
+        turn->mod[2] = 0;
         turn->type = -1;
 
         int random = rand()%2;

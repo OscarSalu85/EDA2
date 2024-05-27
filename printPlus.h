@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include <string.h>
-
-#define CHAR_SIZE 30
-
+#include <unistd.h>
+#define CHAR_SIZE 32
+#define BUFFER_SIZE 1024
 //https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 
 //Message, F_RGB, B_RGB
@@ -38,6 +39,26 @@ void printImage(char fileImage[]){
         remaining -= number;
     }
     fclose(f);
+}
+
+//Function provided by chatGPT to format the text so that it can be printed by the printtext function correctly
+void printFormattedText(const char *format, ...) {
+    char buffer[BUFFER_SIZE];
+    va_list args;
+    va_start(args, format);
+    vsnprintf(buffer, BUFFER_SIZE, format, args);
+    va_end(args);
+    printText(buffer);
+}
+
+void printText(const char *text) {
+    printf("\n");
+    for (int i = 0; i < strlen(text); i++) {
+        printf("%c", text[i]);
+        fflush(stdout);  // Prints the character immediately
+        usleep(20000);   // 20 milliseconds
+    }
+    printf("\n");
 }
 /*void printCombatImage(char *FileImage, int num){
     FILE *files;

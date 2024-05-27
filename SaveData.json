@@ -1,19 +1,19 @@
 {
 	"Character":	{
-		"name":	"Alex Roig",
+		"name":	"a",
 		"stats":	{
 			"HP":	10,
-			"ATK":	2500,
+			"ATK":	25,
 			"DEF":	5
 		},
 		"skills":	[{
+				"skill_name":	"The ultimate attack"
+			}, {
 				"skill_name":	"Wooden plank"
 			}, {
 				"skill_name":	"The bible"
 			}, {
 				"skill_name":	"Brew"
-			}, {
-				"skill_name":	"injection"
 			}]
 	},
 	"Current_Scenario":	{

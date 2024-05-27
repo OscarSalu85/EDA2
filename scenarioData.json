@@ -15,9 +15,9 @@
                     "Combat":[{
                         "enemyName":"cultist"},
                         {
-                        "enemyName":"cultist"},
+                        "enemyName":"Mi-Go"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Deep one"}]
 
                 },
 
@@ -25,35 +25,35 @@
                     "optName":"3rd class floor",
                     "optText":"Here is where the 'normal' people resides when they are in the ship. Well thinking that they are normal may be a bit opthimistic.",
                     "Combat":[{
-                        "enemyName":"cultist"},
+                        "enemyName":"Mi-Go"},
                         {
                         "enemyName":"cultist"},
                         {
-                        "enemyName":"cthulu"}]
+                        "enemyName":"Tsathoggua"}]
                 }
                     
             ],
             "next_scenarios":
             {
-                "option_A": "3rd class floor",
-                "option_B": "kitchen"
+                "option_A": "kitchen",
+                "option_B": "3rd class floor"
             }
         },
         {
             "name":"3rd class floor",
             "image":"3rd class floor.txt",
             "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
-            "question":"Which zone do you want to explore now? The hall or the 1st class floor",
+            "question":"Which zone do you want to explore now? (1) The 1st class floor or (2) The hall.",
             "options":[
                 {
                     "optName":"1st class floor",
                     "optText":"In the 1st class floor you find more sophosticated people and more sophisticated enemies.",
                     "Combat":[{
-                        "enemyName":"cthulu"},
+                        "enemyName":"Hastur"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Dagon"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Azathoth"}]
                        
                      
                 },
@@ -61,18 +61,18 @@
                     "optName":"hall",
                     "optText":"After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Hastur"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Dagon"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Yog-Sothoth"}]
                 }
             ],
                 
             "next_scenarios":
             {
-                "Option_A":"1st class floor",
-                "Option_B":"hall"
+                "option_A":"1st class floor",
+                "option_B":"hall"
             }
         },
         {
@@ -96,13 +96,14 @@
             ],
             "next_scenarios":
             {
-                "Option_A":"Cellar"
+                "option_A":"Cellar",
+                "option_B":""
      
             }
         },
         {
             "name":"hall",
-            "image": "Hall.txt",
+            "image": "hall.txt",
             "description": "After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
             "question":"Congratulations you have arrived to the cellar",
             "options":
@@ -122,14 +123,15 @@
                 
             "next_scenarios":
             {
-                "Option_A":"Cellar"
+                "option_A":"Cellar",
+                "option_B":""
             }
         },
         {
             "name":"kitchen",
             "image":"kitchen.txt",
             "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the kitchen where he didn't find what he expected to find there were some food but in a special way.",
-            "question":"Which zone do you want to explore now? The 2nd class floor or the captain's room",
+            "question":"Which zone do you want to explore now? (1) The 2nd class floor or (2) the captain's room",
             "options":[
                 {
                     "optName":"2nd class floor",
@@ -157,8 +159,8 @@
                 
             "next_scenarios":
             {
-                "Option_A":"2nd class floor",
-                "Option_B":"captain's room"
+                "option_A":"2nd class floor",
+                "option_B":"captain's room"
             }
         },
         {
@@ -183,7 +185,8 @@
                 
             "next_scenarios":
             {
-                "Option_A":"Cellar"
+                "option_A":"Cellar",
+                "option_B":""
             }
         },
         {
@@ -208,14 +211,15 @@
                 
             "next_scenarios":
             {
-                "Option_A":"Cellar"
+                "option_A":"Cellar",
+                "option_B":""
             }
         },
 
         {
             "name":"Cellar",
             "image": "Cellar.txt",
-            "description": "You seem to arrive to the last stage of your adventure but whatever there is in this celler will let you speechless.",
+            "description": "You seem to arrive to the last stage of your adventure but whatever there is in this cellar will let you speechless.",
             "question":"Welcome to the cellar the last stage of your adventure, only if you can leave this place...",
             "options":
             [
@@ -223,18 +227,16 @@
                     "optName":"Cellar",
                     "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
                     "Combat":[{
-                        "enemyName":"cultist"},
-                        {
-                        "enemyName":"cultist"},
-                        {
-                        "enemyName":"cultist"}]
+                        "enemyName":"cthulu"}
+]
 
                 }
             ],
 
             "next_scenarios":
             {
-                "Option_A":""
+                "option_A":"",
+                "option_B":""
             }
         }
     ]

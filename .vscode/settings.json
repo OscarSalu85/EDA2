@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "unistd.h": "c",
+        "stdarg.h": "c"
     }
 }
