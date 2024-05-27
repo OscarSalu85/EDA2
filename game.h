@@ -6,7 +6,6 @@
 #include "interface.h"
 #include "queue.h"
 #include "dataR.h"
-#include "graph.h"
 #define BASE_HP 25
 #define BASE_DEF 20
 #define BASE_ATK 15
