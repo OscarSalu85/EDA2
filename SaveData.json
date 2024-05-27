@@ -1,22 +1,22 @@
 {
 	"Character":	{
-		"name":	"a",
+		"name":	"",
 		"stats":	{
-			"HP":	25,
-			"ATK":	35,
-			"DEF":	20
+			"HP":	0,
+			"ATK":	0,
+			"DEF":	0
 		},
 		"skills":	[{
-				"skill_name":	"The ultimate attack"
+				"skill_name":	""
 			}, {
-				"skill_name":	"The bible"
+				"skill_name":	""
 			}, {
-				"skill_name":	"Brew"
+				"skill_name":	""
 			}, {
-				"skill_name":	"injection"
+				"skill_name":	""
 			}]
 	},
 	"Current_Scenario":	{
-		"name":	"captain's room"
+		"name":	""
 	}
 }

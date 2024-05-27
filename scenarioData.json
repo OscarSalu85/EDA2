@@ -191,12 +191,12 @@
             "name":"captain's room",
             "image": "captain_room.txt",
             "description": "After visiting the kitchen (name char) visits the captain's room in order to be safe and find help but you will find totally the opposite",
-            "question":"Congratulations you have arrived to the cellar",
+            "question":"The cellar is in front of you",
             "options":
             [   
                 {
-                    "optName":"captain's room",
-                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "optName":"Cellar",
+                    "optText":"Enter the Cellar",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {

@@ -271,8 +271,6 @@ void get_enemy_data(Enemy *enemy){
         for(int j = 0; j<ENEMY_SKILL_MAX ;j++){
             if(strcmp(name, skill[j].name) == 0){
                 enemy->skill[i] = skill[j];
-                printf("\nENEMY = %s", enemy->name);
-                printf("\nENEMY SKILL= %s", enemy->skill->name);
             }
         }
     }

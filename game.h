@@ -561,7 +561,7 @@ Scenario* allocate_scenarios(int num_scenarios) {
 void isTerminal(Data *data){
     printf("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)");
     char decision;
-    scanf("%c", &decision);
+    scanf(" %c", &decision);
     if(decision == '1'){
         new_game(data);
     }
@@ -588,7 +588,7 @@ int Decision(Data *data, Scenario scene){
         printText(currentDesc->question);
         while(1){
             if(scene.next_scenario_name_1 != NULL && scene.next_scenario_name_2 != NULL){
-                scanf("%c",&option);
+                scanf(" %c",&option);
                 if(option == '1'){
                     num_option = 1;
                     break;
@@ -604,7 +604,7 @@ int Decision(Data *data, Scenario scene){
                 printText("The only option now is going to Cellar and confronting the evil presence. There is no way back.");
                 printText("1.Cellar     2.Cellar");
                 fflush(stdout);
-                scanf("%c",&option);
+                scanf(" %c",&option);
                 if(option == '1' || option == '2'){
                     num_option = 2;
                     break;
@@ -617,7 +617,7 @@ int Decision(Data *data, Scenario scene){
                 printText("You are in front of the Captain's room. There is no way back.");
                 printText("1.Captain's room     2.Captain's room");
                 fflush(stdout);
-                scanf("%c",&option);
+                scanf(" %c",&option);
                 if(option == '1' || option == '2'){
                     num_option = 1;
                     break;
@@ -656,6 +656,16 @@ int Decision(Data *data, Scenario scene){
         } 
     }
     else{
+        data->character->current_hp = data->character->hp; //Heals in between scenarios
+        save_data(data,1);
+        Option *currentOpt = currentDesc->options[0];
+        int win = combat(data->character, currentOpt->enemies);
+        if(win == 0){
+            printf("\nYou lost the battle, after backing up for a little you returned to the room\n");
+            data->character->current_hp= data->character->hp;
+            save_data(data,1);
+            return 0;
+        }
         isTerminal(data);
         return 0;
     }
