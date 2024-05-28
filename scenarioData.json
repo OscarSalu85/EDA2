@@ -75,7 +75,7 @@
         {
             "name":"1st class floor",
             "image": "1st class floor.txt",
-            "description": "Noticing that the possibility of every passanger having vanished becomes more real every second that passes, you feel your body shaking as the fear of being the only human left alive on board grows. Looking for a safe place to hide in and gather information, you realize that heading to the captain's room would be the best choice for now.",
+            "description": "Noticing that the possibility of every passenger having vanished becomes more real every second that passes, you feel your body shaking as the fear of being the only human left alive on board grows. Looking for a safe place to hide in and gather information, you realize that heading to the captain's room would be the best choice for now.",
             "question":"Go to the captain's room? (1)Yes     (2)No",
             "options":
             [   
@@ -83,21 +83,21 @@
                     "optName":"captain's room",
                     "optText":"While running off to the captain's room from the 1st class floor looking for safety, you accidentally make way more noise than you should have and quickly get swarmed by a new wave of monsters.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Nyarlathotep"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Shub-niggurath"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Yithian possessors"}]
                 },
                 {
                     "optName":"captain's room",
                     "optText":"Although your mind refuses to move from your hiding spot right under one of the beds in fear of death, your body pushes you forward and starts heading to the captain's room on its own. To your horror, a group of monsters notice you running and feel your fear.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Shub-niggurath"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Nyarlathotep"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Yithian possessors"}]
                 }
             ],
                 
@@ -118,21 +118,21 @@
                     "optName":"captain's room",
                     "optText":"You enter the passage leading to the captain's room and discover that there are monsters in this area too. Although you are shaking in fear, you know there's no choice but to move forward and fight your way through.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Gouls"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Shoggoths"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Byakhees"}]
                 },
                 {
                     "optName":"captain's room",
                     "optText":"Although the idea of moving from the hall is not particularly enticing, you know you won't be able to survive unless you go to the captain's room. Taking a peek through the door of the room, you can clearly see it's swarmed with creatures. After mentally preparing yourself, you decide to go inside.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Byakhees"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Gouls"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Shoggoths"}]
                 }
             ],
                 
@@ -152,11 +152,11 @@
                     "optName":"2nd class floor",
                     "optText":"After some thought, you start heading to the 2nd class floor. However, you get ambushed by more creatures before you can even make it out of the kitchen.",
                     "Combat":[{
-                        "enemyName":"cthulu"},
+                        "enemyName":"Shub-niggurath"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Byakhees"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Byakhees"}]
                        
                      
                 },
@@ -164,11 +164,11 @@
                     "optName":"hall",
                     "optText":"You quickly move to the main hall in search of anyone that could explain the situation or provide some help. Before you can reach the hall, your path gets blocked by even more creatures looking to end your life.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Mi-Go"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Byakhees"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Night Gaunts"}]
                 }
             ],
                 
@@ -189,21 +189,21 @@
                     "optName":"captain's room",
                     "optText":"Heading to the captain's room, you hear some noises on the room right next to you. Before you can realize, some creatures burst through the door and charge towards you.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Night Gaunts"},
                         {
                         "enemyName":"cthulu"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Night Gaunts"}]
                 },
                 {
                     "optName":"captain's room",
                     "optText":"Although you don't like the idea, you feel something pulling you closer and closer to the captain's room. When you're about to enter, you notice the creatures sneaking up behind you and prepare yourself for what's about to come.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"cultist"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Nyarlathotep"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Night Gaunts"}]
                 }
             ],
                 
@@ -224,11 +224,11 @@
                     "optName":"Cellar",
                     "optText":"Walking down the stairs to the cellar, you find a group of creatures in your way. You feel like this will be the last time you will encounter these creatures before confronting the evil being residing in the cellar. You take a deep breath and prepare to fight.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Hastur"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Night Gaunts"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Night Gaunts"}]
                 }
             ],
 
@@ -248,7 +248,7 @@
             [
                 {
                     "optName":"Cellar",
-                    "optText":"After what feels like hours mentally preparing yourself for this encounter, you finally open the door. Immediately, your eyes are laid upon some bizarre creature you have never encountered before. Even stranger than the ones running around in the upper levels of the ship. You instantly ",
+                    "optText":"After what feels like hours mentally preparing yourself for this encounter, you finally open the door. Immediately, your eyes are laid upon some bizarre creature you have never encountered before. Even stranger than the ones running around in the upper levels of the ship. You instantly know this is the being behind everything you've gone through. You brace yourself for battle and attack the creature.",
                     "Combat":[{
                         "enemyName":"cthulu"}
 ]

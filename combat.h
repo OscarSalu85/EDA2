@@ -45,7 +45,7 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
                 return character->skill[opt-1];
             }
         }
-        else if(opt = 6 && time_strk->num_skills != 0){
+        else if(opt = 6 && time_strk->num_skills != 0 && time_strk->used == 0){
             printText("\nTime Strike:",BASE_SPEED);
             int num_skill = rand()%time_strk->num_skills;
             Skills *selected_skill = &time_strk->array[num_skill];
@@ -57,12 +57,13 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
             upgraded_skill->modifiers[0] = selected_skill->modifiers[0] * 2;
             upgraded_skill->modifiers[1] = selected_skill->modifiers[1] * 2;
             upgraded_skill->modifiers[2] = selected_skill->modifiers[2] * 2;
+            time_strk->used = 1;
             printFormattedText("\nYou have used %s with all the stats x2", BASE_SPEED,upgraded_skill->name);
             sleep(2);
             return upgraded_skill;
         }
         else if(opt = 6){
-            printText("\nYou haven't used any skills yet, choose a valid option",BASE_SPEED);
+            printText("\nYou can't use time strike now, choose a valid option",BASE_SPEED);
         }
         else{
             printText("\nChoose a valid option.",BASE_SPEED);
@@ -322,6 +323,7 @@ int combat(Character *character, Enemy *enemies[MAX_ENEMIES]){
     Skills *skills = malloc(MAX_SKILLS * sizeof(Skills));
     time_strk->array = skills;
     time_strk->num_skills = 0;
+    time_strk->used = 0;
     
     //creates the queue based turn order
     Queue *queue = malloc(sizeof(Queue));

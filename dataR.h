@@ -318,7 +318,6 @@ Scenario* get_scenario_nodes(Scenario *scenario_list){
                 cJSON *enemy_type = cJSON_GetObjectItem(enemy_type_list, "enemyName");
                 scenario_list[i].decision->options[j]->enemies[x]->name = enemy_type->valuestring;
             }
-            strcpy(scenario_list[i].decision->options[j]->n_text , optName->valuestring);
             strcpy(scenario_list[i].decision->options[j]->r_text ,optText->valuestring);
         }
         
@@ -373,7 +372,6 @@ Scenario* get_scenario_node(Scenario *scene, char* child_name){
                     scene->decision->options[j]->enemies[x]->name = enemy_type->valuestring;
 
                 }
-                strcpy(scene->decision->options[j]->n_text ,optName->valuestring);
                 strcpy(scene->decision->options[j]->r_text ,optText->valuestring);
             }
             

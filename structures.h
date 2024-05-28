@@ -42,7 +42,6 @@ typedef struct Enemy{
 //Option
 typedef struct Option{
     char r_text[MAX_CHAR_DESC];
-    char n_text[MAX_CHAR_DESC];
     Enemy *enemies[MAX_ENEMIES];
 }Option;
 
@@ -72,6 +71,7 @@ typedef struct Data{
 
 typedef struct Time_Strike{
     Skills *array;
+    int used;
     int num_skills;
 }Time_Strike;
 

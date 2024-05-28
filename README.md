@@ -5,9 +5,9 @@ Participants: Name - UPF Nº - Github
 --
 Oscar Salueña Pujolràs    -  U232300  - OscarSalu85/patata85
 
-Alex Roig Balsells        -  UXXXXXX  - Roigbal2
+Alex Roig Balsells        -  U233528  - Roigbal2
 
-Guillermo Sanchez         -  UXXXXXX  - Guille22Hola
+Guillermo Sánchez Bordejé        -  U231911  - Guille22Hola
 
 
 Introduction
