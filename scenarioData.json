@@ -105,9 +105,19 @@
             "name":"hall",
             "image": "hall.txt",
             "description": "After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
-            "question":"Congratulations you have arrived to the cellar",
+            "question":"You are in front of the Captain's room, you must go in (Press 1/2)",
             "options":
             [   
+                {
+                    "optName":"captain's room",
+                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "Combat":[{
+                        "enemyName":"Pedro"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                },
                 {
                     "optName":"captain's room",
                     "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
@@ -123,7 +133,7 @@
             "next_scenarios":
             {
                 "option_A":"captain's room",
-                "option_B":""
+                "option_B":"captain's room"
             }
         },
         {
@@ -166,9 +176,19 @@
             "name":"2nd class floor",
             "image": "2nd class floor.txt",
             "description": "After visiting the kitchen you will visit the 2nd class floor which is better than the 3rd class floor but just in some aspects....",
-            "question":"Congratulations you have arrived to the cellar",
+            "question":"You are in front of the Captain's room, you must go in (Press 1/2)",
             "options":
             [   
+                {
+                    "optName":"captain's room",
+                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "Combat":[{
+                        "enemyName":"Pedro"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                },
                 {
                     "optName":"captain's room",
                     "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
@@ -184,7 +204,7 @@
             "next_scenarios":
             {
                 "option_A":"captain's room",
-                "option_B":""
+                "option_B":"captain's room"
             }
         },
         {

@@ -411,6 +411,7 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, i
             if(target->def > 0) damage = (((character->atk + turn->mod[0]) * skill->damage) - target->def);
             else damage = (character->atk * skill->damage);
             if(damage > target->hp) damage = target->hp;
+            if(damage < 0) damage = 0;
             target->hp = target->hp - damage;
             if(target->hp< 0)   target->hp=0;
             printFormattedText("\nYou deal %d damage to enemy, %s has %d health", damage, target->name, target->hp);
@@ -464,6 +465,7 @@ Queue* enemyTurn(Queue *queue, Character *character, int *active){
     int damage = 0;
     if(character->def > 0) damage = ((current_enemy->atk * skill->damage) - (character->def + current_turn->mod[1]))/10;
     else damage = (current_enemy->atk * skill->damage)/10;
+    if(damage < 0) damage = 0;
     character->current_hp = hp + current_turn->mod[2] - damage;
     if(character->current_hp < 0)   character->current_hp=0;
     printFormattedText("\n-deals %d damage, remaining health --> %d",damage,character->current_hp);

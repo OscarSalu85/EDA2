@@ -19,7 +19,7 @@
         "cthulu":
         {
             "hp":550,
-            "atk":100,
+            "atk":20,
             "def":100,
             "num_skills":2,
             "skills":[
@@ -65,7 +65,7 @@
         "Hastur":
         {
             "hp":150,
-            "atk":18,
+            "atk":17,
             "def":9,
             "num_skills":2,
             "skills":[
@@ -80,7 +80,7 @@
         "Dagon":
         {
             "hp":200,
-            "atk":20,
+            "atk":13,
             "def":20,
             "num_skills":2,
             "skills":[
@@ -95,7 +95,7 @@
         "Azathoth":
         {
             "hp":230,
-            "atk":27,
+            "atk":15,
             "def":21,
             "num_skills":2,
             "skills":[
@@ -110,7 +110,7 @@
         "Yog-Sothoth":
         {
             "hp":250,
-            "atk":33,
+            "atk":14,
             "def":30,
             "num_skills":2,
             "skills":[
@@ -125,7 +125,7 @@
         "Nyarlathotep":
         {
             "hp":300,
-            "atk":45,
+            "atk":18,
             "def":60,
             "num_skills":2,
             "skills":[
@@ -140,7 +140,7 @@
         "Shub-niggurath":
         {
             "hp":350,
-            "atk":78,
+            "atk":12,
             "def":75,
             "num_skills":2,
             "skills":[
@@ -155,7 +155,7 @@
         "Yithian possessors":
         {
             "hp":390,
-            "atk":85,
+            "atk":17,
             "def":75,
             "num_skills":2,
             "skills":[
@@ -170,7 +170,7 @@
         "Gouls":
         {
             "hp":425,
-            "atk":91,
+            "atk":11,
             "def":84,
             "num_skills":2,
             "skills":[
@@ -185,7 +185,7 @@
         "Byakhees":
         {
             "hp":475,
-            "atk":99,
+            "atk":19,
             "def":97,
             "num_skills":2,
             "skills":[
@@ -200,7 +200,7 @@
         "Shoggoths":
         {
             "hp":490,
-            "atk":105,
+            "atk":7,
             "def":95,
             "num_skills":2,
             "skills":[
@@ -215,7 +215,7 @@
         "Night Gaunts":
         {
             "hp":530,
-            "atk":97,
+            "atk":14,
             "def":109,
             "num_skills":2,
             "skills":[

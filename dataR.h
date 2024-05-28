@@ -20,7 +20,7 @@ cJSON startup_read(char json[]){
     } 
   
     // read the file contents into a string 
-    char buffer[10024]; 
+    char buffer[12072]; 
     int len = fread(buffer, 1, sizeof(buffer), fp); 
     fclose(fp); 
     

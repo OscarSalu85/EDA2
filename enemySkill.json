@@ -19,14 +19,14 @@
             "description":"Cthulhu invades the minds of those nearby, causing intense fear, hallucinations, and madness.",
             "duration": 1 ,
             "modifiers": [-90,0,-90], 
-            "damage": 95
+            "damage": 25
         },
         {
             "name":"Tentacle Crush",
             "description":"Using his massive tentacles, Cthulhu crushes and constricts his enemies, dealing devastating physical damage.",
             "duration": 1 ,
             "modifiers": [-50,0,0], 
-            "damage":80
+            "damage":20
         },
         {
             "name":"Oceanic Assault",
@@ -159,14 +159,14 @@
             "description":"Ghouls bite and tear at their enemies, consuming flesh and causing severe physical wounds.",
             "duration": 1 ,
             "modifiers": [0,-40,0], 
-            "damage": 35
+            "damage": 20
         },
         {  
             "name":"Graveyard Miasma",
             "description":"Ghouls exhale a toxic breath that saps the strength and vitality of those nearby.",
             "duration": 1 ,
             "modifiers": [0,-40,-35], 
-            "damage": 35
+            "damage": 30
         },
         {
             "name":"Dimensional Flight",
@@ -180,35 +180,35 @@
             "description":"Byakhees use their talons to strike and slash at their enemies.",
             "duration": 1 ,
             "modifiers": [-50,0,0], 
-            "damage": 37
+            "damage": 25
         },
         {
             "name":"Engulf",
             "description":"Shoggoths engulf their victims in their amorphous mass, crushing and digesting them.",
             "duration": 1 ,
             "modifiers": [-30,0,-50], 
-            "damage": 80
+            "damage": 20
         },
         {  
             "name":"Protoplasmic Assault",
             "description":"Shoggoths reshape their bodies into deadly forms, such as spikes and blades, to attack their enemies.",
             "duration": 1 ,
             "modifiers": [-30,-40,0], 
-            "damage": 65
+            "damage": 20
         },
         {
             "name":"Silent Abduction",
             "description":"Night Gaunts silently grab and carry away their victims to unknown realms.",
             "duration": 1 ,
             "modifiers": [-80,0,-40], 
-            "damage": 44
+            "damage": 15
         },
         {  
             "name":"Claw Swipe",
             "description":"Night Gaunts use their clawed hands to rend and tear at their enemies.",
             "duration": 1 ,
             "modifiers": [0,0,-60], 
-            "damage": 50
+            "damage": 15
         },
         {
             "name":"Brain Extraction",
