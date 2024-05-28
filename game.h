@@ -842,17 +842,22 @@ int Decision(Data *data, Scenario scene){
     Decisions *currentDesc = scene.decision;
     char option;
     int num_option;
+    //Converst the next scenarios from empty strings to null for later if statements
     if(strcmp(scene.next_scenario_name_2, "") == 0){
         scene.next_scenario_name_2 = NULL;
     }
     if(strcmp(scene.next_scenario_name_1, "") == 0){
         scene.next_scenario_name_1 = NULL;
     }
+
+    //Checks if there exist adjacent scenarios
     if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
+        //Prints the scenario question asking to which scenario to go next
         printf("\n");
         printText(currentDesc->question);
         printf("\n");
         while(1){
+            //Asks for user input in order to advance scenarios
             if(scene.next_scenario_name_1 != NULL && scene.next_scenario_name_2 != NULL){
                 scanf(" %c",&option);
                 if(option == '1'){
@@ -863,12 +868,13 @@ int Decision(Data *data, Scenario scene){
                     num_option = 2;
                     break;
                 }
-                else {
+                else { //Handles invalid options
                     printText("\nMust be 1 or 2.\n");
                     sleep(1);
                     continue;
                 }
             }
+            //Asks for user input to go to the last stage. The next_scenario_1 being NULL indicates that it's the last scenario
             else if(scene.next_scenario_name_1 == NULL){
                 printText("The only option now is going to Cellar and confronting the evil presence. There is no way back.");
                 printText("\n1.Cellar     2.Cellar\n");
