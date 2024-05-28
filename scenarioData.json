@@ -1,17 +1,16 @@
 {
-
     "Scenarios":
     [
         {
             "name":"Deck",
             "image": "Deck.txt",
-            "description": "When (name character) arrives to the ship what it is obvious is that he finds the deck where he starts to see some rare things that were not supposed to be there. ",
-            "question":"Which zone do you want to explore now? (1)The kitchen or the (2)3rd class floor",
+            "description": "You manage to board the Saint Papadiamantis ship. However, once you make it on board you feel a sudden chill down your spine. On board there does not appear to be anyone other than yourself. You decide to investigate the ship and look for someone to explain the situation. You see 2 possible areas to explore you could go to, the kitchen and the 3rd class passenger floor.",
+            "question":"Which zone do you want to explore? (1) The kitchen or the (2) 3rd class floor: ",
             "options":
             [   
                 {   
                     "optName":"kitchen",
-                    "optText":"Here there is the kitchen is not as supposed to be but it still makes his function, to prepare good mealsb (or something else).",
+                    "optText":"While heading to the kitchen, you spot a weird man accompanied by 2 weird looking figures. Before you can try to communicate with them, the unnatural figures start rushing towards you with clear harmful intent.",
                     "Combat":[{
                         "enemyName":"cultist"},
                         {
@@ -23,7 +22,7 @@
 
                 {
                     "optName":"3rd class floor",
-                    "optText":"Here is where the 'normal' people resides when they are in the ship. Well thinking that they are normal may be a bit opthimistic.",
+                    "optText":"You find yourself walking towards your cabinet located on the 3rd class floor, you feel an odd presence getting closer from behind. Thinking you might have finally found another passenger, you turn around only to find a cloaked man holding a weapon accompanied by 2 creatures with an aspect that should not belong to this world.",
                     "Combat":[{
                         "enemyName":"Mi-Go"},
                         {
@@ -42,24 +41,22 @@
         {
             "name":"3rd class floor",
             "image":"3rd class floor.txt",
-            "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the 3rd class floor where the situation and the conditions of the trip are very precarious.",
-            "question":"Which zone do you want to explore now? (1) The 1st class floor or (2) The hall.",
+            "description":"After somehow managing to fend off whatever was that attacked you, you reach the 3rd class floor. As you expected by now, there is no one in here either. However, you decide to not lose hope yet and search further. The closest areas you could investigate now are the 1st class floor or the main hall of the ship.",
+            "question":"Which zone do you want to explore? (1) The 1st class floor or (2) The main hall: ",
             "options":[
                 {
                     "optName":"1st class floor",
-                    "optText":"In the 1st class floor you find more sophosticated people and more sophisticated enemies.",
+                    "optText":"Turning left to reach the first class floor, you encounter 3 new monsters, as you've decided to call them. You try to sneak past them and avoid confrontations. Unfortunately, you stepping on some leftover chips made enough noise for them to notice you.",
                     "Combat":[{
                         "enemyName":"Hastur"},
                         {
                         "enemyName":"Dagon"},
                         {
                         "enemyName":"Azathoth"}]
-                       
-                     
                 },
                 {
                     "optName":"hall",
-                    "optText":"After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
+                    "optText":"Exiting the 3rd class floor, you take a turn right and head towards the main Hall. If there is somewhere people would be, it would be there. Nearing the hall, you find more weird looking creatures standing still. As soon as you step foot inside the hall, the creatures start walking in your direction.",
                     "Combat":[{
                         "enemyName":"Hastur"},
                         {
@@ -78,39 +75,13 @@
         {
             "name":"1st class floor",
             "image": "1st class floor.txt",
-            "description": "When (name character) finish the work in the 1st class floor he is ready to confront Cthulu in thelast fight",
-            "question":"Congratulations you have arrived to the cellar",
-            "options":
-            [   
-                {   
-                    "optName":"Cellar",
-                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
-                    "Combat":[{
-                        "enemyName":"cultist"},
-                        {
-                        "enemyName":"cultist"},
-                        {
-                        "enemyName":"cultist"}]
-
-                }
-            ],
-            "next_scenarios":
-            {
-                "option_A":"Cellar",
-                "option_B":""
-     
-            }
-        },
-        {
-            "name":"hall",
-            "image": "hall.txt",
-            "description": "After visiting the 3rd class floor (name char) visits the hall where all the problems are joined togeather.",
-            "question":"You are in front of the Captain's room, you must go in (Press 1/2)",
+            "description": "Noticing that the possibility of every passanger having vanished becomes more real every second that passes, you feel your body shaking as the fear of being the only human left alive on board grows. Looking for a safe place to hide in and gather information, you realize that heading to the captain's room would be the best choice for now.",
+            "question":"Go to the captain's room? (1)Yes     (2)No",
             "options":
             [   
                 {
                     "optName":"captain's room",
-                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "optText":"While running off to the captain's room from the 1st class floor looking for safety, you accidentally make way more noise than you should have and quickly get swarmed by a new wave of monsters.",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {
@@ -120,7 +91,42 @@
                 },
                 {
                     "optName":"captain's room",
-                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "optText":"Although your mind refuses to move from your hiding spot right under one of the beds in fear of death, your body pushes you forward and starts heading to the captain's room on its own. To your horror, a group of monsters notice you running and feel your fear.",
+                    "Combat":[{
+                        "enemyName":"Pedro"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                }
+            ],
+                
+            "next_scenarios":
+            {
+                "option_A":"captain's room",
+                "option_B":"captain's room"
+            }
+        },
+        {
+            "name":"hall",
+            "image": "hall.txt",
+            "description": "Scaring off the creatures, you enter the main hall of the ship. Having accepted the fact that there would be no one in the room, you think of the best possible course of action. You quickly come to the conclusion that looking for information on the captain's room would be the best idea.",
+            "question":"Go to the captain's room? (1)Yes     (2)No",
+            "options":
+            [   
+                {
+                    "optName":"captain's room",
+                    "optText":"You enter the passage leading to the captain's room and discover that there are monsters in this area too. Although you are shaking in fear, you know there's no choice but to move forward and fight your way through.",
+                    "Combat":[{
+                        "enemyName":"Pedro"},
+                        {
+                        "enemyName":"cthulu"},
+                        {
+                        "enemyName":"cultist"}]
+                },
+                {
+                    "optName":"captain's room",
+                    "optText":"Although the idea of moving from the hall is not particularly enticing, you know you won't be able to survive unless you go to the captain's room. Taking a peek through the door of the room, you can clearly see it's swarmed with creatures. After mentally preparing yourself, you decide to go inside.",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {
@@ -139,12 +145,12 @@
         {
             "name":"kitchen",
             "image":"kitchen.txt",
-            "description":"While (name character) advances through the floors of the ship he notices that it is not as he thought. Now he is in the kitchen where he didn't find what he expected to find there were some food but in a special way.",
-            "question":"Which zone do you want to explore now? (1) The 2nd class floor or (2) the captain's room",
+            "description":"Having reached the kitchen, you look around for the ship's crew. After a while and having found nothing other than boiling pots of what seems to be slices of meat as preparation for dinner, you think about what your possible next move could be. You could either head to the 2nd class floor or the main hall of the ship. Both options seem fine.",
+            "question":"Which zone do you want to explore now? (1) The 2nd class floor or (2) The main hall",
             "options":[
                 {
                     "optName":"2nd class floor",
-                    "optText":"The conditions of this stage are better but the enemies are worse. I don't know if it was the best decision.",
+                    "optText":"After some thought, you start heading to the 2nd class floor. However, you get ambushed by more creatures before you can even make it out of the kitchen.",
                     "Combat":[{
                         "enemyName":"cthulu"},
                         {
@@ -155,8 +161,8 @@
                      
                 },
                 {
-                    "optName":"captain's room",
-                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "optName":"hall",
+                    "optText":"You quickly move to the main hall in search of anyone that could explain the situation or provide some help. Before you can reach the hall, your path gets blocked by even more creatures looking to end your life.",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {
@@ -175,7 +181,7 @@
         {
             "name":"2nd class floor",
             "image": "2nd class floor.txt",
-            "description": "After visiting the kitchen you will visit the 2nd class floor which is better than the 3rd class floor but just in some aspects....",
+            "description": "Quickly eliminating the creatures, you grab a kitchen knife and start repeatedly stabbing them over and over, slowly being consumed by the madness of the situation.",
             "question":"You are in front of the Captain's room, you must go in (Press 1/2)",
             "options":
             [   
@@ -190,14 +196,14 @@
                         "enemyName":"cultist"}]
                 },
                 {
-                    "optName":"captain's room",
-                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "optName":"hall",
+                    "optText":"Exiting the 3rd class floor, you take a turn right and head towards the main Hall. If there is somewhere people would be, it would be there. Nearing the hall, you find more weird looking creatures standing still. As soon as you step foot inside the hall, the creatures start walking in your direction.",
                     "Combat":[{
-                        "enemyName":"Pedro"},
+                        "enemyName":"Hastur"},
                         {
-                        "enemyName":"cthulu"},
+                        "enemyName":"Dagon"},
                         {
-                        "enemyName":"cultist"}]
+                        "enemyName":"Yog-Sothoth"}]
                 }
             ],
                 
@@ -228,8 +234,8 @@
                 
             "next_scenarios":
             {
-                "option_A":"",
-                "option_B":"Cellar"
+                "option_A":"Cellar",
+                "option_B":""
             }
         },
 

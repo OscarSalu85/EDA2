@@ -2,6 +2,11 @@
     "files.associations": {
         "typeinfo": "c",
         "unistd.h": "c",
-        "stdarg.h": "c"
+        "stdarg.h": "c",
+        "printplus.h": "c",
+        "structures.h": "c",
+        "stdlib.h": "c",
+        "datar.h": "c",
+        "string.h": "c"
     }
 }

@@ -2,8 +2,12 @@
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
+#include "structures.h"
 #define CHAR_SIZE 32
 #define BUFFER_SIZE 1024
+#define BASE_SPEED 3000
+#ifndef PRINTPLUS_H
+#define PRINTPLUS_H
 //https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 
 //Message, F_RGB, B_RGB
@@ -45,35 +49,30 @@ void printImage(char fileImage[]){
     fclose(f);
 }
 
-void printText(const char *text) {
+//Function for QOL text printing so that it's easier to follow what's going on for the user
+void printText(const char *text, int printTime) {
     for (int i = 0; i < strlen(text); i++) {
         printf("%c", text[i]);
         fflush(stdout);  // Prints the character immediately
-        usleep(5000);   // 1 milliseconds
+        usleep(printTime);   // Time in u seconds it takes for each character to be printed
     }
 }
+
 //Function provided by chatGPT to format the text so that it can be printed by the printtext function correctly
-void printFormattedText(const char *format, ...) {
+void printFormattedText(const char *format,int printTime ,...) {
     char buffer[BUFFER_SIZE];
     va_list args;
     va_start(args, format);
     vsnprintf(buffer, BUFFER_SIZE, format, args);
     va_end(args);
-    printText(buffer);
+    printText(buffer, printTime);
 }
 
-/*void printCombatImage(char *FileImage, int num){
-    FILE *files;
-    //Print line by line, Jump after line completed
-    for(int i = 0; i< num; i++){
-        if(FileImage[i] != NULL){
-            char *name = FileImage[i];
-            strcat(name,".txt");
-            files[i] = fopen(name,"r");
-        }
-        else{
-            files[i] = fopen("NULL.txt","r");
-        }
-    }
+//Function to print the scenario image and description on screen
+void printScenario(Scenario *Scene){
+    printImage(Scene->image);
+    printFormattedText("%s",BASE_SPEED,Scene->description);
+    sleep(3);
+}
 
-}*/
+#endif

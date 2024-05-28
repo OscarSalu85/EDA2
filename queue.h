@@ -5,6 +5,7 @@
 #define QUEQUE_H
 #define NUM_TURNS 50
 
+//Creates the necessary data structures for the combat queue
 typedef struct Turn{
     char *name;
     int mod[3];
@@ -18,6 +19,8 @@ typedef struct Queue{
     Turn *last;
 }Queue;
 
+
+//Adds an element to the queue
 void AddElement(Turn *turn, Queue *queue){
     if(queue->first == NULL){
         queue->first = turn;
@@ -33,10 +36,10 @@ void AddElement(Turn *turn, Queue *queue){
     }
 }
 
+//Creates the Queue based turn system
 Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queue,int num_enemies){
     queue->first = NULL;
     queue->last = NULL;
-    printf("Order combat:\n");
     for(int i = 0; i < NUM_TURNS; i++){
         Turn *turn = malloc(sizeof(Turn));
         turn->enemy = NULL;
@@ -47,6 +50,7 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
         turn->mod[2] = 0;
         turn->type = -1;
 
+        //Obtains a random value to determine the queue
         int random = rand()%2;
         if(random == 0){
             turn->enemy = NULL;
@@ -54,6 +58,7 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
             turn->type = 0;
         }
         else{
+            //Adds a random enemy to the queue
             if(num_enemies != 0){
                 random = rand()%(num_enemies);
                 turn->enemy = enemies[random];
@@ -62,7 +67,6 @@ Queue* createQueue(Character *character, Enemy *enemies[MAX_ENEMIES],Queue *queu
             }
         }
         AddElement(turn,queue);
-        //printf("%s",queue->last->name);
     }
     return queue;
 }

@@ -63,13 +63,16 @@ typedef struct Scenario{
     char *next_scenario_name_2;
 }Scenario;
 
-
-
 //DATA
 typedef struct Data{
     Character *character;
     Scenario *current_scenario;
     Scenario *sceneNodes;
 }Data;
+
+typedef struct Time_Strike{
+    Skills *array;
+    int num_skills;
+}Time_Strike;
 
 #endif
