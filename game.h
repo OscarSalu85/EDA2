@@ -849,6 +849,7 @@ int Decision(Data *data, Scenario scene){
         scene.next_scenario_name_1 = NULL;
     }
     if(scene.next_scenario_name_1 != NULL || scene.next_scenario_name_2 != NULL){
+        printf("\n");
         printText(currentDesc->question);
         printf("\n");
         while(1){
