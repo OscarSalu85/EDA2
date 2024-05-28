@@ -1,4 +1,4 @@
-GAME NAME
+The Curse of Saint Papadiamantis
 ---
 Participants:
 
