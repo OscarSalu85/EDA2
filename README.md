@@ -1,8 +1,7 @@
 The Curse of Saint Papadiamantis
 ---
-Participants:
 
-Name:                        UPF Nº:    Github:
+Participants: Name - UPF Nº - Github
 --
 Oscar Salueña Pujolràs    -  U232300  - OscarSalu85/patata85
 
