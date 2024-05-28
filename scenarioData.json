@@ -181,13 +181,13 @@
         {
             "name":"2nd class floor",
             "image": "2nd class floor.txt",
-            "description": "Quickly eliminating the creatures, you grab a kitchen knife and start repeatedly stabbing them over and over, slowly being consumed by the madness of the situation.",
-            "question":"You are in front of the Captain's room, you must go in (Press 1/2)",
+            "description": "Quickly eliminating the creatures, you grab a kitchen knife and start repeatedly stabbing them over and over to make sure they won't move again, slowly being consumed by the madness of the situation. After a while you manage to calm yourself down and leave the kitchen. Shortly after you arrive at the 2nd class floor. Since yet again, no one can be found there, you feel like your last choice is heading to the captain's room and look for some information there.",
+            "question":"Go to the captain's room? (1)Yes     (2)No",
             "options":
             [   
                 {
                     "optName":"captain's room",
-                    "optText":"You entered to the captain's room to find some help but you find that you are more in trouble than before.",
+                    "optText":"Heading to the captain's room, you hear some noises on the room right next to you. Before you can realize, some creatures burst through the door and charge towards you.",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {
@@ -196,14 +196,14 @@
                         "enemyName":"cultist"}]
                 },
                 {
-                    "optName":"hall",
-                    "optText":"Exiting the 3rd class floor, you take a turn right and head towards the main Hall. If there is somewhere people would be, it would be there. Nearing the hall, you find more weird looking creatures standing still. As soon as you step foot inside the hall, the creatures start walking in your direction.",
+                    "optName":"captain's room",
+                    "optText":"Although you don't like the idea, you feel something pulling you closer and closer to the captain's room. When you're about to enter, you notice the creatures sneaking up behind you and prepare yourself for what's about to come.",
                     "Combat":[{
-                        "enemyName":"Hastur"},
+                        "enemyName":"Pedro"},
                         {
-                        "enemyName":"Dagon"},
+                        "enemyName":"cthulu"},
                         {
-                        "enemyName":"Yog-Sothoth"}]
+                        "enemyName":"cultist"}]
                 }
             ],
                 
@@ -216,13 +216,13 @@
         {
             "name":"captain's room",
             "image": "captain_room.txt",
-            "description": "After visiting the kitchen (name char) visits the captain's room in order to be safe and find help but you will find totally the opposite",
-            "question":"The cellar is in front of you",
+            "description": "You quickly close the door of the captain's room behind you and take a deep breath. After looking around, you find a worn out notebook that talks about a great evil lurking in the cellar of the ship, possibly that being is the one behind whatever happened to the passengers. Even though your body is filled with fear, the idea of going to the cellar to confront this being seems oddly enticing. Both by the need to end this madness and by a mysterious force pulling you towards the cellar, you decide to head down there.",
+            "question":"Head to the cellar?     (1)Yes      (2)No",
             "options":
             [   
                 {
                     "optName":"Cellar",
-                    "optText":"Enter the Cellar",
+                    "optText":"Walking down the stairs to the cellar, you find a group of creatures in your way. You feel like this will be the last time you will encounter these creatures before confronting the evil being residing in the cellar. You take a deep breath and prepare to fight.",
                     "Combat":[{
                         "enemyName":"Pedro"},
                         {
@@ -231,7 +231,7 @@
                         "enemyName":"cultist"}]
                 }
             ],
-                
+
             "next_scenarios":
             {
                 "option_A":"Cellar",
@@ -242,13 +242,13 @@
         {
             "name":"Cellar",
             "image": "Cellar.txt",
-            "description": "You seem to arrive to the last stage of your adventure but whatever there is in this cellar will let you speechless.",
-            "question":"Welcome to the cellar the last stage of your adventure, only if you can leave this place...",
+            "description": "After many struggles, you reach the door of the cellar. You can clearly feel an ominous presence behind this door, making your body tremble in fear as you try to imagine whatever awaits through that door looks like. You instinctively know that after going through that door, there will only be 2 possible outcomes. You either come back out alive or you don't.",
+            "question":"Enter the cellar and confront the evil lurking inside? (1)Yes   (2)No",
             "options":
             [
                 {
                     "optName":"Cellar",
-                    "optText":"You have arrived to the last stage where you can find the best wine but not the best enemies to deal with.",
+                    "optText":"After what feels like hours mentally preparing yourself for this encounter, you finally open the door. Immediately, your eyes are laid upon some bizarre creature you have never encountered before. Even stranger than the ones running around in the upper levels of the ship. You instantly ",
                     "Combat":[{
                         "enemyName":"cthulu"}
 ]

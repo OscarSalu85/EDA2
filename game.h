@@ -169,12 +169,16 @@ void configure_name(Data* data){
 
 //Function to configure the character's stats
 void configure_stats(Data* data){
+
+    int previous_points = 0;
+    previous_points = data->character->atk - BASE_ATK + data->character->def - BASE_DEF + (data->character->hp - BASE_HP)/2;
     data->character->atk = BASE_ATK;
     data->character->def = BASE_DEF;
     data->character->hp = BASE_HP;   //BASE ATK, DEF AND HP VALUES
     int input;
     int input2;
     int current_points = 20;
+    if(1000 > previous_points && previous_points > current_points) current_points = previous_points;
     //While loop until there's no more points to spend
     while(current_points > 0){
         clearScreen();
