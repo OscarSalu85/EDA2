@@ -2,56 +2,56 @@
     "skills":[
         {
             "name":"Wooden plank",
-            "description":"You took this wooden plank in order to attack the enemies, it is not the best attack but it is effective.",
+            "description":"You took this wooden plank in order to attack the enemies, it might not be the best weapon but it is effective.",
             "duration": 1 ,
             "modifiers": [2,0,-1], 
             "damage": 10
         },
         {
             "name":"The bible",
-            "description":"You are a religious man that always brings your bible in the bag, now you have to defend yourself in the name of God.",
+            "description":"You are a religious man that always carries a bible in your bag, now you have to defend yourself in the name of God.",
             "duration": 1 ,
             "modifiers": [2,0,-1],
             "damage": 7
         },
         {
             "name":"Brew",
-            "description":"You saw this strange drink on a table and you thought that could be useful to recover yourself.",
+            "description":"You saw this strange drink on a table and you thought that it could be useful to recover yourself.",
             "duration": 1 ,
             "modifiers": [0,2,4],
             "damage": 0
         },
         {
             "name":"injection",
-            "description":"You saw the doctor's suitcase and you decided to took some stuff. However you don't notice that it was a shot of adrenaline that will boost himself.",
+            "description":"You saw the doctor's suitcase and decided to take some stuff. However you didn't notice that it was a shot of adrenaline that will provide you with a boost.",
             "duration": 3,
             "modifiers": [2,2,1],
             "damage": 0
         },
         {
             "name":"Special soup",
-            "description":"When you arrivee to the kitchen you found a pot with a soup but whatyou didn't notice that you will have a boost of hp and def.",
+            "description":"When you arrive to the kitchen you find a pot with a soup but what you didn't notice is that you it will boost your hp and def.",
             "duration": 3,
             "modifiers": [0,2,2],
             "damage": 0
         },
         {
             "name":"Carrot's shurikens",
-            "description":"When you are in the kitchen you found 3 carrots and why don't use them to attack enemies.",
+            "description":"When you are in the kitchen you find 3 carrots and why wouldn't you use them to attack enemies.",
             "duration": 1,
             "modifiers": [0,0,0],
             "damage": 15
         },
         {
             "name":"Haunted pen",
-            "description":"When you arrived to the hall you see a pen levitating and you decide to took it with you and not for write anything. The oen throws 2 burst of ink that  hurts and increases your hp",
+            "description":"When you arrived to the hall you saw a pen levitating and you decided to take it with you and not to write anything. The pen throws 2 burst of ink that hurt and increases your hp",
             "duration": 2,
             "modifiers": [0,0,4],
             "damage": 20 
         },
         {
             "name":"Ceiling light jump",
-            "description":"He sees that if he arrives to the roof's light he can make an amazing jump that makes a lot of damage but he hurts himself. ",
+            "description":"You hang from a ceiling light on the roof and attack your enemies from above, although you may get hurt in the process. ",
             "duration": 1,
             "modifiers": [0,0,-5],
             "damage": 50
@@ -65,43 +65,43 @@
         },
         {
             "name":"Warming chandelier",
-            "description":"This object keeps you warm and gains hp and attack for 3 turns.",
+            "description":"This object keeps you warm, providing hp and attack for 3 turns.",
             "duration": 4,
             "modifiers": [2,0,2],
             "damage": 0
         },
         {
             "name":"Sclading sip",
-            "description":"Taking a little sip of this cup of tea makes to everyone a sensation of being stronger and increases de defense but as it is too hot it decreases some hp.",
+            "description":"Take a sip of this tea, providing you with a sudden burst of energy. Be careful not to hurt yourself though, it's still hot.",
             "duration": 3,
             "modifiers": [3,3,-1],
             "damage": 0
         },
         {
             "name":"Umbrella's fury",
-            "description":"An umbrella found in a little space that makes two incredible hits to the enemies one when it is closed and another when it is opened. ",
+            "description":"Strike your enemies with this common day object able to expand itself for a quick and powerful attack.",
             "duration": 1,
             "modifiers": [0,0,0],
             "damage": 70
         },
         {
             "name":"Rudder's spin",
-            "description":"With the direction wheel you can use it as a boomerang in order to hit twice, it reduces your defense because you have to be very careful to pick it back ",
+            "description":"Throw your trusty boomerang towards a target. Watch your back when catching it back since your guard will be down against attacks in that time.",
             "duration": 2,
             "modifiers": [0,-5,0],
             "damage": 35
         },
         {
             "name":"Telescope vision",
-            "description":"With the captain's telescope you can see your enemies from everywhere and this can be helpful to recover some life and prepare your next attack ",
-            "duration": 2,
+            "description":"Take a step back and observe your enemies through a telescope. This allows you to spot their weak points and take a breather from the fight.",
+            "duration": 4,
             "modifiers": [7,0,7],
             "damage": 0
         },
         {
             "name":"Fit of rage",
-            "description":"You enter in a critical situation where you try to do a lot of damage but it reduces a lot the hp and the defense.",
-            "duration": 1,
+            "description":"A desperate attemp at self defense that catches enemies off guard. The dangerous movements performed leave you vulnerable against your opponents. ",
+            "duration": 3,
             "modifiers": [0,-10,-15],
             "damage": 85
         }
