@@ -111,7 +111,7 @@
         {
             "hp":250,
             "atk":14,
-            "def":30,
+            "def":25,
             "num_skills":2,
             "skills":[
                 {
@@ -126,7 +126,7 @@
         {
             "hp":300,
             "atk":18,
-            "def":60,
+            "def":45,
             "num_skills":2,
             "skills":[
                 {
@@ -141,7 +141,7 @@
         {
             "hp":350,
             "atk":12,
-            "def":75,
+            "def":55,
             "num_skills":2,
             "skills":[
                 {
@@ -156,7 +156,7 @@
         {
             "hp":390,
             "atk":17,
-            "def":75,
+            "def":65,
             "num_skills":2,
             "skills":[
                 {
@@ -171,7 +171,7 @@
         {
             "hp":425,
             "atk":11,
-            "def":84,
+            "def":74,
             "num_skills":2,
             "skills":[
                 {
@@ -186,7 +186,7 @@
         {
             "hp":475,
             "atk":19,
-            "def":97,
+            "def":82,
             "num_skills":2,
             "skills":[
                 {
@@ -201,7 +201,7 @@
         {
             "hp":490,
             "atk":7,
-            "def":95,
+            "def":86,
             "num_skills":2,
             "skills":[
                 {
@@ -216,7 +216,7 @@
         {
             "hp":530,
             "atk":14,
-            "def":109,
+            "def":93,
             "num_skills":2,
             "skills":[
                 {
