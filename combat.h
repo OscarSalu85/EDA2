@@ -45,7 +45,7 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
                 return character->skill[opt-1];
             }
         }
-        else if(opt = 6 && time_strk->num_skills != 0 && time_strk->used == 0){
+        else if(opt == 6 && time_strk->num_skills != 0 && time_strk->used == 0){
             printText("\nTime Strike:",BASE_SPEED);
             int num_skill = rand()%time_strk->num_skills;
             Skills *selected_skill = &time_strk->array[num_skill];
@@ -62,7 +62,7 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
             sleep(2);
             return upgraded_skill;
         }
-        else if(opt = 6){
+        else if(opt == 6){
             printText("\nYou can't use time strike now, choose a valid option",BASE_SPEED);
         }
         else{
