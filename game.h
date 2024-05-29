@@ -119,7 +119,7 @@ void configure_name(Data* data){
         //Checks to verify wether the name is valid or not
         if(strcmp(data->character->name, "")){
             if(data->character->name[0] == '\0' && data->character->name[0] == ' ') {
-                printText("\nName cannot be empty, please try again.",BASE_SPEED);
+                printText("\nName cannot be empty, please try again.\n",BASE_SPEED);
                 sleep(2);
                 continue;
             }
@@ -272,7 +272,7 @@ void configure_stats(Data* data){
 void print_skill_list(Skills *skill_list){
     clearScreen();
     for(int i=0; i<SKILL_MAX; i++){
-        printFormattedText("\n%d.: %s",BASE_SPEED, i+1, skill_list[i].name);
+        printFormattedText("\n%d. %s",1000, i+1, skill_list[i].name);
     }
 }
 
@@ -292,7 +292,7 @@ void configure_skills(Data* data){
                 print_skill_list(skill_list);
                 repeat = 0;
                 //Asks the user to select the skill they want to add to their arsenal.
-                printFormattedText("\nSelect your skill nº%d: ",BASE_SPEED, i+1);
+                printFormattedText("\nSelect your skill number %d: ",BASE_SPEED, i+1);
                 int c;
                 int scan = scanf("%d",&selected_skill);
                 while ((c = getchar()) != '\n');
@@ -325,7 +325,7 @@ void configure_skills(Data* data){
                     printFormattedText("\nSelf modifiers: (%d ATK, %d DEF, %d HP)",BASE_SPEED, skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
                     
                     //Asks for user confirmation
-                    printFormattedText("\n\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No): ",BASE_SPEED, i);
+                    printFormattedText("\n\nDo you want to equip this skill as your skill number %d (1.Yes 2.No): ",BASE_SPEED, i);
                     int c;
                     int result = scanf("%d", &confirm);
                     while ((c = getchar()) != '\n');
@@ -361,6 +361,7 @@ void configure_skills(Data* data){
                 while ((c = getchar()) != '\n');
         } 
         if(confirm == 1 && result != 0){
+            clearScreen();
             return;
         }
         for(int i = 0; i<MAX_SKILLS; i++){
