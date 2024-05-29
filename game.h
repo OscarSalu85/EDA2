@@ -325,7 +325,7 @@ void configure_skills(Data* data){
                     printFormattedText("\nSelf modifiers: (%d ATK, %d DEF, %d HP)",BASE_SPEED, skill_list[selected_skill].modifiers[0],skill_list[selected_skill].modifiers[1],skill_list[selected_skill].modifiers[2]);
                     
                     //Asks for user confirmation
-                    printFormattedText("\n\nDo you want to equip this skill as your skill number %d (1.Yes 2.No): ",BASE_SPEED, i);
+                    printFormattedText("\n\nDo you want to equip this skill as your skill number %d (1.Yes 2.No): ",BASE_SPEED, i+1);
                     int c;
                     int result = scanf("%d", &confirm);
                     while ((c = getchar()) != '\n');
