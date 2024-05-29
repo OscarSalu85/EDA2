@@ -1,15 +1,15 @@
 {
     "skills":[
         {
-            "name":"Wooden plank",
-            "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies.",
+            "name":"The Rite of the Shadowed Stars",
+            "description":"Cultists summon malevolent entities under a moonless sky, warping starlight to consume sanity and plunge victims into inescapable madness.",
             "duration": 1 ,
             "modifiers": [2,0,-1], 
             "damage": 10
         },
         {
-            "name":"deflm",
-            "description":"(name character) took this wooden plank in order to start his path and try to defeat hsi enemies.",
+            "name":"The Invocation of the Abyssal Horde",
+            "description":"A blasphemous ceremony summons grotesque, oceanic horrors from the abyss, unleashing chaos and despair as they hunt and devour the living.",
             "duration": 2 ,
             "modifiers": [2,0,-1], 
             "damage": 10
