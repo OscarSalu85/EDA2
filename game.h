@@ -188,8 +188,10 @@ void configure_stats(Data* data){
             printFormattedText("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d\n",BASE_SPEED, data->character->atk-BASE_ATK,data->character->def-BASE_DEF,(data->character->hp-BASE_HP) / HP_PER_POINT);
             printText("\nSelect which stat you want to invest in: ",BASE_SPEED);
             //asks for user input and checks if it's a valid input
-            scanf("%d", &input);
-            if(input < 1 || input>3){
+            int result = scanf("%d", &input);
+            int c;
+            while ((c = getchar()) != '\n');
+            if(input < 1 || input>3 || result == 0){
                 printText("\nNot a valid element, try again.",BASE_SPEED);
                 sleep(2);
                 continue;
@@ -200,11 +202,16 @@ void configure_stats(Data* data){
                     clearScreen();
                     //Asks for input on stat ammount to spend
                     printText("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ",BASE_SPEED);
-                    scanf("%d", &input2);
+                    result = scanf("%d", &input2);
+                    while ((c = getchar()) != '\n');
                     if(input2 > current_points || input2 < 0){
                         printText("\nNot enough stat points available.",BASE_SPEED);
                         sleep(2);
                         continue;
+                    }
+                    else if(result == 0){
+                        printText("\nNot a valid element, try again.",BASE_SPEED);
+                        sleep(2);
                     }
                     //Applies the stat allocation
                     else if(input2 > 0){
@@ -231,11 +238,11 @@ void configure_stats(Data* data){
             if(current_points == 0){
                 while(1){
                     clearScreen();
-                    while (getchar() != '\n');
                     int input3;
                     printFormattedText("\nFinal stat allocation:    Atk:%d        Def:%d      Hp:%d\n",BASE_SPEED,data->character->atk,data->character->def,data->character->hp);
                     printText("\nConfirm stat allocation?  1.Yes   2.No: ",BASE_SPEED);
                     scanf("%d",&input3);
+                    while ((c = getchar()) != '\n');
                     //Returns if input is yes
                     if(input3 == 1){
                         return;
@@ -249,6 +256,8 @@ void configure_stats(Data* data){
                         break;
                     }
                     else{
+                        printText("\nNot a valid element, try again.",BASE_SPEED);
+                        sleep(2);
                         current_points = 0;
                     }
                 }
@@ -284,11 +293,12 @@ void configure_skills(Data* data){
                 repeat = 0;
                 //Asks the user to select the skill they want to add to their arsenal.
                 printFormattedText("\nSelect your skill nº%d: ",BASE_SPEED, i+1);
-                while (getchar() != '\n');
-                scanf("%d",&selected_skill);
+                int c;
+                int scan = scanf("%d",&selected_skill);
+                while ((c = getchar()) != '\n');
                 selected_skill--;
                 //Checks wether input is valid or not
-                if(selected_skill<0 || selected_skill >SKILL_MAX){
+                if(selected_skill<0 || selected_skill > SKILL_MAX - 1 || scan == 0){
                     printText("\nNo valid skill was selected, please choose a valid skill.",BASE_SPEED);
                     sleep(3);
                     continue;
@@ -316,9 +326,9 @@ void configure_skills(Data* data){
                     
                     //Asks for user confirmation
                     printFormattedText("\n\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No): ",BASE_SPEED, i);
-                    while (getchar() != '\n');
-                    scanf("%d", &confirm);
-                    if(confirm == 1){
+                    int result = scanf("%d", &confirm);
+                    while ((c = getchar()) != '\n');
+                    if(confirm == 1 && result != 0){
                         //Adds the selected skill to the character's skill structure
                         clearScreen();
                         *data->character->skill[i] = skill_list[selected_skill];
@@ -339,9 +349,17 @@ void configure_skills(Data* data){
         }
         //Asks for confirmation
         printText("\n\nConfirm skill set?\n1.Yes\n2.No\n",BASE_SPEED );
-        while (getchar() != '\n');
-        scanf("%d", &confirm);
-        if(confirm == 1){
+        int result = scanf("%d", &confirm);
+        int c;
+        while ((c = getchar()) != '\n');
+        while(result == 0){
+                printText("\nNot a valid input, try again.",BASE_SPEED);
+                sleep(2);
+                printText("\n\nConfirm skill set?\n1.Yes\n2.No\n",BASE_SPEED );
+                result = scanf("%d", &confirm);
+                while ((c = getchar()) != '\n');
+        } 
+        if(confirm == 1 && result != 0){
             return;
         }
         for(int i = 0; i<MAX_SKILLS; i++){
