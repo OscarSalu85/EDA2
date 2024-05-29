@@ -19,7 +19,7 @@
         "cthulu":
         {
             "hp":550,
-            "atk":20,
+            "atk":15,
             "def":100,
             "num_skills":2,
             "skills":[
@@ -65,7 +65,7 @@
         "Hastur":
         {
             "hp":150,
-            "atk":17,
+            "atk":13,
             "def":9,
             "num_skills":2,
             "skills":[
@@ -80,7 +80,7 @@
         "Dagon":
         {
             "hp":200,
-            "atk":13,
+            "atk":10,
             "def":20,
             "num_skills":2,
             "skills":[
@@ -95,7 +95,7 @@
         "Azathoth":
         {
             "hp":230,
-            "atk":15,
+            "atk":11,
             "def":21,
             "num_skills":2,
             "skills":[
@@ -110,7 +110,7 @@
         "Yog-Sothoth":
         {
             "hp":250,
-            "atk":14,
+            "atk":12,
             "def":25,
             "num_skills":2,
             "skills":[
@@ -125,7 +125,7 @@
         "Nyarlathotep":
         {
             "hp":300,
-            "atk":18,
+            "atk":13,
             "def":45,
             "num_skills":2,
             "skills":[
@@ -140,7 +140,7 @@
         "Shub-niggurath":
         {
             "hp":350,
-            "atk":12,
+            "atk":9,
             "def":55,
             "num_skills":2,
             "skills":[
@@ -155,7 +155,7 @@
         "Yithian possessors":
         {
             "hp":390,
-            "atk":17,
+            "atk":12,
             "def":65,
             "num_skills":2,
             "skills":[
@@ -185,7 +185,7 @@
         "Byakhees":
         {
             "hp":475,
-            "atk":19,
+            "atk":11,
             "def":82,
             "num_skills":2,
             "skills":[
@@ -215,7 +215,7 @@
         "Night Gaunts":
         {
             "hp":530,
-            "atk":14,
+            "atk":7,
             "def":93,
             "num_skills":2,
             "skills":[

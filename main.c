@@ -18,6 +18,7 @@ int main(){
         }
         else if(main_menu_choice == 2){
             new_game(data);
+            data->current_scenario[0] = data->sceneNodes[0];
             break;
         }
         else if(main_menu_choice == 3){

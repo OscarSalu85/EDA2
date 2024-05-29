@@ -358,6 +358,7 @@ void configure_skills(Data* data){
                 sleep(2);
                 printText("\n\nConfirm skill set?\n1.Yes\n2.No\n",BASE_SPEED );
                 result = scanf("%d", &confirm);
+                int c;
                 while ((c = getchar()) != '\n');
         } 
         if(confirm == 1 && result != 0){
@@ -535,13 +536,14 @@ void new_game(Data *data){
     data->sceneNodes = allocate_scenarios(8);
     data->sceneNodes = get_scenario_nodes(data->sceneNodes);
     save_data(data, 0);//Overwrites save file with empty file, second parameter = 0 --> Delete data
-
     //calls the configuration function to set the character's characteristics
     configure_name(data);
     configure_stats(data);
     configure_skills(data);
+
     //Sets the current scenario to the first scenario in the game
-    data->current_scenario[0] = data->sceneNodes[0];
+    data->current_scenario = &data->sceneNodes[0];
+
     save_data(data,1); //Saves the configured data
     return;
 }

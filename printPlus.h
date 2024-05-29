@@ -5,7 +5,7 @@
 #include "structures.h"
 #define CHAR_SIZE 32
 #define BUFFER_SIZE 1024
-#define BASE_SPEED 5000
+#define BASE_SPEED 2500
 #ifndef PRINTPLUS_H
 #define PRINTPLUS_H
 //https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
@@ -62,7 +62,7 @@ void printText(const char *text, int printTime) {
 void printFormattedText(const char *format,int printTime ,...) {
     char buffer[BUFFER_SIZE];
     va_list args;
-    va_start(args, format); //This warning does not affect the functionality of the code
+    va_start(args, format); //This warning does not affect the correct functionality of the code
     vsnprintf(buffer, BUFFER_SIZE, format, args);
     va_end(args);
     printText(buffer, printTime);
