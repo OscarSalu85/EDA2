@@ -20,13 +20,14 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
         }
         //Asks for user input
         printText("\nChoose option (press 5 if you want to see the skill information or 6 for the skill time strike): ",BASE_SPEED);
-        scanf("%d", &opt);
-        while (getchar() != '\n');
-        if(0 < opt && opt < 5) {
+        int result = scanf("%d", &opt);
+        int c;
+        while ((c = getchar()) != '\n');
+        if(result != 0 && 0 < opt && opt < 5) {
             return character->skill[opt-1];
         }
         //Shows the details of every skill on screen
-        else if(opt == 5){
+        else if(result != 0 && opt == 5){
             clearScreen();
             for(int i = 0; i < 4;i++){
                 printFormattedText("\n%d.%s:\n", BASE_SPEED, i+1,character->skill[i]->name);
@@ -38,14 +39,17 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
             }  
 
             printText("\nChoose option: ",BASE_SPEED);
+            int c;
             scanf("%d", &opt);
+            while ((c = getchar()) != '\n');
             if(0 < opt && opt < 5) {
                 clearScreen();
                 //Returns the selected skill
+                printFormattedText("\n%s uses %s!", BASE_SPEED,character->name, character->skill[opt-1]);
                 return character->skill[opt-1];
             }
         }
-        else if(opt == 6 && time_strk->num_skills != 0 && time_strk->used == 0){
+        else if(result != 0 && opt == 6 && time_strk->num_skills != 0 && time_strk->used == 0){
             printText("\nTime Strike:",BASE_SPEED);
             int num_skill = rand()%time_strk->num_skills;
             Skills *selected_skill = &time_strk->array[num_skill];
@@ -62,26 +66,27 @@ Skills* selectSkill(Character *character, Time_Strike *time_strk){
             sleep(2);
             return upgraded_skill;
         }
-        else if(opt == 6){
+        else if(result != 0 && opt == 6){
             printText("\nYou can't use time strike now, choose a valid option",BASE_SPEED);
         }
         else{
             printText("\nChoose a valid option.",BASE_SPEED);
         }
-        //Cleans the input buffer and tries again
-        while (getchar() != '\n');
-        opt = 0;        
+        opt = 0;
+        
         sleep(1);
         clearScreen();
     }
 }
 
 //Function to select the enemy to attack
-int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
+int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies, Character *character){
     int num_alive = 0;
     int opt = 0;
     while(1){
         clearScreen();
+        printText("Player Turn:\n\n",BASE_SPEED);
+        printFormattedText("Alex: %d/%d HP\n", BASE_SPEED, character->current_hp, character->hp);
         //Prints the available enemies to target
         for(int i = 0; i < num_enemies; i++){
             if(enemies[i]->hp > 0){
@@ -95,8 +100,10 @@ int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
         printText("\nChoose option: ",BASE_SPEED);
         opt = 0;
         if(opt < 1 || opt > num_enemies){
-            scanf("%d", &opt);
-            if(0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
+            int c;
+            int result = scanf("%d", &opt);
+            while ((c = getchar()) != '\n');
+            if(result != 0 && 0 < opt < num_enemies && enemies[opt -1]->hp > 0) return opt-1;
             opt = 0;
             printText("\nChoose a valid option.",BASE_SPEED);
         }
@@ -110,20 +117,17 @@ int selectTarget(Enemy *enemies[MAX_ENEMIES],int num_enemies){
 void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, int num_enemies, int *active, Time_Strike *time_strk){
     clearScreen();
     if(enemies != NULL){
-        printText("Player Turn:\n",BASE_SPEED);
         Enemy *target; 
         //Obtains the target
-        int chosen_target_index = selectTarget(enemies,num_enemies);
+        int chosen_target_index = selectTarget(enemies,num_enemies, character);
         if(chosen_target_index != -1){
             target = enemies[chosen_target_index];
             Skills *skill;
             //obtains the skill to use
             skill = selectSkill(character,time_strk);
-
             //Add skill to time strike array
             time_strk->array[time_strk->num_skills] = *skill;
             time_strk->num_skills++;
-
             //Handles the skill modifiers
             Turn *current_turn = turn;
             for(int i = 0;i < skill->duration;i++){
@@ -147,7 +151,7 @@ void playerTurn(Turn *turn, Enemy *enemies[MAX_ENEMIES], Character *character, i
             if(damage < 0) damage = 0;
             target->hp = target->hp - damage;
             if(target->hp< 0)   target->hp=0;
-            printFormattedText("\nYou deal %d damage to enemy, %s has %d health", BASE_SPEED,damage, target->name, target->hp);
+            printFormattedText("\nYou deal %d damage to %s, %s has %d health remaining.", BASE_SPEED,damage,target->name, target->name, target->hp);
             sleep(1);
         }
         //If there are no more enemies
@@ -239,8 +243,10 @@ void add_stats(Character *character,int num){
             printFormattedText("\nAvailable SP(Stat Points):%d SP\n",BASE_SPEED,current_points);
             printFormattedText("\nInvested SP:    1.Atk:%d      2.Def:%d      3.HP:%d\n",BASE_SPEED, character->atk-base_atk,character->def-base_def,(character->hp-base_hp) / HP_PER_POINT);
             printText("\nSelect which stat you want to invest in: ",BASE_SPEED);
-            scanf("%d", &input);
-            if(input < 1 || input>3){
+            int result = scanf("%d", &input);
+            int c;
+            while ((c = getchar()) != '\n');
+            if(input < 1 || input>3 || result == 0){
                 printText("\nNot a valid element, try again.",BASE_SPEED);
                 sleep(1);
                 continue;
@@ -249,11 +255,17 @@ void add_stats(Character *character,int num){
                 while(1){
                     clearScreen();
                     printText("\nHow many stat points do you want to invest in this stat?(Press 0 to not invest in this stat for now): ",BASE_SPEED);
-                    scanf("%d", &input2);
-                    if(input2 > current_points || input2 < 0){
+                    result = scanf("%d", &input2);
+                    int c;
+                    while ((c = getchar()) != '\n');
+                    if(result != 0 && (input2 > current_points || input2 < 0)){
                         printText("\nNot enough stat points available.",BASE_SPEED);
                         sleep(1);
                         continue;
+                    }
+                    else if(result == 0){
+                        printText("\nIncorrect input, try again",BASE_SPEED);
+                        sleep(1);
                     }
                     else if(input2 > 0){
                         if(input == 1){
@@ -278,13 +290,12 @@ void add_stats(Character *character,int num){
             if(current_points == 0){
                 while(1){
                     clearScreen();
-                    while (getchar() != '\n');
                     int input3;
-
+                    int c;
                     printFormattedText("\nFinal stat allocation:    Atk:%d        Def:%d      Hp:%d\n",BASE_SPEED,character->atk,character->def,character->hp);
                     printText("\nConfirm stat allocation?  1.Yes   2.No: ",BASE_SPEED);
                     scanf("%d",&input3);
-
+                    while ((c = getchar()) != '\n');
                     if(input3 == 1){
                         return;
                     }

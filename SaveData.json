@@ -3,7 +3,7 @@
 		"name":	"alex",
 		"stats":	{
 			"HP":	25,
-			"ATK":	35,
+			"ATK":	55,
 			"DEF":	20
 		},
 		"skills":	[{
@@ -17,6 +17,6 @@
 			}]
 	},
 	"Current_Scenario":	{
-		"name":	"Deck"
+		"name":	"kitchen"
 	}
 }

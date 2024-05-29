@@ -138,7 +138,7 @@ void configure_name(Data* data){
                 if(count == 0){
                     while(1){
                         //Asks for name confirmation
-                        printFormattedText("\nName Selected: %s\nConfirm name? (1 = yes, 0 = no): ",BASE_SPEED, data->character->name);
+                        printFormattedText("\nName Selected: %s\nConfirm name? (1 = yes, 2 = no): ",BASE_SPEED, data->character->name);
                         //Checks wether the input was a valid option or not
                         if (scanf("%d", &choice) != 1) {
                             printText("\nNot a valid option, try again.\n",BASE_SPEED);
@@ -153,7 +153,7 @@ void configure_name(Data* data){
                         //If the name is valid, checks the inputed confirmation
                         if (choice == 1) {
                             return;
-                        } else if (choice == 0) {
+                        } else if (choice == 2) {
                             break;
                         } else {
                             printText("\nNot a valid option, try again.\n",BASE_SPEED);
@@ -326,6 +326,7 @@ void configure_skills(Data* data){
                     
                     //Asks for user confirmation
                     printFormattedText("\n\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No): ",BASE_SPEED, i);
+                    int c;
                     int result = scanf("%d", &confirm);
                     while ((c = getchar()) != '\n');
                     if(confirm == 1 && result != 0){
@@ -376,7 +377,9 @@ void configure_menu(Data *data){
         clearScreen();
         printText("\n1.Change Name\n2.Change stat allocation\n3.Change skill set\n4.Back to Main Menu",BASE_SPEED);
         printText("\nSelect an option: ",BASE_SPEED);
+        int c;
         scanf("%d", &choice_configure);
+        while ((c = getchar()) != '\n');
         //Checks if the user input is valid and acts accordingly by calling the respective function
         if(choice_configure == 1){
             configure_name(data);
@@ -547,7 +550,9 @@ void isTerminal(Data *data){
     //Asks user input on wether to restart the game or exit
     printText("\nCONGRATULATIONS!!!\nYOU DEFEATED THE MONSTERS AND SAVED THE SHIP\nDo you wish to start a new game? (Yes:1, No:2)",BASE_SPEED);
     char decision;
+    int c;
     scanf(" %c", &decision);
+    while ((c = getchar()) != '\n');
     if(decision == '1'){
         new_game(data);
     }
@@ -584,7 +589,9 @@ int Decision(Data *data, Scenario scene){
         while(1){
             //Asks for user input in order to advance scenarios
             if(scene.next_scenario_name_1 != NULL && scene.next_scenario_name_2 != NULL){
+                int c;
                 scanf(" %c",&option);
+                while ((c = getchar()) != '\n');
                 if(option == '1'){
                     num_option = 1;
                     break;
@@ -604,7 +611,9 @@ int Decision(Data *data, Scenario scene){
                 printText("The only option now is going to Cellar and confronting the evil presence. There is no way back.",BASE_SPEED);
                 printText("\n1.Cellar     2.Cellar\n",BASE_SPEED);
                 fflush(stdout);
+                int c;
                 scanf(" %c",&option);
+                while ((c = getchar()) != '\n');
                 if(option == '1' || option == '2'){
                     num_option = 1;
                     break;
