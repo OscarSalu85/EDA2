@@ -5,7 +5,7 @@
 #include "structures.h"
 #define CHAR_SIZE 32
 #define BUFFER_SIZE 1024
-#define BASE_SPEED 3000
+#define BASE_SPEED 7500
 #ifndef PRINTPLUS_H
 #define PRINTPLUS_H
 //https://en.wikipedia.org/wiki/ANSI_escape_code#Colors

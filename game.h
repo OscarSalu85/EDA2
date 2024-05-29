@@ -7,7 +7,6 @@
 #include "dataR.h"
 #include "combat.h"
 #include "printPlus.h"
-#define BASE_SPEED 3000
 #define BASE_HP 25
 #define BASE_DEF 20
 #define BASE_ATK 15
@@ -47,7 +46,7 @@ int main_menu(Data *data){
         //If choice == new game, asks the player for confirmation and returns the corresponding value
         else if(choice == '2'){
             clearScreen();
-            printText("Are you sure you want to start a new game? All save data will be deleted.(1.Yes  2.No)", BASE_SPEED);
+            printText("Are you sure you want to start a new game? All save data will be deleted.(1.Yes  2.No): ", BASE_SPEED);
             while (getchar() != '\n');
             scanf("%c", &choice2);
             if(choice2 == '1'){
@@ -121,14 +120,15 @@ void configure_name(Data* data){
         if(strcmp(data->character->name, "")){
             if(data->character->name[0] == '\0' && data->character->name[0] == ' ') {
                 printText("\nName cannot be empty, please try again.",BASE_SPEED);
-                sleep(1);
+                sleep(2);
                 continue;
             }
             else{
                 //Checks if every letter on the name is either a space or a letter from the alphabet
                 for(int i=0;i<strlen(data->character->name);i++){
                     if (!isalpha(data->character->name[i]) && data->character->name[i] != ' '){
-                        printf("\nThe name can only contain letters from the alphabet, try again.\n");
+                        printText("\nThe name can only contain letters from the alphabet, try again.\n",BASE_SPEED);
+                        sleep(2);
                         count = 1;
                         break;
                     }
@@ -142,7 +142,7 @@ void configure_name(Data* data){
                         //Checks wether the input was a valid option or not
                         if (scanf("%d", &choice) != 1) {
                             printText("\nNot a valid option, try again.\n",BASE_SPEED);
-                            sleep(1);
+                            sleep(2);
                             // Clear invalid input from buffer
                             while (getchar() != '\n');
                             continue;
@@ -157,7 +157,7 @@ void configure_name(Data* data){
                             break;
                         } else {
                             printText("\nNot a valid option, try again.\n",BASE_SPEED);
-                            sleep(1);
+                            sleep(2);
                         }
                     } 
                 }
@@ -191,7 +191,7 @@ void configure_stats(Data* data){
             scanf("%d", &input);
             if(input < 1 || input>3){
                 printText("\nNot a valid element, try again.",BASE_SPEED);
-                sleep(1);
+                sleep(2);
                 continue;
             }
             //If it is a valid input, execute the code below
@@ -203,7 +203,7 @@ void configure_stats(Data* data){
                     scanf("%d", &input2);
                     if(input2 > current_points || input2 < 0){
                         printText("\nNot enough stat points available.",BASE_SPEED);
-                        sleep(1);
+                        sleep(2);
                         continue;
                     }
                     //Applies the stat allocation
@@ -263,7 +263,7 @@ void configure_stats(Data* data){
 void print_skill_list(Skills *skill_list){
     clearScreen();
     for(int i=0; i<SKILL_MAX; i++){
-        printf("\n%d.: %s", i+1, skill_list[i].name);
+        printFormattedText("\n%d.: %s",BASE_SPEED, i+1, skill_list[i].name);
     }
 }
 
@@ -273,6 +273,7 @@ void configure_skills(Data* data){
     int selected_skill;
     int repeat;
     Skills *skill_list;
+    Skills blank_skill;
     //Calls the get_skill_data function to have access to all the available skills
     skill_list = get_skill_data();
     while(1){
@@ -283,12 +284,13 @@ void configure_skills(Data* data){
                 repeat = 0;
                 //Asks the user to select the skill they want to add to their arsenal.
                 printFormattedText("\nSelect your skill nº%d: ",BASE_SPEED, i+1);
+                while (getchar() != '\n');
                 scanf("%d",&selected_skill);
                 selected_skill--;
                 //Checks wether input is valid or not
                 if(selected_skill<0 || selected_skill >SKILL_MAX){
                     printText("\nNo valid skill was selected, please choose a valid skill.",BASE_SPEED);
-                    sleep(1);
+                    sleep(3);
                     continue;
                 }
                 else{
@@ -296,7 +298,7 @@ void configure_skills(Data* data){
                         //Checks if the player has already chosen this skill to avoid a player to have the same skill multiple times
                         if(skill_list[selected_skill].name ==  data->character->skill[j]->name){
                             printText("\nYou have already chosen this skill, select a different one.",BASE_SPEED);
-                            sleep(1);
+                            sleep(3);
                             repeat = 1;
                             break;
                         }
@@ -314,12 +316,14 @@ void configure_skills(Data* data){
                     
                     //Asks for user confirmation
                     printFormattedText("\n\nDo you want to equip this skill as your skill nº%d (1.Yes 2.No): ",BASE_SPEED, i);
+                    while (getchar() != '\n');
                     scanf("%d", &confirm);
                     if(confirm == 1){
                         //Adds the selected skill to the character's skill structure
                         clearScreen();
                         *data->character->skill[i] = skill_list[selected_skill];
                         printFormattedText("\n%s added to your character's skill set",BASE_SPEED, skill_list[selected_skill].name);
+                        sleep(2);
                     }
                     else{
                         continue;
@@ -331,13 +335,17 @@ void configure_skills(Data* data){
         clearScreen();
         printFormattedText("\n%s's current skill set: ",BASE_SPEED, data->character->name);
         for(int i = 0; i<MAX_SKILLS; i++){
-            printFormattedText("\n%s",BASE_SPEED, data->character->skill[i]->name);
+            printFormattedText("\n-%s",BASE_SPEED, data->character->skill[i]->name);
         }
         //Asks for confirmation
-        printText("\nConfirm skill set?\n1.Yes\n2.No\n",BASE_SPEED );
+        printText("\n\nConfirm skill set?\n1.Yes\n2.No\n",BASE_SPEED );
+        while (getchar() != '\n');
         scanf("%d", &confirm);
         if(confirm == 1){
             return;
+        }
+        for(int i = 0; i<MAX_SKILLS; i++){
+            *data->character->skill[i] = blank_skill;
         }
         repeat = 0;
     }
