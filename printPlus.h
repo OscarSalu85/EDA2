@@ -58,7 +58,7 @@ void printText(const char *text, int printTime) {
     }
 }
 
-//Function provided by chatGPT to format the text so that it can be printed by the printtext function correctly
+//Function to format the text so that it can be printed by the printtext function correctly
 void printFormattedText(const char *format,int printTime ,...) {
     char buffer[BUFFER_SIZE];
     va_list args;
